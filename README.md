@@ -50,18 +50,20 @@ Open **`http://localhost:3000`** in your browser.
 ```text
 Portfolio/
 ├── index.html                   # High-performance semantic HTML5 entry point
+├── cv.html                      # Print-optimized ATS-friendly Curriculum Vitae & PDF generator
 ├── start-local.bat              # 1-click local development launcher
 ├── vercel.json                  # Edge routing, security headers & immutable asset caching
 ├── README.md                    # Site documentation & setup guide
 ├── ProjectStructure.txt         # Project layout reference
 ├── PROJECTS_ANALYSIS.md         # Full codebase analysis reference
+├── MARKET_ANALYSIS.md           # Egypt tech hiring market strategy & gap plan
 │
 ├── css/
 │   └── styles.css               # Design system: tokens, dark/light themes,
 │                                # glassmorphism, responsive grid & animations
 │
 ├── js/
-│   ├── projects.js              # ⭐ SINGLE EDITABLE DATA FILE for all projects + templates
+│   ├── projects.js              # ⭐ SINGLE EDITABLE DATA FILE for all 7 projects + templates
 │   └── main.js                  # Particle canvas, theme switcher, filters, modal,
 │                                # animated counters & contact form handler
 │
@@ -75,9 +77,11 @@ Portfolio/
             ├── healthcare-ai.png
             ├── automation-suite.png
             ├── cinema-booking.svg
+            ├── customer-manager.svg
             ├── login-automation.svg
             ├── market-monitor.svg
-            └── graphql-api.svg
+            ├── graphql-api.svg
+            └── myhealthai/      # 29 high-resolution categorized screenshots
 ```
 
 ---
