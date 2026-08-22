@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Primary Meta Tags -->
+  <title>Mohamed Hany Fathy | Software Developer • Full-Stack • Backend • Automation • Data</title>
+  <meta name="title" content="Mohamed Hany Fathy | Software Developer • Full-Stack • Backend • Automation • Data" />
+  <meta name="description" content="Software Developer specializing in Full-Stack (Angular, Node.js, MongoDB), Python Automation (Playwright, Multithreading), and Cloud/AI integrations. Delivered 30% faster API response times and 70% reduction in manual verification." />
+  <meta name="keywords" content="Mohamed Hany, Software Developer, Full-Stack Developer, Angular, Node.js, Python, Automation Engineer, Playwright, Backend Engineer, MongoDB, Redis, GraphQL" />
+  <meta name="author" content="Mohamed Hany Fathy" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://portfolio-mohany.vercel.app/" />
+  <meta property="og:title" content="Mohamed Hany Fathy | Software Developer Portfolio" />
+  <meta property="og:description" content="Full-Stack developer and Python automation engineer. Explore flagship AI telemedicine systems, high-concurrency desktop tools, and enterprise APIs." />
+  <meta property="og:image" content="assets/images/projects/healthcare-ai.svg" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:title" content="Mohamed Hany Fathy | Software Developer Portfolio" />
+  <meta property="twitter:description" content="Full-Stack developer and Python automation engineer. 30% faster API latencies, 70% automated verification." />
+  <meta property="twitter:image" content="assets/images/projects/healthcare-ai.svg" />
+
+  <!-- Google Fonts: Inter, Outfit & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mohamed Hany Fathy",
+    "jobTitle": "Software Developer",
+    "telephone": "+201003672318",
+    "email": "mahamedhany8@gmail.com",
+    "url": "https://github.com/mohany6",
+    "sameAs": [
+      "https://github.com/mohany6",
+      "https://linkedin.com/in/mohamed-hany"
+    ],
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "Helwan University, Faculty of Computers and Artificial Intelligence"
+    },
+    "knowsAbout": ["Angular", "Node.js", "Express", "MongoDB", "Python", "Playwright", "FastAPI", "Redis", "GraphQL", "Docker"]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Interactive Particle Background Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Ambient Glow Elements -->
+  <div class="ambient-glow ambient-glow-1"></div>
+  <div class="ambient-glow ambient-glow-2"></div>
+
+  <!-- ========================================================================
+       STICKY NAVBAR
+       ======================================================================== -->
+  <header class="navbar-wrapper">
+    <nav class="navbar" aria-label="Main Navigation">
+      <a href="#hero" class="nav-brand" aria-label="Home">
+        <span class="brand-icon">M</span>
+        <span>Mohamed Hany</span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#education" class="nav-link">Education</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Theme Mode" title="Toggle Light / Dark Mode">
+          <svg class="light-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg class="dark-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <!-- Download CV Action -->
+        <a href="public/cv/mohamed-hany-cv.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" download="Mohamed_Hany_CV.pdf">
+          <i class="fas fa-file-arrow-down"></i> Download CV
+        </a>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button id="mobile-menu-toggle" class="mobile-toggle" aria-label="Toggle Mobile Navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ========================================================================
+       1. HERO SECTION
+       ======================================================================== -->
+  <section id="hero" class="hero section">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-status">
+            <span class="status-dot"></span>
+            <span>Available for Full-Stack, Backend &amp; Automation Roles</span>
+          </div>
+
+          <div class="hero-greeting">Hi, I am</div>
+          <h1 class="hero-name">
+            <span class="gradient-text">Mohamed Hany Fathy</span>
+          </h1>
+
+          <div class="hero-role-wrapper">
+            <span>Specialized in </span>
+            <span id="hero-typed-text"></span>
+            <span class="typed-cursor"></span>
+          </div>
+
+          <p class="hero-tagline">
+            Software Developer with full-stack experience (Angular, Node.js, MongoDB) and high-throughput Python automation engineering. Delivering <strong>30% faster API response times</strong> and <strong>70% reduction in manual verification</strong> through resilient architectures.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#projects" class="btn btn-primary">
+              <i class="fas fa-bolt"></i> View Projects
+            </a>
+            <a href="#contact" class="btn btn-outline">
+              <i class="fas fa-paper-plane"></i> Contact Me
+            </a>
+          </div>
+
+          <div class="hero-social-strip">
+            <span>Connect with me:</span>
+            <a href="https://github.com/mohany6" target="_blank" rel="noopener noreferrer" class="social-link-icon" title="GitHub Profile">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/mohamed-hany" target="_blank" rel="noopener noreferrer" class="social-link-icon" title="LinkedIn Profile">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="mailto:mahamedhany8@gmail.com" class="social-link-icon" title="Send Direct Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+            <a href="tel:01003672318" class="social-link-icon" title="Call Phone">
+              <i class="fas fa-phone"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="avatar-frame">
+            <div class="avatar-img-wrapper">
+              <img src="assets/images/profile.jpg" alt="Mohamed Hany Fathy" class="avatar-img" onerror="this.src='public/images/profile.jpg'" />
+            </div>
+          </div>
+
+          <!-- Floating Badges -->
+          <div class="floating-badge badge-top-left">
+            <i class="fas fa-gauge-high" style="color: var(--accent-emerald);"></i>
+            <span>-30% API Response Latency</span>
+          </div>
+
+          <div class="floating-badge badge-bottom-right">
+            <i class="fas fa-robot" style="color: var(--accent-cyan);"></i>
+            <span>100-Thread Automation Engine</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       2. STATS STRIP SECTION (Animated Counters)
+       ======================================================================== -->
+  <section class="stats-strip" aria-label="Key Performance Statistics">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-value-wrapper">
+            <span class="stat-number" data-target="30">0</span>
+            <span class="stat-symbol">%</span>
+          </div>
+          <div class="stat-label">Faster API Response Times</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-value-wrapper">
+            <span class="stat-number" data-target="70">0</span>
+            <span class="stat-symbol">%</span>
+          </div>
+          <div class="stat-label">Reduction in Manual Verification</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-value-wrapper">
+            <span class="stat-number" data-target="85">0</span>
+            <span class="stat-symbol">+</span>
+          </div>
+          <div class="stat-label">Production Endpoints Engineered</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-value-wrapper">
+            <span class="stat-number" data-target="3800">0</span>
+            <span class="stat-symbol">+</span>
+          </div>
+          <div class="stat-label">Lines of Concurrent Python Pipelines</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       3. ABOUT ME SECTION
+       ======================================================================== -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fas fa-user-astronaut"></i> Background</span>
+        <h2 class="section-title">Architecting Resilient Web &amp; Automation Systems</h2>
+        <p class="section-subtitle">Bridging full-stack software development, cloud backends, high-throughput concurrency, and AI integrations.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-bio">
+          <p>
+            I am a <strong>Software Developer</strong> with extensive hands-on experience building full-stack applications with <strong>Angular, Node.js, Express, and MongoDB</strong>, alongside engineering production-grade <strong>Python automation systems</strong> (Playwright, multithreaded worker pools, proxy rotation pipelines).
+          </p>
+          <p>
+            My engineering philosophy centers on <strong>system resilience, performance optimization, and airtight security</strong>. In my flagship telemedicine platform, I optimized complex database queries to reduce API latency by <strong>30%</strong> and deployed automated verification workflows cutting manual overhead by <strong>70%</strong>.
+          </p>
+          <p>
+            Whether implementing bank-grade authentication (TOTP 2FA, IP-geolocated session managers), configuring Redis cache-aside architectures, or building high-concurrency 100-thread desktop scraping engines, I build software engineered for scale and reliability.
+          </p>
+
+          <div style="margin-top: 1.75rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="#projects" class="btn btn-primary btn-sm">
+              <i class="fas fa-folder-open"></i> Explore Flagship Projects
+            </a>
+            <a href="public/cv/mohamed-hany-cv.pdf" target="_blank" class="btn btn-outline btn-sm">
+              <i class="fas fa-file-pdf"></i> View Full Resume
+            </a>
+          </div>
+        </div>
+
+        <div class="about-metrics-list">
+          <div class="metric-card glass-card">
+            <div class="metric-icon-box">
+              <i class="fas fa-database"></i>
+            </div>
+            <div>
+              <h4 class="metric-title">Database &amp; Caching Optimization</h4>
+              <p class="metric-desc">Expertise in Redis cache-aside architectures, Mongoose discriminator inheritance, compound indexing, and query tuning delivering sub-50ms API endpoints.</p>
+            </div>
+          </div>
+
+          <div class="metric-card glass-card">
+            <div class="metric-icon-box">
+              <i class="fas fa-network-wired"></i>
+            </div>
+            <div>
+              <h4 class="metric-title">High-Concurrency Pipelines</h4>
+              <p class="metric-desc">Architecting thread-safe producer/consumer worker pools (1–20 workers), 100-thread proxy validators, and automated browser testing suites with zero UI blocking.</p>
+            </div>
+          </div>
+
+          <div class="metric-card glass-card">
+            <div class="metric-icon-box">
+              <i class="fas fa-shield-halved"></i>
+            </div>
+            <div>
+              <h4 class="metric-title">Bank-Grade Security &amp; Auth</h4>
+              <p class="metric-desc">Implementing Speakeasy TOTP &amp; email 2FA, SHA-256 device fingerprints, IP-geolocated session inventories with remote revocation, and granular RBAC.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       4. SKILLS MATRIX SECTION
+       ======================================================================== -->
+  <section id="skills" class="section" style="background: var(--bg-secondary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fas fa-layer-group"></i> Technical Arsenal</span>
+        <h2 class="section-title">Skills &amp; Technologies</h2>
+        <p class="section-subtitle">A comprehensive toolkit spanning full-stack frameworks, backend architectures, concurrency engines, and cloud tools.</p>
+      </div>
+
+      <div class="skills-container">
+        <!-- 1. Languages -->
+        <div class="skill-category-card glass-card">
+          <div class="skill-category-header">
+            <div class="category-icon-wrapper"><i class="fas fa-code"></i></div>
+            <h3 class="skill-category-title">Programming Languages</h3>
+          </div>
+          <div class="skills-badge-wrap">
+            <span class="skill-badge"><i class="fab fa-js skill-badge-icon" style="color: #f7df1e;"></i> JavaScript (ES6+)</span>
+            <span class="skill-badge"><i class="fab fa-js skill-badge-icon" style="color: #3178c6;"></i> TypeScript</span>
+            <span class="skill-badge"><i class="fab fa-python skill-badge-icon" style="color: #38bdf8;"></i> Python 3</span>
+            <span class="skill-badge"><i class="fas fa-terminal skill-badge-icon" style="color: #4ade80;"></i> Bash / Shell Scripting</span>
+          </div>
+        </div>
+
+        <!-- 2. Backend & APIs -->
+        <div class="skill-category-card glass-card">
+          <div class="skill-category-header">
+            <div class="category-icon-wrapper"><i class="fas fa-server"></i></div>
+            <h3 class="skill-category-title">Backend Architecture &amp; APIs</h3>
+          </div>
+          <div class="skills-badge-wrap">
+            <span class="skill-badge"><i class="fab fa-node-js skill-badge-icon" style="color: #68a063;"></i> Node.js</span>
+            <span class="skill-badge"><i class="fas fa-cubes skill-badge-icon" style="color: #94a3b8;"></i> Express.js</span>
+            <span class="skill-badge"><i class="fas fa-bolt skill-badge-icon" style="color: #009688;"></i> FastAPI</span>
+            <span class="skill-badge"><i class="fas fa-network-wired skill-badge-icon" style="color: #38bdf8;"></i> RESTful APIs (~85 endpoints)</span>
+            <span class="skill-badge"><i class="fas fa-project-diagram skill-badge-icon" style="color: #e10098;"></i> GraphQL (SDL &amp; Code-First)</span>
+            <span class="skill-badge"><i class="fas fa-lock skill-badge-icon" style="color: #f59e0b;"></i> JWT / RBAC / TOTP 2FA</span>
+            <span class="skill-badge"><i class="fas fa-file-pdf skill-badge-icon" style="color: #ef4444;"></i> PDFKit Server Documents</span>
+          </div>
+        </div>
+
+        <!-- 3. Frontend Development -->
+        <div class="skill-category-card glass-card">
+          <div class="skill-category-header">
+            <div class="category-icon-wrapper"><i class="fas fa-laptop-code"></i></div>
+            <h3 class="skill-category-title">Frontend Engineering</h3>
+          </div>
+          <div class="skills-badge-wrap">
+            <span class="skill-badge"><i class="fab fa-angular skill-badge-icon" style="color: #dd0031;"></i> Angular 16+</span>
+            <span class="skill-badge"><i class="fab fa-react skill-badge-icon" style="color: #61dafb;"></i> React</span>
+            <span class="skill-badge"><i class="fab fa-html5 skill-badge-icon" style="color: #e34f26;"></i> Modern HTML5 / Semantic DOM</span>
+            <span class="skill-badge"><i class="fab fa-sass skill-badge-icon" style="color: #cc6699;"></i> SCSS / CSS3 Glassmorphism</span>
+            <span class="skill-badge"><i class="fab fa-bootstrap skill-badge-icon" style="color: #7952b3;"></i> Bootstrap 5</span>
+            <span class="skill-badge"><i class="fas fa-wind skill-badge-icon" style="color: #38bdf8;"></i> Tailwind CSS Compatible</span>
+            <span class="skill-badge"><i class="fas fa-map-marked-alt skill-badge-icon" style="color: #22c55e;"></i> Leaflet &amp; OpenStreetMap</span>
+            <span class="skill-badge"><i class="fas fa-chart-line skill-badge-icon" style="color: #f59e0b;"></i> Chart.js Data Visuals</span>
+          </div>
+        </div>
+
+        <!-- 4. Databases & Caching -->
+        <div class="skill-category-card glass-card">
+          <div class="skill-category-header">
+            <div class="category-icon-wrapper"><i class="fas fa-database"></i></div>
+            <h3 class="skill-category-title">Databases &amp; Distributed Caching</h3>
+          </div>
+          <div class="skills-badge-wrap">
+            <span class="skill-badge"><i class="fas fa-leaf skill-badge-icon" style="color: #47a248;"></i> MongoDB / Mongoose (13 Models)</span>
+            <span class="skill-badge"><i class="fas fa-memory skill-badge-icon" style="color: #dc2626;"></i> Redis (Cache-Aside &amp; Invalidation)</span>
+            <span class="skill-badge"><i class="fas fa-database skill-badge-icon" style="color: #00758f;"></i> MySQL</span>
+            <span class="skill-badge"><i class="fas fa-server skill-badge-icon" style="color: #cc292b;"></i> MS SQL Server (Connection Pooling)</span>
+          </div>
+        </div>
+
+        <!-- 5. Automation & Concurrency -->
+        <div class="skill-category-card glass-card">
+          <div class="skill-category-header">
+            <div class="category-icon-wrapper"><i class="fas fa-robot"></i></div>
+            <h3 class="skill-category-title">Automation &amp; Concurrency Engineering</h3>
+          </div>
+          <div class="skills-badge-wrap">
+            <span class="skill-badge"><i class="fas fa-theater-masks skill-badge-icon" style="color: #2dd4bf;"></i> Playwright Headless Automation</span>
+            <span class="skill-badge"><i class="fas fa-key skill-badge-icon" style="color: #fbbf24;"></i> Automated OAuth / MFA Resolution</span>
+            <span class="skill-badge"><i class="fas fa-microchip skill-badge-icon" style="color: #38bdf8;"></i> Multiprocessing / ThreadPool Pools</span>
+            <span class="skill-badge"><i class="fas fa-shield-virus skill-badge-icon" style="color: #a855f7;"></i> 100-Thread Proxy Validator</span>
+            <span class="skill-badge"><i class="fas fa-window-maximize skill-badge-icon" style="color: #60a5fa;"></i> CustomTkinter Desktop UI</span>
+          </div>
+        </div>
+
+        <!-- 6. Data Pipelines & Monitoring -->
+        <div class="skill-category-card glass-card">
+          <div class="skill-category-header">
+            <div class="category-icon-wrapper"><i class="fas fa-chart-pie"></i></div>
+            <h3 class="skill-category-title">Data Ingestion &amp; Monitoring</h3>
+          </div>
+          <div class="skills-badge-wrap">
+            <span class="skill-badge"><i class="fas fa-spider skill-badge-icon" style="color: #38bdf8;"></i> 48-Source Concurrent Web Scrapers</span>
+            <span class="skill-badge"><i class="fas fa-code-branch skill-badge-icon" style="color: #a78bfa;"></i> JSON / HTML Stream Parsers</span>
+            <span class="skill-badge"><i class="fas fa-tachometer-alt skill-badge-icon" style="color: #f59e0b;"></i> Algorithmic Activity Scoring</span>
+            <span class="skill-badge"><i class="fab fa-discord skill-badge-icon" style="color: #5865f2;"></i> Discord Webhook Tiered Alerts</span>
+            <span class="skill-badge"><i class="fas fa-brain skill-badge-icon" style="color: #10b981;"></i> Remote AI Model Integration (FastAPI)</span>
+          </div>
+        </div>
+
+        <!-- 7. DevOps & Tools -->
+        <div class="skill-category-card glass-card">
+          <div class="skill-category-header">
+            <div class="category-icon-wrapper"><i class="fas fa-toolbox"></i></div>
+            <h3 class="skill-category-title">DevOps, Cloud &amp; Tools</h3>
+          </div>
+          <div class="skills-badge-wrap">
+            <span class="skill-badge"><i class="fab fa-git-alt skill-badge-icon" style="color: #f05032;"></i> Git / GitHub</span>
+            <span class="skill-badge"><i class="fab fa-docker skill-badge-icon" style="color: #2496ed;"></i> Docker</span>
+            <span class="skill-badge"><i class="fab fa-jenkins skill-badge-icon" style="color: #d24939;"></i> Jenkins CI/CD</span>
+            <span class="skill-badge"><i class="fab fa-aws skill-badge-icon" style="color: #ff9900;"></i> AWS Certified Developer</span>
+            <span class="skill-badge"><i class="fab fa-microsoft skill-badge-icon" style="color: #0078d4;"></i> Microsoft Azure Fundamentals</span>
+            <span class="skill-badge"><i class="fas fa-cubes skill-badge-icon" style="color: #000000;"></i> Vercel &amp; Netlify Edge</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       5. WORK EXPERIENCE SECTION
+       ======================================================================== -->
+  <section id="experience" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fas fa-briefcase"></i> Track Record</span>
+        <h2 class="section-title">Work &amp; Project Experience</h2>
+        <p class="section-subtitle">Delivering high-impact systems within fast-paced engineering teams.</p>
+      </div>
+
+      <div class="timeline-wrap">
+        <!-- Experience 1: Graduation Project Flagship -->
+        <div class="timeline-item">
+          <div class="timeline-node"></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-meta">
+              <div>
+                <h3 class="timeline-role">Software Developer — Graduation Project</h3>
+                <div class="timeline-org">MyHealthAI Healthcare Platform</div>
+              </div>
+              <span class="timeline-period"><i class="fas fa-calendar-alt"></i> 2024 – 2025</span>
+            </div>
+            <ul class="timeline-bullets">
+              <li>Built a full-stack AI telemedicine platform (~73k lines, 85 REST endpoints, 13 MongoDB models) spanning patient, doctor, and admin portals using Angular 16, Node.js/Express, and MongoDB.</li>
+              <li>Integrated a remote Python/FastAPI pneumonia-detection ML model (95% accuracy) with API-key secured Node proxy layer, confidence scoring, and historical diagnosis logs.</li>
+              <li>Engineered bank-grade account security: Speakeasy TOTP &amp; email 2FA, SHA-256 trusted-device fingerprints, and IP-geolocated session inventory with remote revocation.</li>
+              <li>Optimized database schemas, virtuals, and compound indexing, resulting in a <strong>30% reduction in API response times</strong>.</li>
+              <li>Led sprint deliverables within an Agile (Scrum) workflow, deploying automated scheduler transitions and PDF receipt generation.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Experience 2: DHL Internship -->
+        <div class="timeline-item">
+          <div class="timeline-node"></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-meta">
+              <div>
+                <h3 class="timeline-role">IT Support Intern</h3>
+                <div class="timeline-org">DHL Supply Chain &amp; Logistics</div>
+              </div>
+              <span class="timeline-period"><i class="fas fa-calendar-alt"></i> Nov 2025 – Dec 2025</span>
+            </div>
+            <ul class="timeline-bullets">
+              <li>Logged, prioritized, and resolved high-volume IT support tickets across enterprise hardware, networks, and software applications.</li>
+              <li>Diagnosed damaged peripherals, handheld scanners, and operational workstations to minimize staff downtime during peak logistics operations.</li>
+              <li>Responded to client and internal staff escalations regarding internal portal systems, providing first-line technical investigation and resolution.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       6. PROJECTS SECTION (Hero Featured Card + Filterable Standard Grid)
+       ======================================================================== -->
+  <section id="projects" class="section" style="background: var(--bg-secondary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fas fa-diagram-project"></i> Portfolio Showcase</span>
+        <h2 class="section-title">Featured Engineering Projects</h2>
+        <p class="section-subtitle">Real-world production codebases analyzed for concurrency, security, and algorithmic efficiency.</p>
+      </div>
+
+      <!-- Controls: Category Filters + Live Search Bar -->
+      <div class="projects-controls">
+        <div class="filter-pills-bar" role="tablist" aria-label="Project Categories">
+          <button class="filter-btn active" data-filter="All">All Projects</button>
+          <button class="filter-btn" data-filter="Full-Stack">Full-Stack</button>
+          <button class="filter-btn" data-filter="AI">AI &amp; Healthcare</button>
+          <button class="filter-btn" data-filter="Desktop Automation">Desktop Automation</button>
+          <button class="filter-btn" data-filter="Automation">Automation / MFA</button>
+          <button class="filter-btn" data-filter="Data">Data &amp; Scraping</button>
+          <button class="filter-btn" data-filter="Labs">Labs &amp; APIs</button>
+        </div>
+
+        <div class="search-box-wrapper">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" id="project-search-input" class="search-input" placeholder="Search by technology, name, or keyword..." aria-label="Search projects" />
+        </div>
+      </div>
+
+      <!-- Extra-Large Featured Flagship Project Container -->
+      <div id="featured-project-container" class="featured-project-container">
+        <!-- Rendered dynamically by js/main.js from js/projects.js -->
+      </div>
+
+      <!-- Standard Projects Grid -->
+      <div id="projects-standard-grid" class="projects-standard-grid">
+        <!-- Rendered dynamically by js/main.js from js/projects.js -->
+      </div>
+
+      <!-- Empty State Container -->
+      <div id="projects-empty-state" style="display: none; text-align: center; padding: 4rem 1rem;">
+        <i class="fas fa-folder-open" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
+        <h3 style="font-family: var(--font-heading); font-size: 1.35rem; margin-bottom: 0.5rem;">No Matching Projects Found</h3>
+        <p style="color: var(--text-secondary); max-width: 400px; margin: 0 auto;">Try clearing your search query or selecting a different category filter above.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       7. EDUCATION & CERTIFICATIONS SECTION
+       ======================================================================== -->
+  <section id="education" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fas fa-graduation-cap"></i> Academic &amp; Cloud Credentials</span>
+        <h2 class="section-title">Education &amp; Certifications</h2>
+        <p class="section-subtitle">Solid academic foundation paired with industry-recognized cloud certifications.</p>
+      </div>
+
+      <div class="credentials-grid">
+        <!-- Column 1: Academic Education -->
+        <div>
+          <h3 class="credential-column-title">
+            <i class="fas fa-university" style="color: var(--accent-cyan);"></i> Formal Education
+          </h3>
+
+          <div class="credential-card glass-card">
+            <div class="credential-header">
+              <div>
+                <h4 class="credential-name">B.Sc. in Computers &amp; Artificial Intelligence</h4>
+                <div class="credential-issuer">Software Engineering Department — Helwan University</div>
+              </div>
+              <span class="credential-date">Graduation: Aug 2025</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.75rem; line-height: 1.6;">
+              Comprehensive curriculum focused on Data Structures, Algorithms, Distributed Systems, Software Architecture, Database Management, and Artificial Intelligence integration. Completed flagship full-stack healthcare platform as Graduation Project.
+            </p>
+          </div>
+        </div>
+
+        <!-- Column 2: Industry Certifications -->
+        <div>
+          <h3 class="credential-column-title">
+            <i class="fas fa-certificate" style="color: var(--accent-emerald);"></i> Cloud Certifications
+          </h3>
+
+          <div class="credential-card glass-card" style="margin-bottom: 1.25rem;">
+            <div style="display: flex; gap: 1rem; align-items: center;">
+              <div class="cert-badge-icon" style="background: rgba(255, 153, 0, 0.12); color: #ff9900;">
+                <i class="fab fa-aws"></i>
+              </div>
+              <div style="flex-grow: 1;">
+                <h4 class="credential-name">AWS Certified Developer – Associate</h4>
+                <div class="credential-issuer">Amazon Web Services (AWS)</div>
+              </div>
+              <span class="credential-date">Verified</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">
+              Demonstrated proficiency in developing, deploying, and debugging cloud-based applications using AWS core services (Lambda, API Gateway, DynamoDB, S3, ECS).
+            </p>
+          </div>
+
+          <div class="credential-card glass-card">
+            <div style="display: flex; gap: 1rem; align-items: center;">
+              <div class="cert-badge-icon" style="background: rgba(0, 120, 212, 0.12); color: #0078d4;">
+                <i class="fab fa-microsoft"></i>
+              </div>
+              <div style="flex-grow: 1;">
+                <h4 class="credential-name">Microsoft Azure Fundamentals (AZ-900)</h4>
+                <div class="credential-issuer">Microsoft Azure</div>
+              </div>
+              <span class="credential-date">Verified</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">
+              Foundational knowledge of cloud concepts, Azure architectural components, security, privacy, compliance, and cloud governance frameworks.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       8. CONTACT SECTION & WORKING FORM
+       ======================================================================== -->
+  <section id="contact" class="section" style="background: var(--bg-secondary); border-top: 1px solid var(--border-color);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fas fa-paper-plane"></i> Get In Touch</span>
+        <h2 class="section-title">Let's Build Something Exceptional</h2>
+        <p class="section-subtitle">Interested in discussing a backend, full-stack, automation, or data role? Send a message or reach out directly.</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Direct Contact Info Cards -->
+        <div class="contact-info-cards">
+          <!-- Email Card -->
+          <div class="contact-tile glass-card">
+            <div class="contact-tile-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div>
+              <div class="contact-tile-label">Direct Email</div>
+              <div class="contact-tile-value">mahamedhany8@gmail.com</div>
+            </div>
+            <button class="copy-btn" data-copy="mahamedhany8@gmail.com" title="Copy Email">
+              <i class="fas fa-copy"></i> Copy
+            </button>
+          </div>
+
+          <!-- Phone Card -->
+          <div class="contact-tile glass-card">
+            <div class="contact-tile-icon" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald); border-color: rgba(16, 185, 129, 0.25);">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div>
+              <div class="contact-tile-label">Phone / WhatsApp</div>
+              <div class="contact-tile-value">01003672318</div>
+            </div>
+            <button class="copy-btn" data-copy="01003672318" title="Copy Phone Number">
+              <i class="fas fa-copy"></i> Copy
+            </button>
+          </div>
+
+          <!-- Location Card -->
+          <div class="contact-tile glass-card">
+            <div class="contact-tile-icon" style="background: rgba(99, 102, 241, 0.12); color: var(--accent-indigo); border-color: rgba(99, 102, 241, 0.25);">
+              <i class="fas fa-location-dot"></i>
+            </div>
+            <div>
+              <div class="contact-tile-label">Location</div>
+              <div class="contact-tile-value">Cairo, Egypt (Open to Remote / Relocation)</div>
+            </div>
+          </div>
+
+          <!-- GitHub & LinkedIn Links -->
+          <div class="contact-tile glass-card">
+            <div class="contact-tile-icon" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan); border-color: rgba(56, 189, 248, 0.25);">
+              <i class="fab fa-github"></i>
+            </div>
+            <div>
+              <div class="contact-tile-label">GitHub Repository</div>
+              <div class="contact-tile-value"><a href="https://github.com/mohany6" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan);">github.com/mohany6</a></div>
+            </div>
+          </div>
+
+          <div class="contact-tile glass-card">
+            <div class="contact-tile-icon" style="background: rgba(0, 119, 181, 0.12); color: #0077b5; border-color: rgba(0, 119, 181, 0.25);">
+              <i class="fab fa-linkedin-in"></i>
+            </div>
+            <div>
+              <div class="contact-tile-label">Professional LinkedIn</div>
+              <div class="contact-tile-value"><a href="https://linkedin.com/in/mohamed-hany" target="_blank" rel="noopener noreferrer" style="color: #0077b5;">linkedin.com/in/mohamed-hany</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Contact Form -->
+        <div class="contact-form-card glass-card">
+          <form id="portfolio-contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+            <div class="form-group">
+              <label for="form-name" class="form-label">Full Name *</label>
+              <input type="text" id="form-name" name="name" class="form-input" placeholder="e.g. John Doe / Technical Recruiter" required />
+            </div>
+
+            <div class="form-group">
+              <label for="form-email" class="form-label">Work Email *</label>
+              <input type="email" id="form-email" name="email" class="form-input" placeholder="e.g. recruiter@company.com" required />
+            </div>
+
+            <div class="form-group">
+              <label for="form-subject" class="form-label">Opportunity / Role *</label>
+              <input type="text" id="form-subject" name="subject" class="form-input" placeholder="e.g. Backend Developer Role / Project Collaboration" required />
+            </div>
+
+            <div class="form-group">
+              <label for="form-message" class="form-label">Message Details *</label>
+              <textarea id="form-message" name="message" class="form-textarea" placeholder="Describe the role, company requirements, or any questions..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              <i class="fas fa-paper-plane"></i> Send Direct Message
+            </button>
+
+            <div id="form-status-msg" class="form-status-msg"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
+            <span class="brand-icon" style="width: 28px; height: 28px; font-size: 0.8rem;">M</span>
+            <span style="font-family: var(--font-heading); font-weight: 700; color: var(--text-primary);">Mohamed Hany Fathy</span>
+          </div>
+          <p class="footer-copyright">© 2025 – 2026 Mohamed Hany Fathy. Engineered with precision &amp; modern web standards.</p>
+        </div>
+
+        <ul class="footer-links">
+          <li><a href="#about" class="footer-link">About</a></li>
+          <li><a href="#skills" class="footer-link">Skills</a></li>
+          <li><a href="#projects" class="footer-link">Projects</a></li>
+          <li><a href="#contact" class="footer-link">Contact</a></li>
+          <li><a href="public/cv/mohamed-hany-cv.pdf" target="_blank" class="footer-link">Resume PDF</a></li>
+        </ul>
+
+        <a href="#hero" class="back-to-top-btn" aria-label="Scroll to top of page" title="Back to top">
+          <i class="fas fa-chevron-up"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       PROJECT DEEP-DIVE MODAL
+       ======================================================================== -->
+  <div id="project-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-container">
+      <button id="modal-close-btn" class="modal-close-btn" aria-label="Close Project Details Dialog">
+        <i class="fas fa-times"></i>
+      </button>
+      <div id="modal-project-content">
+        <!-- Rendered dynamically by js/main.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Data Store & App Controller -->
+  <script src="js/projects.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

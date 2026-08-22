@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="100%" height="100%">
+  <defs>
+    <linearGradient id="mBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0c16" />
+      <stop offset="50%" stop-color="#121629" />
+      <stop offset="100%" stop-color="#070810" />
+    </linearGradient>
+    <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(99, 102, 241, 0.4)" />
+      <stop offset="100%" stop-color="rgba(99, 102, 241, 0.0)" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="580" fill="url(#mBg)" />
+
+  <rect x="25" y="20" width="950" height="540" rx="14" fill="#0f1424" stroke="rgba(99,102,241,0.25)" stroke-width="1.5" />
+
+  <!-- Top Bar -->
+  <rect x="25" y="20" width="950" height="42" rx="14" fill="#181e36" />
+  <circle cx="52" cy="41" r="5.5" fill="#ef4444" />
+  <circle cx="70" cy="41" r="5.5" fill="#f59e0b" />
+  <circle cx="88" cy="41" r="5.5" fill="#10b981" />
+  <text x="500" y="46" fill="#94a3b8" font-family="sans-serif" font-size="12" font-weight="600" text-anchor="middle">Market Monitor Pipeline &amp; Automated Discord Webhook Engine</text>
+
+  <!-- Left: Live Market Telemetry & Algorithmic Scoring -->
+  <g transform="translate(45, 80)">
+    <rect x="0" y="0" width="530" height="455" rx="10" fill="#13192e" stroke="rgba(255,255,255,0.06)" />
+    
+    <text x="20" y="32" fill="#f8fafc" font-family="sans-serif" font-size="15" font-weight="700">Real-Time Ingestion &amp; Activity Scoring</text>
+    <text x="20" y="52" fill="#94a3b8" font-family="sans-serif" font-size="11">Scraping 48 endpoints every 1.5s • Zero rate limit bans</text>
+
+    <!-- Sparkline Chart Area -->
+    <rect x="20" y="70" width="490" height="170" rx="8" fill="#0b0f1d" stroke="rgba(255,255,255,0.04)" />
+    <path d="M 30 190 Q 90 160 140 170 T 250 110 T 360 80 T 440 50 T 490 35 L 490 220 L 30 220 Z" fill="url(#chartGrad)" />
+    <path d="M 30 190 Q 90 160 140 170 T 250 110 T 360 80 T 440 50 T 490 35" fill="none" stroke="#6366f1" stroke-width="3" />
+    <circle cx="490" cy="35" r="5" fill="#38bdf8" />
+
+    <text x="40" y="95" fill="#64748b" font-family="sans-serif" font-size="10">ACTIVITY VELOCITY</text>
+    <text x="40" y="118" fill="#34d399" font-family="sans-serif" font-size="18" font-weight="800">+412% Surge</text>
+
+    <!-- Table of Detected Anomalies -->
+    <text x="20" y="270" fill="#f8fafc" font-family="sans-serif" font-size="12" font-weight="700">Recent Scoring Triggers</text>
+    <rect x="20" y="285" width="490" height="150" rx="6" fill="#0b0f1d" />
+    
+    <text x="35" y="310" fill="#64748b" font-family="sans-serif" font-size="10">ASSET / SKU</text>
+    <text x="180" y="310" fill="#64748b" font-family="sans-serif" font-size="10">PRICE DELTA</text>
+    <text x="290" y="310" fill="#64748b" font-family="sans-serif" font-size="10">SCORE</text>
+    <text x="390" y="310" fill="#64748b" font-family="sans-serif" font-size="10">ALERT STATUS</text>
+
+    <line x1="20" y1="322" x2="510" y2="322" stroke="rgba(255,255,255,0.06)" />
+
+    <text x="35" y="348" fill="#cbd5e1" font-family="monospace" font-size="11">ITEM_R9_PRIME_01</text>
+    <text x="180" y="348" fill="#34d399" font-family="sans-serif" font-size="11" font-weight="600">-42% Below Avg</text>
+    <text x="290" y="348" fill="#38bdf8" font-family="sans-serif" font-size="11" font-weight="700">98.4 / 100</text>
+    <text x="390" y="348" fill="#a78bfa" font-family="sans-serif" font-size="10" font-weight="700">DISPATCHED 🚀</text>
+
+    <text x="35" y="380" fill="#cbd5e1" font-family="monospace" font-size="11">ITEM_CR7_GOLD_91</text>
+    <text x="180" y="380" fill="#34d399" font-family="sans-serif" font-size="11" font-weight="600">-30% Below Avg</text>
+    <text x="290" y="380" fill="#38bdf8" font-family="sans-serif" font-size="11" font-weight="700">92.1 / 100</text>
+    <text x="390" y="380" fill="#a78bfa" font-family="sans-serif" font-size="10" font-weight="700">DISPATCHED 🚀</text>
+
+    <text x="35" y="412" fill="#cbd5e1" font-family="monospace" font-size="11">ITEM_MBAPPE_TOTW</text>
+    <text x="180" y="412" fill="#fbbf24" font-family="sans-serif" font-size="11" font-weight="600">-15% Volume Bump</text>
+    <text x="290" y="412" fill="#fbbf24" font-family="sans-serif" font-size="11" font-weight="700">76.0 / 100</text>
+    <text x="390" y="412" fill="#64748b" font-family="sans-serif" font-size="10">QUEUED</text>
+  </g>
+
+  <!-- Right: Live Discord Rich Embed Broadcast Preview -->
+  <g transform="translate(600, 80)">
+    <rect x="0" y="0" width="350" height="455" rx="10" fill="#202225" stroke="#5865f2" stroke-width="1.5" />
+    
+    <rect x="20" y="20" width="310" height="415" rx="6" fill="#2f3136" />
+    <rect x="20" y="20" width="6" height="415" rx="2" fill="#5865f2" />
+
+    <text x="40" y="50" fill="#5865f2" font-family="sans-serif" font-size="13" font-weight="700">🤖 MARKET SNIPER BOT</text>
+    <text x="40" y="75" fill="#f8fafc" font-family="sans-serif" font-size="14" font-weight="800">🚨 HIGH-TIER ARBITRAGE DETECTED</text>
+    
+    <rect x="40" y="90" width="270" height="60" rx="4" fill="#202225" />
+    <text x="52" y="112" fill="#94a3b8" font-family="sans-serif" font-size="10">ASSET IDENTIFIER</text>
+    <text x="52" y="132" fill="#f8fafc" font-family="monospace" font-size="12" font-weight="700">R9 Prime Icon #8812</text>
+
+    <text x="40" y="175" fill="#94a3b8" font-family="sans-serif" font-size="11">Current Ask Price: <tspan fill="#34d399" font-weight="700">1,250,000 Coins</tspan></text>
+    <text x="40" y="200" fill="#94a3b8" font-family="sans-serif" font-size="11">Estimated Market: <tspan fill="#38bdf8" font-weight="700">2,100,000 Coins</tspan></text>
+    <text x="40" y="225" fill="#94a3b8" font-family="sans-serif" font-size="11">Net Profit Margin: <tspan fill="#fbbf24" font-weight="700">+850,000 (68%)</tspan></text>
+    <text x="40" y="250" fill="#94a3b8" font-family="sans-serif" font-size="11">Activity Score: <tspan fill="#a78bfa" font-weight="700">98.4 / 100</tspan></text>
+
+    <line x1="40" y1="270" x2="310" y2="270" stroke="rgba(255,255,255,0.06)" />
+
+    <text x="40" y="295" fill="#cbd5e1" font-family="sans-serif" font-size="11" font-weight="600">Pipeline Ingestion Stats:</text>
+    <text x="40" y="318" fill="#94a3b8" font-family="monospace" font-size="10">• Latency: 32ms from HTTP scrape</text>
+    <text x="40" y="338" fill="#94a3b8" font-family="monospace" font-size="10">• Parser: BeautifulSoup4 + lxml</text>
+    <text x="40" y="358" fill="#94a3b8" font-family="monospace" font-size="10">• Delivery: Webhook POST 200 OK</text>
+    <text x="40" y="378" fill="#94a3b8" font-family="monospace" font-size="10">• Synced to Daily JSON Analytics</text>
+
+    <text x="40" y="415" fill="#64748b" font-family="sans-serif" font-size="9">Market Monitor v2.1 • Today at 15:42</text>
+  </g>
+</svg>

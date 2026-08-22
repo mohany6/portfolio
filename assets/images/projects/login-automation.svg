@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="100%" height="100%">
+  <defs>
+    <linearGradient id="lBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#081018" />
+      <stop offset="50%" stop-color="#0e1d2c" />
+      <stop offset="100%" stop-color="#050a10" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="580" fill="url(#lBg)" />
+
+  <rect x="25" y="20" width="950" height="540" rx="14" fill="#0b1622" stroke="rgba(45,212,191,0.25)" stroke-width="1.5" />
+
+  <!-- Top Bar -->
+  <rect x="25" y="20" width="950" height="42" rx="14" fill="#132435" />
+  <circle cx="52" cy="41" r="5.5" fill="#ef4444" />
+  <circle cx="70" cy="41" r="5.5" fill="#f59e0b" />
+  <circle cx="88" cy="41" r="5.5" fill="#10b981" />
+  <text x="500" y="46" fill="#94a3b8" font-family="sans-serif" font-size="12" font-weight="600" text-anchor="middle">Playwright MFA &amp; OAuth Orchestrator (Multiprocessing Engine)</text>
+
+  <!-- KPI Badges Strip -->
+  <g transform="translate(45, 80)">
+    <rect x="0" y="0" width="205" height="55" rx="8" fill="#162b3f" stroke="rgba(45,212,191,0.2)" />
+    <text x="18" y="22" fill="#94a3b8" font-family="sans-serif" font-size="10">PARALLEL INSTANCES</text>
+    <text x="18" y="44" fill="#2dd4bf" font-family="sans-serif" font-size="18" font-weight="700">8 Chromium Workers</text>
+
+    <rect x="220" y="0" width="205" height="55" rx="8" fill="#162b3f" stroke="rgba(56,189,248,0.2)" />
+    <text x="238" y="22" fill="#94a3b8" font-family="sans-serif" font-size="10">AUTH SUCCESS RATE</text>
+    <text x="238" y="44" fill="#38bdf8" font-family="sans-serif" font-size="18" font-weight="700">99.4% (Resolved)</text>
+
+    <rect x="440" y="0" width="205" height="55" rx="8" fill="#162b3f" stroke="rgba(16,185,129,0.2)" />
+    <text x="458" y="22" fill="#94a3b8" font-family="sans-serif" font-size="10">SESSION COOKIES SAVED</text>
+    <text x="458" y="44" fill="#34d399" font-family="sans-serif" font-size="18" font-weight="700">1,420 Active</text>
+
+    <rect x="660" y="0" width="245" height="55" rx="8" fill="#162b3f" stroke="rgba(245,158,11,0.2)" />
+    <text x="678" y="22" fill="#94a3b8" font-family="sans-serif" font-size="10">MFA CHALLENGE LATENCY</text>
+    <text x="678" y="44" fill="#fbbf24" font-family="sans-serif" font-size="18" font-weight="700">420ms Avg Response</text>
+  </g>
+
+  <!-- Left: Live Headless Workers Grid -->
+  <g transform="translate(45, 150)">
+    <rect x="0" y="0" width="460" height="385" rx="10" fill="#102030" stroke="rgba(255,255,255,0.06)" />
+    <text x="20" y="28" fill="#f8fafc" font-family="sans-serif" font-size="13" font-weight="700">Active Worker Contexts &amp; State</text>
+
+    <!-- Worker Item 1 -->
+    <rect x="20" y="45" width="420" height="70" rx="6" fill="#182c40" />
+    <circle cx="40" cy="80" r="10" fill="rgba(16,185,129,0.2)" />
+    <circle cx="40" cy="80" r="4" fill="#10b981" />
+    <text x="60" y="72" fill="#f8fafc" font-family="sans-serif" font-size="12" font-weight="600">Worker-01 (OAuth 2.0 PKCE Flow)</text>
+    <text x="60" y="92" fill="#94a3b8" font-family="monospace" font-size="10">Bypassed MFA Challenge • Cookies cached to disk</text>
+    <rect x="345" y="65" width="80" height="26" rx="4" fill="rgba(16,185,129,0.2)" />
+    <text x="385" y="82" fill="#34d399" font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle">SUCCESS</text>
+
+    <!-- Worker Item 2 -->
+    <rect x="20" y="125" width="420" height="70" rx="6" fill="#182c40" />
+    <circle cx="40" cy="160" r="10" fill="rgba(56,189,248,0.2)" />
+    <circle cx="40" cy="160" r="4" fill="#38bdf8" />
+    <text x="60" y="152" fill="#f8fafc" font-family="sans-serif" font-size="12" font-weight="600">Worker-02 (TOTP Authenticator Resolver)</text>
+    <text x="60" y="172" fill="#94a3b8" font-family="monospace" font-size="10">Computing 6-digit TOTP • Intercepting DOM input</text>
+    <rect x="345" y="145" width="80" height="26" rx="4" fill="rgba(56,189,248,0.2)" />
+    <text x="385" y="162" fill="#38bdf8" font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle">RUNNING</text>
+
+    <!-- Worker Item 3 -->
+    <rect x="20" y="205" width="420" height="70" rx="6" fill="#182c40" />
+    <circle cx="40" cy="240" r="10" fill="rgba(16,185,129,0.2)" />
+    <circle cx="40" cy="240" r="4" fill="#10b981" />
+    <text x="60" y="232" fill="#f8fafc" font-family="sans-serif" font-size="12" font-weight="600">Worker-03 (Session Keep-Alive Pump)</text>
+    <text x="60" y="252" fill="#94a3b8" font-family="monospace" font-size="10">Bearer token refreshed • No re-challenge required</text>
+    <rect x="345" y="225" width="80" height="26" rx="4" fill="rgba(16,185,129,0.2)" />
+    <text x="385" y="242" fill="#34d399" font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle">SUCCESS</text>
+
+    <!-- Worker Item 4 -->
+    <rect x="20" y="285" width="420" height="70" rx="6" fill="#182c40" />
+    <circle cx="40" cy="320" r="10" fill="rgba(245,158,11,0.2)" />
+    <circle cx="40" cy="320" r="4" fill="#f59e0b" />
+    <text x="60" y="312" fill="#f8fafc" font-family="sans-serif" font-size="12" font-weight="600">Worker-04 (Captcha Telemetry Hook)</text>
+    <text x="60" y="332" fill="#94a3b8" font-family="monospace" font-size="10">Saved failure screenshot: /logs/traces/err_04.png</text>
+    <rect x="345" y="305" width="80" height="26" rx="4" fill="rgba(245,158,11,0.2)" />
+    <text x="385" y="322" fill="#fbbf24" font-family="sans-serif" font-size="10" font-weight="700" text-anchor="middle">RETRYING</text>
+  </g>
+
+  <!-- Right: Real-time Telemetry Terminal -->
+  <g transform="translate(525, 150)">
+    <rect x="0" y="0" width="430" height="385" rx="10" fill="#070d14" stroke="rgba(255,255,255,0.06)" />
+    <text x="20" y="28" fill="#2dd4bf" font-family="monospace" font-size="12" font-weight="700">~/playwright-pool/telemetry.log</text>
+
+    <line x1="0" y1="42" x2="430" y2="42" stroke="rgba(255,255,255,0.06)" />
+
+    <text x="20" y="70" fill="#94a3b8" font-family="monospace" font-size="11">[15:42:01.102] <tspan fill="#38bdf8">INFO</tspan> Pool spawned 8 worker threads via multiprocessing.</text>
+    <text x="20" y="95" fill="#94a3b8" font-family="monospace" font-size="11">[15:42:01.450] <tspan fill="#2dd4bf">AUTH</tspan> Hooked proxy context: Socks5://192.168.1.12:8080</text>
+    <text x="20" y="120" fill="#94a3b8" font-family="monospace" font-size="11">[15:42:02.120] <tspan fill="#34d399">PASS</tspan> Intercepted SMS MFA code from IMAP queue.</text>
+    <text x="20" y="145" fill="#94a3b8" font-family="monospace" font-size="11">[15:42:02.390] <tspan fill="#34d399">PASS</tspan> Injected OTP token to selector #mfa-input.</text>
+    <text x="20" y="170" fill="#94a3b8" font-family="monospace" font-size="11">[15:42:02.810] <tspan fill="#a78bfa">PERSIST</tspan> Serialized session state: active_session_01.json</text>
+    <text x="20" y="195" fill="#94a3b8" font-family="monospace" font-size="11">[15:42:03.200] <tspan fill="#fbbf24">WARN</tspan> Rate-limit flag detected on Worker-04. Exponential backoff (1.5s).</text>
+    <text x="20" y="220" fill="#94a3b8" font-family="monospace" font-size="11">[15:42:04.700] <tspan fill="#38bdf8">INFO</tspan> Auto-reconnected Worker-04 with clean fingerprint.</text>
+    <text x="20" y="245" fill="#94a3b8" font-family="monospace" font-size="11">[15:42:05.100] <tspan fill="#34d399">PASS</tspan> All 8 instances verified &amp; ready.</text>
+  </g>
+</svg>
