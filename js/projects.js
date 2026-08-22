@@ -60,14 +60,86 @@ const PROJECTS_DATA = [
       "Automated Services: Background scheduler detecting missed appointments with transactional Nodemailer alerts and server-side PDF prescription generation."
     ],
     links: {
-      github: "https://github.com/mohany6/myhealthai", // Replace with your repository URL
-      live: "https://myhealthai-demo.vercel.app",       // Replace with your live demo URL if available
-      demoVideo: ""                                   // Optional video walkthrough link
+      github: "https://github.com/mohany6/MyHealthAI",
+      live: "https://myhealthai-demo.vercel.app",
+      demoVideo: ""
     },
     image: {
       banner: "assets/images/projects/healthcare-ai.png",
       caption: "MyHealthAI Telemedicine & AI Diagnostic Platform"
-    }
+    },
+    gallery: [
+      {
+        url: "assets/images/projects/myhealthai/01-home-telemedicine-hero.png",
+        caption: "Patient Telemedicine Portal & Health Dashboard",
+        category: "Portal"
+      },
+      {
+        url: "assets/images/projects/myhealthai/02-ai-xray-pneumonia-scanner.png",
+        caption: "FastAPI Deep-Learning AI Pneumonia X-Ray Classifier",
+        category: "AI Engine"
+      },
+      {
+        url: "assets/images/projects/myhealthai/03-ai-prediction-confidence.png",
+        caption: "AI Diagnostic Confidence Scoring & Probability Metrics",
+        category: "AI Engine"
+      },
+      {
+        url: "assets/images/projects/myhealthai/04-ai-diagnosis-metrics.png",
+        caption: "AI Radiology History & Diagnostic Logs",
+        category: "AI Engine"
+      },
+      {
+        url: "assets/images/projects/myhealthai/07-leaflet-clinic-map.png",
+        caption: "Leaflet OpenStreetMap Geospatial Clinic Discovery",
+        category: "Discovery"
+      },
+      {
+        url: "assets/images/projects/myhealthai/12-totp-authenticator-2fa.png",
+        caption: "Speakeasy TOTP 2FA Authenticator Workflow",
+        category: "Security"
+      },
+      {
+        url: "assets/images/projects/myhealthai/14-bank-grade-security-hub.png",
+        caption: "Bank-Grade Security Settings Hub",
+        category: "Security"
+      },
+      {
+        url: "assets/images/projects/myhealthai/15-sha256-trusted-devices.png",
+        caption: "SHA-256 Trusted Device Hardware Fingerprinting",
+        category: "Security"
+      },
+      {
+        url: "assets/images/projects/myhealthai/16-ip-geolocated-sessions.png",
+        caption: "IP-Geolocated Session Inventory & Remote Kill Switch",
+        category: "Security"
+      },
+      {
+        url: "assets/images/projects/myhealthai/17-doctor-dashboard-workspace.png",
+        caption: "Doctor Clinical Workspace & Daily Schedule",
+        category: "Doctor Portal"
+      },
+      {
+        url: "assets/images/projects/myhealthai/18-doctor-clinic-slot-manager.png",
+        caption: "Clinic Slot Capacity & Schedule Modeling",
+        category: "Doctor Portal"
+      },
+      {
+        url: "assets/images/projects/myhealthai/22-admin-oversight-dashboard.png",
+        caption: "Administrator System Operations Dashboard",
+        category: "Admin"
+      },
+      {
+        url: "assets/images/projects/myhealthai/24-admin-doctor-license-verification.png",
+        caption: "Multi-Document Doctor Credential Verification Workflow",
+        category: "Admin"
+      },
+      {
+        url: "assets/images/projects/myhealthai/27-booking-wizard-slot-capacity.png",
+        caption: "Multi-Step Conflict-Checked Booking Wizard",
+        category: "Scheduler"
+      }
+    ]
   },
 
   {

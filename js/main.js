@@ -627,6 +627,35 @@ function attachProjectModalTriggers() {
           </div>
         </div>
 
+        ${
+          project.gallery && project.gallery.length > 0
+            ? `
+          <div style="margin-bottom: 2rem;">
+            <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.85rem; color: var(--text-primary);">
+              <i class="fas fa-images" style="color: var(--accent-cyan); margin-right: 0.4rem;"></i> Verified Feature Screenshots (${project.gallery.length})
+            </h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem;">
+              ${project.gallery
+                .map(
+                  (img) => `
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; display: flex; flex-direction: column;">
+                  <a href="${escapeHtml(img.url)}" target="_blank" rel="noopener noreferrer" title="Click to view full-resolution image" style="display: block; overflow: hidden; background: #000;">
+                    <img src="${escapeHtml(img.url)}" alt="${escapeHtml(img.caption)}" style="width: 100%; height: 135px; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy" />
+                  </a>
+                  <div style="padding: 0.6rem 0.75rem; flex: 1; display: flex; flex-direction: column;">
+                    <span style="font-size: 0.68rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">${escapeHtml(img.category || "Feature")}</span>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.35;">${escapeHtml(img.caption)}</p>
+                  </div>
+                </div>
+              `
+                )
+                .join("")}
+            </div>
+          </div>
+        `
+            : ""
+        }
+
         <div style="display: flex; gap: 1rem; flex-wrap: wrap; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
           ${
             project.links.github
