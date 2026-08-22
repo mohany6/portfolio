@@ -238,6 +238,53 @@ const PROJECTS_DATA = [
   },
 
   {
+    id: "laravel-customer-manager",
+    title: "CustomerManager — Laravel 11 CRUD Application",
+    shortTitle: "CustomerManager (Laravel 11)",
+    tagline: "Relational Resource Management System with Eloquent Cascade Deletes & Vite-Powered Blade UI",
+    category: "Full-Stack",
+    secondaryCategory: "Labs",
+    featured: false,
+    badge: "PHP & Laravel 11",
+    period: "2024",
+    stats: [
+      { label: "Framework", value: "Laravel 11" },
+      { label: "Runtime", value: "PHP 8.2" },
+      { label: "Architecture", value: "RESTful CRUD" },
+      { label: "ORM Layer", value: "Eloquent 1:M" }
+    ],
+    techStack: [
+      "PHP 8.2",
+      "Laravel 11",
+      "Eloquent ORM",
+      "Blade Templates",
+      "Tailwind CSS",
+      "Vite",
+      "SQLite / MySQL",
+      "Form Validation"
+    ],
+    summary: "A relational Customer & Order management platform engineered on Laravel 11 and PHP 8.2. Features full resource controllers, Eloquent one-to-many relationships with foreign-key cascade deletes, server-side validation rules, and a responsive Tailwind CSS Blade UI.",
+    highlights: [
+      "Built complete RESTful resource controllers for Customers and Orders with strict server-side validation (unique phone formats, foreign key existence).",
+      "Engineered Eloquent one-to-many relationships with database migration foreign keys and automated cascade deletion.",
+      "Delivered a modern responsive Tailwind CSS UI compiled via Vite with session flash messages, inline validation errors, and seeded demo databases."
+    ],
+    architecturalDetails: [
+      "Clean MVC architecture following Laravel 11 streamlined directory layout and route definitions.",
+      "Seeded database factories generating realistic customer portfolios and order histories for testing."
+    ],
+    links: {
+      github: "https://github.com/mohany6/laravel-customer-manager",
+      live: "",
+      demoVideo: ""
+    },
+    image: {
+      banner: "assets/images/projects/customer-manager.svg",
+      caption: "Laravel 11 Resource Management Dashboard"
+    }
+  },
+
+  {
     id: "login-automation-playwright",
     title: "Headless Login Automation & MFA Pipeline",
     shortTitle: "Login Automation Pipeline",
