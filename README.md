@@ -96,4 +96,4 @@ To add a new project, open `js/projects.js`, copy one of the commented template 
 - **Email**: [mahamedhany8@gmail.com](mailto:mahamedhany8@gmail.com)
 - **Phone**: +20 100 367 2318
 - **GitHub**: [github.com/mohany6](https://github.com/mohany6)
-- **LinkedIn**: [linkedin.com/in/mohamed-hany](https://linkedin.com/in/mohamed-hany)
+- **LinkedIn**: [linkedin.com/in/mohanyoo](https://www.linkedin.com/in/mohanyoo/)
