@@ -144,18 +144,18 @@ const PROJECTS_DATA = [
 
   {
     id: "fc26-automation-suite",
-    title: "High-Throughput Automation & Monitoring Suite",
-    shortTitle: "Automation & Monitoring Suite",
-    tagline: "Modular Multi-Threaded Python Engine with 100-Thread Proxy Validator & Live KPI Telemetry",
+    title: "FC26 Automation Suite — High-Throughput Desktop Pipeline",
+    shortTitle: "FC26 Automation Suite (Desktop)",
+    tagline: "Educational Desktop Concurrency Suite with Reverse-Engineered Protocol Pipeline & 100-Thread Proxy Validator",
     category: "Desktop Automation",
     secondaryCategory: "Data",
     featured: false,
-    badge: "⭐ Production-Tested Concurrency",
+    badge: "⭐ Concurrency & Reverse-Engineering",
     period: "2024",
     stats: [
-      { label: "Concurrent Threads", value: "100" },
-      { label: "Codebase Scale", value: "~3,800 LOC" },
-      { label: "Scraper Sources", value: "48 Concurrent" },
+      { label: "Concurrency", value: "100 Threads" },
+      { label: "Modular Design", value: "14 Packages" },
+      { label: "Scraper Sources", value: "48 Sources" },
       { label: "Status Taxonomy", value: "34 Buckets" }
     ],
     techStack: [
@@ -164,28 +164,30 @@ const PROJECTS_DATA = [
       "Threading / Queue",
       "ThreadPoolExecutor",
       "Requests",
+      "Playwright",
       "JSON Persistence",
       "Win32 ctypes"
     ],
-    summary: "A production-tested Windows desktop concurrency system (~3,800 LOC) refactored from a single-file monolith into 14 cohesive modules. Implements an airtight producer/consumer pipeline with live O(1) telemetry and sliding-window ETA estimators.",
+    summary: "Built strictly for educational research to master desktop concurrency, reverse-engineering, and web scraping in the absence of a public EA API. Reverse-engineered undocumented REST endpoints, session cookie flows, and OAuth redirects into a resilient 4-step headless authentication and verification pipeline (~3,800 LOC across 14 modules).",
     highlights: [
-      "Designed a thread-safe producer/consumer architecture with 1–20 parallel workers; workers communicate exclusively through callback-fed queues drained by an 80ms UI pump — zero cross-thread widget access.",
-      "Built a 100-thread proxy validator against live OAuth endpoints with latency measurement, alongside a 48-source concurrent scraper with 5 pluggable parsers and automatic rotation.",
-      "Implemented a stateless ResultClassifier mapping raw pipeline outputs into a 34-entry status taxonomy, driving live KPI chips, regex-searchable tables, sliding-window ETA estimators, and atomic JSON/CSV exports."
+      "Reverse-Engineered Protocol Pipeline (Educational Research): Analyzed undocumented REST endpoints, token minting (JWT → Gateway PID → authCode), and UTAS account gateway flows to overcome the lack of an official public API.",
+      "Thread-Safe Producer/Consumer Concurrency: Orchestrated 1–20 background workers via callback-fed queues drained by an 80ms main-thread UI pump — eliminating cross-thread UI contention.",
+      "100-Thread Proxy Subsystem & Scraper: Built a 100-thread health validator testing against live endpoints and a 48-source concurrent scraper with 5 parsers (8k deduplicated pool) and dynamic cooldown-aware rotation.",
+      "34-Entry Status Taxonomy (ResultClassifier): Engineered a unified single source of truth mapping raw response payloads to 8 real-time KPI counters, sliding-window ETA estimators, regex search tables, and atomic file persistence."
     ],
     architecturalDetails: [
-      "Clean UI Bridge: Decoupled UI and background thread pools using threading.Events for pause, resume, stop, and skip-in-flight operations.",
-      "Resilient Error Handling: Global exception hooks across main and thread workers transforming unhandled crashes into classified, retryable task results.",
-      "Data Integrity: Atomic JSON file persistence for settings, historical run states, and multi-format exports (TXT, JSON, CSV)."
+      "4-Step Headless & Hybrid Verification Pipeline: Step 1 (OAuth exchange) → Step 2 (JWT & Gateway PID minting) → Step 3 (Browserless UTAS verification) → Step 4 (Hybrid Playwright market probe).",
+      "14-Module Architecture (fut26_ui): Decomposed a 136 KB monolith into 14 cohesive, typed modules (workers, models, status, gather, proxy_modal, main_window, store, etc.) with explicit size budgets and design tokens.",
+      "Educational & Legal Notice: Developed strictly as an academic exercise in desktop concurrency, HTTP protocol analysis, and resilient automation design without commercial distribution."
     ],
     links: {
-      github: "https://github.com/mohany6/automation-suite", // Replace with your repository URL
-      live: "",                                             // Leave empty if desktop-only
+      github: "https://github.com/mohany6/fc26-automation-suite",
+      live: "",
       demoVideo: ""
     },
     image: {
       banner: "assets/images/projects/automation-suite.png",
-      caption: "Desktop Concurrency Engine & Telemetry Dashboard"
+      caption: "Desktop Concurrency Engine & 14-Module Telemetry Dashboard"
     }
   },
 

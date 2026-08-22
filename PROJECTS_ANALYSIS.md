@@ -70,7 +70,7 @@
 ---
 
 ### 🔬 Technical Approach (How It Works Without a Public API)
-Because there is no official API, the pipeline was engineered from the ground up:
+Because EA does not provide any official public API for companion or web app platforms, the pipeline was engineered from the ground up:
 1. **Traffic Capture & Protocol Analysis** — Inspected browser↔EA web-app HTTP traffic to map undocumented REST endpoints, dynamic headers, cryptographic tokens, and session-cookie lifecycles.
 2. **Headless Session Handling** — Replayed stored session cookies through browserless HTTP login flows, accurately replicating OAuth redirects, token exchange, and MFA code verification polling.
 3. **Response-Driven Classification** — Reverse-engineered the semantics of upstream status codes and payload signatures into a **34-entry result taxonomy** (club found / no market access / email changed / verification required / cooldowns).
@@ -78,28 +78,48 @@ Because there is no official API, the pipeline was engineered from the ground up
 
 ---
 
-### 🏛️ Concurrency Architecture & Key Subsystems
+### 🔄 4-Step Headless & Hybrid Verification Pipeline
+
+1. **Step 1 — Headless Authentication & Session Replay (`ea_http_login` & `xbox_code_login`)**:
+   - Executes browserless OAuth code exchange, replaying stored session cookies and polling Microsoft verification endpoints without launching browser processes.
+2. **Step 2 — Token Minting & Identity Gateway (`gateway.ea.com`)**:
+   - Mints `FC26_JS_WEB_APP` JWT tokens via promptless authentication, queries the Identity Gateway (`/proxy/identity/pids/me`) for the user persona ID (`pidId`), and acquires `FUTWEB_BK_OL_SERVER` authorization codes.
+3. **Step 3 — Browserless UTAS Account Verification (`utas.mob.v5.prd.futc-ext.gcp.ea.com`)**:
+   - Ingests nucleus headers and queries `/ut/game/fc26/v2/user/accountinfo`. HTTP 200 signals a returning club account; HTTP 465 signals no club; 4xx codes trigger specific taxonomy mapping.
+4. **Step 4 — Hybrid Market Probe & Telemetry (`Playwright` + UTAS API)**:
+   - For confirmed club accounts, automated Playwright sessions capture `X-UT-SID` session tokens, test the Transfer Market API (`/ut/game/fc26/transfermarket`), and classify market states into `open`, `banned`, `not_earned`, or `locked`.
+
+---
+
+### 🏛️ Concurrency Architecture & 14 Modular Packages (`fut26_ui`)
+
+Refactored from a 136 KB single-file monolith into 14 cohesive, typed Python modules:
+- `main_window.py` (Main GUI window, table layouts, live metric tickers, keyboard shortcuts)
+- `workers.py` (`CheckWorkerPool` concurrency orchestrator, thread lifecycle controls, retry state machines)
+- `models.py` (`EtaCalculator`, account data structures, pipeline state snapshots)
+- `status.py` (`ResultClassifier` single source of truth mapping raw payloads → 8 KPI buckets, 7 filter tabs, 3 export buckets)
+- `gather.py` (48-source concurrent proxy scraper with 5 pluggable parsers, deduped to 8k pool)
+- `proxy_modal.py` (100-thread proxy health validator measuring microsecond latency against live endpoints)
+- `inspect_modal.py` (Step-by-step pipeline inspector modal rendering JSON request/response telemetry)
+- `exporters.py` (Multi-format export engine streaming to TXT, JSON, and CSV)
+- `store.py` (Thread-safe atomic persistence store for sessions, history, and checkpoints)
+- `settings_io.py` (Persistent settings serialization)
+- `strings.py` (Taxonomy constants, error messages, and localized labels)
+- `theme.py` (Dark/Light design tokens, CustomTkinter color palettes)
+- `widgets.py` (Custom KPI chips, animated status indicators, custom table cells)
+- `__init__.py` (Package initialization and application launcher)
 
 #### 🧵 Concurrency Engine (`threading` + `queue.Queue` + `ThreadPoolExecutor`)
 - **Producer/Consumer Worker Pool**: Dynamically configurable 1–20 parallel workers with full lifecycle controls (*pause / resume / stop / skip-in-flight*).
-- **Retry State Machine**: Per-attempt counters, exponential backoff, cooldown-aware delayed re-queues, and start-from index persistence.
 - **Zero Cross-Thread Widget Access (`UiBridge`)**: Background workers communicate exclusively through callback-fed queues drained by an 80ms main-thread UI pump; control states are synchronized via `threading.Event` primitives.
 
 #### 🌐 High-Performance Proxy Subsystem
 - **100-Thread Parallel Validator**: Tests candidate proxies against a live OAuth endpoint with microsecond latency measurement.
-- **Auto-Gatherer Engine**: Scrapes 48 concurrent public sources (JSON APIs, HTML tables, plain-text feeds) with 5 pluggable parsers, deduplicated to an 8,000-entry active pool.
 - **Dynamic Rotation & Fault Isolation**: Per-request rotation with bad-proxy reporting, automatic cooldown banning, and direct-connection fallback on exhaustion.
-
-#### 📊 Live Telemetry & Data Management
-- **Stateless `ResultClassifier`**: Single source of truth mapping raw response payloads → human labels, UI colors, KPI buckets, filter categories, and export targets (eliminating triple-duplicated logic).
-- **O(1) Incremental Metrics**: Real-time KPI counters, sliding-window throughput rate (`accounts/min`), and completion ETA estimator.
-- **Interactive UI**: Regex-searchable, color-coded sortable tables; account inspect modal with raw pipeline step dumps; colorized streaming console.
-- **Atomic Persistence**: Thread-safe atomic JSON/TXT stores for configurations, session history, and checkpoint resets; exports to TXT / JSON / CSV.
 
 #### 🛡️ Resilience & Desktop Hardening
 - **Global Exception Hooks**: Crash-proof interception across main and worker threads routing errors to structured diagnostic logs.
 - **Windows Per-Monitor V2 DPI Awareness**: Multi-DPI scale-aware rendering using native `ctypes` integration.
-- **Refactored Architecture**: Decomposed a 136 KB single-file monolith into 14 modular packages with explicit size budgets and design tokens.
 
 ---
 
