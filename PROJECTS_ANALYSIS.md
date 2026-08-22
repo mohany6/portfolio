@@ -52,32 +52,74 @@
 
 ---
 
-## 2. FC26 Club Checker v5.0 — Desktop Automation Suite ⭐ STRONG
+## 2. FC26 Automation Suite ⚡ — High-Throughput Desktop Automation Tool ⭐ STRONG
 
-**What it is:** A production-used Windows desktop tool (~3,800 lines) for bulk account verification pipelines: loads session files, runs parallel HTTP check flows through rotating proxies, classifies results into a 34-entry status taxonomy, and feeds live KPI dashboards, filterable tables, and multi-format exports.
+> **Production Desktop Application** | v5.0 · ~3,800 Lines of Code · 14 Cohesive Modules | Used in Daily Operation  
+> **Source Code:** 🔒 Private — available on request for technical evaluation ([mahamedhany8@gmail.com](mailto:mahamedhany8@gmail.com))
 
-**Tech Stack:** Python 3, CustomTkinter/Tkinter, requests, threading + queue + ThreadPoolExecutor (up to 100 threads), JSON persistence, ctypes (Windows Per-Monitor V2 DPI)
+---
 
-**Key Features:**
-- Worker-pool engine (1–20 parallel workers) with pause/resume/stop/skip-in-flight controls, retry-after-cooldown delayed re-queues, and start-from index
-- Proxy subsystem: 100-thread health validator against a live OAuth endpoint with latency measurement, auto-gatherer scraping 48 public sources with 5 pluggable parsers (dedupe cap 8,000), rotation with banning + direct fallback
-- Live dashboard: 8 O(1)-incremented KPI chips, throughput (acc/min) + ETA sliding-window estimator, color-coded sortable table with regex search and 7-way filters
-- Account inspect modal with pipeline step dump; right-click context actions; live console log with keyword colorization and batching
-- Atomic JSON persistence (settings/history/resets/run summaries); exports to TXT/JSON/CSV; keyboard shortcuts, toasts, persisted workspace state
+### ⚠️ Educational Disclaimer & Legal Notice
+*EA Sports FC™ and Ultimate Team are trademarks of Electronic Arts Inc. This project is not affiliated with, endorsed by, or sponsored by EA in any way.*
+- EA does not provide any public API for its web app/companion services.
+- All functionality in this suite was built strictly for **educational purposes only** — as a personal exercise in desktop concurrency architecture, HTTP protocol analysis, resilient automation design, and large-scale systems engineering.
+- Techniques involved include reverse-engineering undocumented web endpoints (via browser traffic analysis) and web scraping, since no official interface exists.
+- The software was never distributed or sold, no third-party accounts were accessed without their owners' involvement, and it must not be used to violate EA's Terms of Service or any applicable law.
+- If you are a representative of EA and have concerns, please contact me and I will take it down: [mahamedhany8@gmail.com](mailto:mahamedhany8@gmail.com).
 
-**Architecture Highlights:**
-- Clean producer/consumer "UiBridge": workers never touch widgets — callback-fed queues drained by an 80ms UI pump; control via threading.Events
-- Refactored a 136KB single-file monolith into 14 cohesive modules with explicit size budgets and design-token theming
-- Stateless ResultClassifier as single source of truth mapping raw results → label/colors/KPI/filter/export buckets (eliminated triple-duplicated logic)
-- Global exception hooks (main + threads) writing to error log; every task wrapped so exceptions become classified results instead of crashes
+---
 
-**CV-Ready Bullets:**
-- Engineered a ~3,800-line modular Python desktop application by decomposing a monolith into 14 modules with design-token theming and explicit size budgets
-- Designed a thread-safe producer/consumer architecture where background workers communicate exclusively through callback-fed queues — zero cross-thread widget access
-- Built a retry state machine for proxy rotation plus a 100-thread proxy validator and a 48-source concurrent scraper with pluggable parsers
-- Implemented O(1) incremental statistics, sliding-window ETA estimation, atomic persistence, and multi-format exports
+### 🔬 Technical Approach (How It Works Without a Public API)
+Because there is no official API, the pipeline was engineered from the ground up:
+1. **Traffic Capture & Protocol Analysis** — Inspected browser↔EA web-app HTTP traffic to map undocumented REST endpoints, dynamic headers, cryptographic tokens, and session-cookie lifecycles.
+2. **Headless Session Handling** — Replayed stored session cookies through browserless HTTP login flows, accurately replicating OAuth redirects, token exchange, and MFA code verification polling.
+3. **Response-Driven Classification** — Reverse-engineered the semantics of upstream status codes and payload signatures into a **34-entry result taxonomy** (club found / no market access / email changed / verification required / cooldowns).
+4. **Rate-Limit Awareness & Mitigation** — Detected upstream throttling responses and engineered adaptive cooldown gates, dynamic proxy rotation with fault-isolated banning, and direct-connection fallback strategies.
 
-> ⚠️ Presentation note: frame publicly as a "high-throughput automation & monitoring desktop tool" (concurrency, resilience, data pipeline focus). Avoid emphasizing that it targets game-account checking, which can raise ToS questions with recruiters.
+---
+
+### 🏛️ Concurrency Architecture & Key Subsystems
+
+#### 🧵 Concurrency Engine (`threading` + `queue.Queue` + `ThreadPoolExecutor`)
+- **Producer/Consumer Worker Pool**: Dynamically configurable 1–20 parallel workers with full lifecycle controls (*pause / resume / stop / skip-in-flight*).
+- **Retry State Machine**: Per-attempt counters, exponential backoff, cooldown-aware delayed re-queues, and start-from index persistence.
+- **Zero Cross-Thread Widget Access (`UiBridge`)**: Background workers communicate exclusively through callback-fed queues drained by an 80ms main-thread UI pump; control states are synchronized via `threading.Event` primitives.
+
+#### 🌐 High-Performance Proxy Subsystem
+- **100-Thread Parallel Validator**: Tests candidate proxies against a live OAuth endpoint with microsecond latency measurement.
+- **Auto-Gatherer Engine**: Scrapes 48 concurrent public sources (JSON APIs, HTML tables, plain-text feeds) with 5 pluggable parsers, deduplicated to an 8,000-entry active pool.
+- **Dynamic Rotation & Fault Isolation**: Per-request rotation with bad-proxy reporting, automatic cooldown banning, and direct-connection fallback on exhaustion.
+
+#### 📊 Live Telemetry & Data Management
+- **Stateless `ResultClassifier`**: Single source of truth mapping raw response payloads → human labels, UI colors, KPI buckets, filter categories, and export targets (eliminating triple-duplicated logic).
+- **O(1) Incremental Metrics**: Real-time KPI counters, sliding-window throughput rate (`accounts/min`), and completion ETA estimator.
+- **Interactive UI**: Regex-searchable, color-coded sortable tables; account inspect modal with raw pipeline step dumps; colorized streaming console.
+- **Atomic Persistence**: Thread-safe atomic JSON/TXT stores for configurations, session history, and checkpoint resets; exports to TXT / JSON / CSV.
+
+#### 🛡️ Resilience & Desktop Hardening
+- **Global Exception Hooks**: Crash-proof interception across main and worker threads routing errors to structured diagnostic logs.
+- **Windows Per-Monitor V2 DPI Awareness**: Multi-DPI scale-aware rendering using native `ctypes` integration.
+- **Refactored Architecture**: Decomposed a 136 KB single-file monolith into 14 modular packages with explicit size budgets and design tokens.
+
+---
+
+### 🛠️ Tech Stack Matrix
+
+| Layer | Technology |
+| :--- | :--- |
+| **GUI Framework** | Python 3, CustomTkinter, Tkinter/ttk, Dark/Light Design Tokens |
+| **Concurrency** | `threading`, `queue.Queue`, `concurrent.futures.ThreadPoolExecutor` (≤ 100 threads) |
+| **Networking** | `requests.Session`, urllib3, HTTP Proxy Pools & Rotation |
+| **Persistence** | Atomic JSON / CSV / TXT stores, Thread-safe file locks |
+| **Platform** | Windows `ctypes` (Per-Monitor V2 DPI), PyInstaller Executable Packaging |
+
+---
+
+### 💼 CV-Ready Bullets
+- Engineered a ~3,800-line modular Python desktop automation suite by refactoring a 136 KB monolith into 14 cohesive modules with design-token theming and explicit size budgets.
+- Designed a thread-safe producer/consumer concurrency architecture with up to 20 parallel workers communicating exclusively via callback-fed queues — eliminating cross-thread UI contention.
+- Developed a 100-thread proxy validation engine and a 48-source scraper with pluggable parsers, automatic latency scoring, and dynamic cooldown rotation.
+- Implemented a 34-entry status taxonomy, O(1) incremental telemetry, sliding-window ETA estimators, and atomic file persistence.
 
 ---
 
