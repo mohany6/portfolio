@@ -172,53 +172,41 @@ Rebuilt from a broken beginner exercise into a clean, tested CRUD application: f
 
 ---
 
-## How To Use This With The Gemini Prompt
+## 6. GrandStay — Enterprise Hotel Reservation Platform (MEAN Stack) ✅ COMPLETE & HARDENED
 
-Paste the block below at the end of your portfolio prompt (after MY DATA):
+**Location:** `D:\hotel-booking-mean-stack-master`  
+**Repository:** https://github.com/mohany6/hotel-booking-system  
+**Stack:** Angular 18 (TypeScript, Material, Tailwind), Node.js 22 (Express, TypeScript TSX), MongoDB 8 (Mongoose), JWT, RBAC
 
-```text
-ADDITIONAL PROJECTS (analyzed from my actual codebases — use these descriptions):
+### What it is:
+A production-ready full-stack hotel booking platform featuring guest discovery and reservations alongside a complete administrative property management suite.
 
-1. MyHealthAI — AI Telemedicine Platform (FLAGSHIP): Full-stack platform (Angular 16,
-   Express, MongoDB, 85 REST endpoints, 13 models) connecting patients with chest
-   specialists. Remote Python/FastAPI pneumonia-detection model integrated via secure
-   Node proxy (confidence-scored predictions + history UIs). Bank-grade security: TOTP +
-   email 2FA, SHA-256 trusted-device fingerprints, IP-geolocated session manager with
-   remote revocation, security audit logs. Doctor marketplace with document verification
-   workflow, clinics with Leaflet maps + Haversine distances, multi-step booking wizard
-   with slot-capacity modeling, payments lifecycle with PDFKit receipts, minute-interval
-   scheduler automating appointment lifecycle + transactional emails, Chart.js admin
-   analytics dashboards.
-   SHOWCASE: https://github.com/mohany6/MyHealthAI
+### Key Features & Hardening Completed:
+- **Public Hotel Discovery & Multi-Attribute Search**: High-performance full-text search across hotel name, city, and state with server-side pagination (fixed query parameter ingestion bug).
+- **Room Availability & Collision Detection Engine**: Date-range overlap algorithm (`checkIn < reqCheckOut && checkOut > reqCheckIn`) ensuring zero room overbooking across peak reservation windows.
+- **Role-Based Access Control (RBAC)**: Distinct workflows for authenticated guests and administrators enforced via Angular 18 route guards (`AdminGuard`, `AuthGuard`) and Express middleware.
+- **Sanitized Security & PCI-DSS Compliance**: Ownership-verified booking cancellation, secure review submissions, and masked credit card storage (`last4Digits`).
+- **Automated Database Seeder**: Pre-configured database seeder populating luxury Egyptian and international hotel profiles, room types, pricing, and demo user accounts.
 
-2. FC26 High-Throughput Automation Suite (Desktop, Python): ~3,800-line CustomTkinter
-   app refactored from a monolith into 14 modules. Thread-safe producer/consumer worker
-   pool (1–20 workers, pause/resume/stop/skip, retry state machine), 100-thread proxy
-   validator, 48-source concurrent scraper with pluggable parsers, 34-entry result
-   classifier driving 8 live KPI chips, regex-searchable/filterable tables, sliding-window
-   throughput+ETA estimator, atomic JSON persistence, TXT/JSON/CSV exports, global
-   exception hooks.
-   SHOWCASE: https://github.com/mohany6/fc26-automation-suite
+### CV-Ready Bullets:
+- Built a full-stack hotel booking platform (Angular 18, Node.js 22, Express, MongoDB) with TypeScript end-to-end, multi-attribute search filtering, and server-side pagination
+- Engineered a room collision detection algorithm with date-range overlap verification preventing overbooking across multi-tier hotel inventory
+- Implemented role-based administrative dashboards for hotel property CRUD, room tier pricing, user auditing, and booking lifecycle transitions
 
-3. Cinema Booking System (Full-stack Marketplace): Angular 16 + Express + MongoDB +
-   Redis. Three roles (admin/vendor/customer); interactive seat-map with server-side
-   conflict-checked seat inventory; Redis cache-aside catalog with invalidation; hybrid
-   REST + GraphQL API (GraphQL mutation consumed directly from Angular); lazy-loaded
-   persona modules; JWT + RBAC across backend guards and frontend route guards.
-   LIVE: https://github.com/mohany6/cinema-booking-system
+---
 
-4. CustomerManager (Laravel 11 CRUD): PHP 8.2 + Tailwind CSS + SQLite. Full resource
-   controllers for Customers/Orders with server-side validation, Eloquent one-to-many
-   relations with FK cascade deletes, seeded database, responsive Blade UI via Vite;
-   tested end-to-end. LIVE: https://github.com/mohany6/laravel-customer-manager
+## 🏆 Summary of All Projects & Market Pull Alignment
 
-5. GraphQL SQL Server API (Lab): Node.js GraphQL server with full CRUD mutations over
-   Microsoft SQL Server, parameterized queries, connection pooling; implemented in both
-   SDL and code-first schema styles.
+1. **MyHealthAI ⭐ FLAGSHIP** ([github.com/mohany6/MyHealthAI](https://github.com/mohany6/MyHealthAI))
+   - *Market Pull*: Rides the +293% AI-integration wave (FastAPI PyTorch proxy, confidence persistence) + bank-grade TOTP 2FA security + query optimization (-30% API latency).
+2. **FC26 High-Throughput Automation Suite ⭐ STRONG** ([github.com/mohany6/fc26-automation-suite](https://github.com/mohany6/fc26-automation-suite))
+   - *Market Pull*: Answers explicit enterprise "parallel processing / high concurrency" requirements (100-thread validator, producer/consumer queue with zero cross-thread UI blocking).
+3. **Cinema Booking Marketplace ✅ MARKET READY** ([github.com/mohany6/cinema-booking-system](https://github.com/mohany6/cinema-booking-system))
+   - *Market Pull*: Demonstrates Redis cache-aside (1h TTL) + hybrid GraphQL mutations + conflict-checked seat matrix arrays.
+4. **GrandStay Hotel Booking Platform ✅ MEAN STACK** ([github.com/mohany6/hotel-booking-system](https://github.com/mohany6/hotel-booking-system))
+   - *Market Pull*: Full TypeScript MEAN stack (Angular 18 + Node 22) with inventory collision detection and admin property CRUD.
+5. **CustomerManager (Laravel 11) ✅ COMPLETE** ([github.com/mohany6/laravel-customer-manager](https://github.com/mohany6/laravel-customer-manager))
+   - *Market Pull*: Multi-framework breadth (PHP 8.2, Laravel 11, Eloquent ORM, cascade deletes, Tailwind/Blade via Vite).
+6. **GraphQL SQL Server Service ⚠️ LAB**
+   - *Market Pull*: Demonstrates SDL and code-first GraphQL schema designs over Microsoft SQL Server.
 
-Suggested portfolio presentation order: MyHealthAI (hero project) → Automation Suite →
-Cinema Booking → CustomerManager (Laravel) → GraphQL lab. Each GitHub link above can be
-attached to its project card; include a screenshot for Cinema Booking and CustomerManager. For each project card include tech badges, 2-3 bullet
-highlights, and placeholder GitHub/live links I will fill in later. Keep them in the
-single editable projects data file as instructed earlier.
-```

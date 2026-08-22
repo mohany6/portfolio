@@ -285,6 +285,53 @@ const PROJECTS_DATA = [
   },
 
   {
+    id: "grandstay-hotel-booking",
+    title: "GrandStay — Full-Stack Hotel Booking Platform",
+    shortTitle: "GrandStay Hotel Booking (MEAN)",
+    tagline: "Enterprise Reservation & Hospitality Suite with Collision Detection & Role-Based Management",
+    category: "Full-Stack",
+    secondaryCategory: "Labs",
+    featured: false,
+    badge: "Angular 18 & Node.js",
+    period: "2024",
+    stats: [
+      { label: "Frontend", value: "Angular 18 SPA" },
+      { label: "Backend", value: "Node.js + TS" },
+      { label: "Collision Engine", value: "Date Overlap" },
+      { label: "Security", value: "JWT & RBAC" }
+    ],
+    techStack: [
+      "Angular 18",
+      "TypeScript",
+      "Node.js 22",
+      "Express",
+      "MongoDB / Mongoose",
+      "Tailwind CSS",
+      "JWT / RBAC",
+      "RxJS"
+    ],
+    summary: "A full-stack hotel reservation platform engineered with the MEAN Stack (Angular 18, Node.js 22, Express, MongoDB). Features multi-attribute hotel discovery, mathematical date-range collision detection, customer booking lifecycles, and a complete administrative hotel inventory management suite.",
+    highlights: [
+      "Built full-text hotel discovery with multi-attribute filtering (city, state, rating) and server-side pagination.",
+      "Engineered room availability and collision detection via date-range overlap queries (checkIn < reqCheckOut && checkOut > reqCheckIn) preventing room overbooking.",
+      "Constructed role-based administrative dashboards for hotel property CRUD, room tier pricing, user management, and booking status lifecycles."
+    ],
+    architecturalDetails: [
+      "TypeScript-hardened architecture across both Angular 18 standalone components and Express REST services.",
+      "Sanitized payment workflows with client credit card masking to meet PCI-DSS data privacy standards."
+    ],
+    links: {
+      github: "https://github.com/mohany6/hotel-booking-system",
+      live: "",
+      demoVideo: ""
+    },
+    image: {
+      banner: "assets/images/projects/hotel-booking.svg",
+      caption: "Hotel Search, Room Selector & Admin Management Portal"
+    }
+  },
+
+  {
     id: "login-automation-playwright",
     title: "Headless Login Automation & MFA Pipeline",
     shortTitle: "Login Automation Pipeline",
