@@ -1,8 +1,15 @@
-frontend/public/
-frontend/node_modules/
-frontend/dist/
-node_modules/
+# Local batch & development scripts
+start-local.bat
+
+# Logs & Environment Files
 *.log
 .env
+.env.*
 .env.local
 .env.production
+
+# Version Control & IDE
+.git/
+.github/
+.vscode/
+.idea/
