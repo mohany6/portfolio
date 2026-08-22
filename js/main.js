@@ -430,6 +430,26 @@ function createFeaturedProjectHTML(project) {
       </a>`
     : "";
 
+  const showcaseTabs = [
+    { label: "Telemedicine", icon: "fas fa-heartbeat", img: "assets/images/projects/myhealthai/01-home-telemedicine-hero.png", active: true },
+    { label: "AI Scanner", icon: "fas fa-brain", img: "assets/images/projects/myhealthai/02-ai-xray-pneumonia-scanner.png", active: false },
+    { label: "AI Metrics", icon: "fas fa-chart-pie", img: "assets/images/projects/myhealthai/03-ai-prediction-confidence.png", active: false },
+    { label: "Clinic Map", icon: "fas fa-map-marked-alt", img: "assets/images/projects/myhealthai/07-leaflet-clinic-map.png", active: false },
+    { label: "2FA Security", icon: "fas fa-shield-alt", img: "assets/images/projects/myhealthai/14-bank-grade-security-hub.png", active: false },
+    { label: "Doctor Desk", icon: "fas fa-user-md", img: "assets/images/projects/myhealthai/17-doctor-dashboard-workspace.png", active: false },
+    { label: "Admin Console", icon: "fas fa-sliders-h", img: "assets/images/projects/myhealthai/22-admin-oversight-dashboard.png", active: false }
+  ];
+
+  const showcaseTabsHTML = showcaseTabs
+    .map(
+      (tab) => `
+      <button class="showcase-tab-btn ${tab.active ? "active" : ""}" data-img-src="${escapeHtml(tab.img)}">
+        <i class="${tab.icon}"></i> ${escapeHtml(tab.label)}
+      </button>
+    `
+    )
+    .join("");
+
   return `
     <div class="hero-project-card glass-card">
       <div class="hero-project-grid">
@@ -453,16 +473,38 @@ function createFeaturedProjectHTML(project) {
 
           <div class="project-actions-row">
             <button class="btn btn-primary btn-sm view-details-btn" data-project-id="${project.id}">
-              <i class="fas fa-microchip"></i> System Deep-Dive
+              <i class="fas fa-microchip"></i> System Deep-Dive (29 Screens)
             </button>
             ${githubBtn}
             ${liveBtn}
           </div>
         </div>
 
-        <div class="hero-project-media">
-          <div class="project-visual-preview">
-            <img src="${project.image.banner}" alt="${escapeHtml(project.title)}" class="project-preview-img" loading="lazy" />
+        <div class="hero-showcase-device">
+          <div class="mockup-browser">
+            <div class="mockup-browser-header">
+              <div class="mockup-dots">
+                <span class="mockup-dot dot-red"></span>
+                <span class="mockup-dot dot-yellow"></span>
+                <span class="mockup-dot dot-green"></span>
+              </div>
+              <div class="mockup-url-bar">
+                <i class="fas fa-lock" style="color: #10b981;"></i> https://myhealthai.platform/telemedicine
+              </div>
+              <div class="mockup-status-badge">
+                <span class="pulse-dot"></span> AI Model 95% Conf
+              </div>
+            </div>
+            <div class="mockup-screen-viewport view-details-btn" data-project-id="${project.id}" title="Click to open full deep-dive modal">
+              <img id="flagship-preview-img" src="${project.image.banner}" alt="${escapeHtml(project.title)}" class="mockup-screen-img" loading="lazy" />
+              <div class="mockup-hover-overlay">
+                <i class="fas fa-expand-arrows-alt" style="font-size: 1.6rem; color: var(--accent-cyan);"></i>
+                <span>Click to Explore Full Architecture & 29 Screens</span>
+              </div>
+            </div>
+          </div>
+          <div class="showcase-tabs-strip">
+            ${showcaseTabsHTML}
           </div>
         </div>
       </div>
@@ -678,6 +720,27 @@ function attachProjectModalTriggers() {
       document.body.style.overflow = "hidden";
     });
   });
+
+  // Attach interactive screenshot switcher listeners for flagship card
+  const showcaseTabs = document.querySelectorAll(".showcase-tab-btn");
+  const flagshipImg = document.getElementById("flagship-preview-img");
+  if (showcaseTabs.length > 0 && flagshipImg) {
+    showcaseTabs.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        showcaseTabs.forEach((t) => t.classList.remove("active"));
+        btn.classList.add("active");
+        const newSrc = btn.getAttribute("data-img-src");
+        if (newSrc) {
+          flagshipImg.style.opacity = "0.2";
+          setTimeout(() => {
+            flagshipImg.src = newSrc;
+            flagshipImg.style.opacity = "1";
+          }, 120);
+        }
+      });
+    });
+  }
 }
 
 /* ==============================================================================
