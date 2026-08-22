@@ -188,7 +188,24 @@ const PROJECTS_DATA = [
     image: {
       banner: "assets/images/projects/automation-suite.png",
       caption: "Desktop Concurrency Engine & 14-Module Telemetry Dashboard"
-    }
+    },
+    gallery: [
+      {
+        url: "assets/images/projects/fc26/01-main-dashboard-telemetry.png",
+        caption: "Main Concurrency Dashboard with 8 KPI Counters, Sliding-Window ETA, and Accounts Queue",
+        category: "Dashboard"
+      },
+      {
+        url: "assets/images/projects/fc26/02-proxy-live-health-tester.png",
+        caption: "Proxy Manager & 100-Thread Live Latency Health Validator against accounts.ea.com",
+        category: "Proxy Engine"
+      },
+      {
+        url: "assets/images/projects/fc26/03-proxy-auto-gatherer-48-sources.png",
+        caption: "Auto-Gatherer Subsystem Deep-Scraping 48 Public Proxy Sources into a Deduped Pool",
+        category: "Scraper"
+      }
+    ]
   },
 
   {

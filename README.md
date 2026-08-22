@@ -77,10 +77,12 @@ Portfolio/
             ├── healthcare-ai.png
             ├── automation-suite.png
             ├── cinema-booking.svg
+            ├── hotel-booking.svg
             ├── customer-manager.svg
             ├── login-automation.svg
             ├── market-monitor.svg
             ├── graphql-api.svg
+            ├── fc26/            # Desktop automation & 100-thread proxy screenshots
             └── myhealthai/      # 29 high-resolution categorized screenshots
 ```
 
