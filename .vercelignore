@@ -13,3 +13,6 @@ start-local.bat
 .github/
 .vscode/
 .idea/
+
+# Legacy/duplicate site folder — the live site lives at the repo root
+public/
