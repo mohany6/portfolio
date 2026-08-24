@@ -39,7 +39,7 @@ function initTheme() {
 }
 
 /* ==============================================================================
-   2. HIGH-PERFORMANCE INTERACTIVE PARTICLE CANVAS
+   2. HIGH-PERFORMANCE INTERACTIVE PARTICLE CANVAS (BATTERY & MOBILE OPTIMIZED)
    ============================================================================== */
 function initParticleCanvas() {
   const canvas = document.getElementById("bg-canvas");
@@ -50,24 +50,47 @@ function initParticleCanvas() {
   let particles = [];
   let mouse = { x: null, y: null, radius: 120 };
   let animationFrameId;
+  let isMobile = window.innerWidth <= 768;
+  const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function resize() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
+    isMobile = width <= 768;
     createParticles();
   }
 
   function createParticles() {
     particles = [];
-    const density = Math.floor((width * height) / 18000);
-    const particleCount = Math.min(Math.max(density, 35), 90);
+    if (prefersReducedMotion) {
+      // Very light static/sparse particles for reduced motion
+      const count = isMobile ? 8 : 20;
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: 0,
+          vy: 0,
+          radius: Math.random() * 1.5 + 1,
+          alpha: Math.random() * 0.3 + 0.1
+        });
+      }
+      return;
+    }
+
+    // Dynamic density: mobile uses much fewer particles to conserve battery & maintain 60fps touch
+    const divisor = isMobile ? 32000 : 18000;
+    const density = Math.floor((width * height) / divisor);
+    const particleCount = isMobile 
+      ? Math.min(Math.max(density, 12), 22) 
+      : Math.min(Math.max(density, 35), 90);
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6,
+        vx: (Math.random() - 0.5) * (isMobile ? 0.35 : 0.6),
+        vy: (Math.random() - 0.5) * (isMobile ? 0.35 : 0.6),
         radius: Math.random() * 2 + 1,
         alpha: Math.random() * 0.4 + 0.2
       });
@@ -84,22 +107,24 @@ function initParticleCanvas() {
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
 
-      // Move
-      p.x += p.vx;
-      p.y += p.vy;
+      // Move (if not reduced motion)
+      if (!prefersReducedMotion) {
+        p.x += p.vx;
+        p.y += p.vy;
 
-      if (p.x < 0 || p.x > width) p.vx *= -1;
-      if (p.y < 0 || p.y > height) p.vy *= -1;
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
 
-      // Mouse Interaction
-      if (mouse.x !== null && mouse.y !== null) {
-        const dx = mouse.x - p.x;
-        const dy = mouse.y - p.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < mouse.radius) {
-          const force = (mouse.radius - dist) / mouse.radius;
-          p.x -= (dx / dist) * force * 1.5;
-          p.y -= (dy / dist) * force * 1.5;
+        // Mouse Interaction (desktop only)
+        if (!isMobile && mouse.x !== null && mouse.y !== null) {
+          const dx = mouse.x - p.x;
+          const dy = mouse.y - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius) {
+            const force = (mouse.radius - dist) / mouse.radius;
+            p.x -= (dx / dist) * force * 1.5;
+            p.y -= (dy / dist) * force * 1.5;
+          }
         }
       }
 
@@ -109,48 +134,59 @@ function initParticleCanvas() {
       ctx.fillStyle = particleColor + p.alpha + ")";
       ctx.fill();
 
-      // Connect nearby particles
-      for (let j = i + 1; j < particles.length; j++) {
-        const p2 = particles[j];
-        const dx = p.x - p2.x;
-        const dy = p.y - p2.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+      // Connect nearby particles (lightened on mobile to save GPU cycles)
+      if (!prefersReducedMotion) {
+        const maxDist = isMobile ? 80 : 110;
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (dist < 110) {
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = lineColor + (0.15 * (1 - dist / 110)) + ")";
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
+          if (dist < maxDist) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = lineColor + (0.15 * (1 - dist / maxDist)) + ")";
+            ctx.lineWidth = isMobile ? 0.5 : 0.8;
+            ctx.stroke();
+          }
         }
       }
     }
 
-    animationFrameId = requestAnimationFrame(draw);
+    if (!prefersReducedMotion) {
+      animationFrameId = requestAnimationFrame(draw);
+    }
   }
 
+  let resizeTimer;
   window.addEventListener("resize", () => {
-    cancelAnimationFrame(animationFrameId);
-    resize();
-    draw();
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      cancelAnimationFrame(animationFrameId);
+      resize();
+      draw();
+    }, 150);
   });
 
-  window.addEventListener("mousemove", (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  });
+  if (!isMobile) {
+    window.addEventListener("mousemove", (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
 
-  window.addEventListener("mouseout", () => {
-    mouse.x = null;
-    mouse.y = null;
-  });
+    window.addEventListener("mouseout", () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+  }
 
   // Pause when tab is not active to conserve GPU/CPU
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
       cancelAnimationFrame(animationFrameId);
-    } else {
+    } else if (!prefersReducedMotion) {
       draw();
     }
   });
@@ -208,7 +244,7 @@ function initRoleTyper() {
 }
 
 /* ==============================================================================
-   4. NAVBAR SCROLLSPY & MOBILE DRAWER
+   4. NAVBAR SCROLLSPY & ACCESSIBLE MOBILE DRAWER
    ============================================================================== */
 function initNavbarScrollSpy() {
   const navbar = document.querySelector(".navbar");
@@ -228,7 +264,7 @@ function initNavbarScrollSpy() {
     // ScrollSpy active link detection
     let currentSection = "";
     sections.forEach((section) => {
-      const sectionTop = section.offsetTop - 150;
+      const sectionTop = section.offsetTop - 160;
       const sectionHeight = section.offsetHeight;
       if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
         currentSection = section.getAttribute("id");
@@ -241,18 +277,40 @@ function initNavbarScrollSpy() {
         link.classList.add("active");
       }
     });
-  });
+  }, { passive: true });
 
-  // Mobile drawer toggle
+  // Mobile drawer toggle with accessibility & outside dismiss
   if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener("click", () => {
-      navMenu.classList.toggle("open");
+    const toggleDrawer = (forceState) => {
+      const isOpen = forceState !== undefined ? forceState : !navMenu.classList.contains("open");
+      navMenu.classList.toggle("open", isOpen);
+      mobileToggle.classList.toggle("active", isOpen);
+      mobileToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    };
+
+    mobileToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleDrawer();
     });
 
     navLinks.forEach((link) => {
       link.addEventListener("click", () => {
-        navMenu.classList.remove("open");
+        toggleDrawer(false);
       });
+    });
+
+    // Close when clicking outside
+    document.addEventListener("click", (e) => {
+      if (navMenu.classList.contains("open") && !navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+        toggleDrawer(false);
+      }
+    });
+
+    // Close on Escape key
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && navMenu.classList.contains("open")) {
+        toggleDrawer(false);
+      }
     });
   }
 }
@@ -583,7 +641,7 @@ function initModal() {
 
   function closeModal() {
     modalOverlay.classList.remove("active");
-    document.body.style.overflow = "auto";
+    document.body.style.overflow = "";
   }
 
   if (modalCloseBtn) {

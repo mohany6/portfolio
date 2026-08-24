@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Mohamed Hany Fathy — ATS Resume & Curriculum Vitae</title>
   <meta name="description" content="ATS-Optimized Resume of Mohamed Hany Fathy — Backend Developer, Full-Stack MEARN Engineer, and AI-Integration Specialist." />
   
@@ -423,6 +423,99 @@
     }
 
     /* ==============================================================================
+       SCREEN RESPONSIVE STYLES (MOBILE & TABLET ADAPTATION)
+       ============================================================================== */
+    @media screen and (max-width: 868px) {
+      body {
+        padding: 1rem 0.75rem 2.5rem 0.75rem;
+      }
+      .resume-paper {
+        padding: 2rem 1.75rem;
+      }
+      .edu-cert-container {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+    }
+
+    @media screen and (max-width: 640px) {
+      .action-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+        padding: 0.85rem 1rem;
+      }
+      .action-title {
+        justify-content: center;
+      }
+      .action-buttons {
+        justify-content: center;
+        width: 100%;
+      }
+      .action-buttons .btn {
+        flex: 1 1 auto;
+        justify-content: center;
+        min-height: 40px;
+      }
+      .role-switcher-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+      }
+      .role-label {
+        text-align: center;
+        margin-bottom: 0.2rem;
+      }
+      .role-tab {
+        justify-content: center;
+        min-height: 38px;
+      }
+      .resume-paper {
+        padding: 1.5rem 1rem;
+        border-radius: 8px;
+      }
+      .resume-name {
+        font-size: 1.6rem;
+      }
+      .resume-contact-bar {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.35rem;
+      }
+      .resume-contact-bar .separator {
+        display: none;
+      }
+      .skill-row {
+        grid-template-columns: 1fr;
+        gap: 0.2rem;
+        margin-bottom: 0.4rem;
+      }
+      .item-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.15rem;
+      }
+    }
+
+    @media screen and (max-width: 400px) {
+      body {
+        padding: 0.75rem 0.5rem 2rem 0.5rem;
+      }
+      .resume-paper {
+        padding: 1.25rem 0.75rem;
+      }
+      .resume-name {
+        font-size: 1.4rem;
+      }
+      .action-buttons {
+        flex-direction: column;
+      }
+      .action-buttons .btn {
+        width: 100%;
+      }
+    }
+
+    /* ==============================================================================
        PRINT STYLESHEET — PERFECT A4 PDF GENERATION
        ============================================================================== */
     @page {
@@ -667,16 +760,58 @@
       </div>
     </section>
 
-    <!-- SOFTWARE ENGINEERING EXPERIENCE & PROJECTS -->
+    <!-- EXPERIENCE -->
     <section class="resume-section">
-      <h2 class="section-header">PROFESSIONAL &amp; ENGINEERING EXPERIENCE</h2>
+      <h2 class="section-header">EXPERIENCE</h2>
+      <div class="item-block">
+        <div class="item-header">
+          <div class="item-title-wrap">
+            <span class="item-title">IT Support Specialist Intern</span>
+            <span class="separator">|</span>
+            <span class="item-subtitle">DHL Supply Chain</span>
+          </div>
+          <span class="item-date">Nov 2025 – Dec 2025</span>
+        </div>
+        <ul class="bullet-list">
+          <li>Managed enterprise IT support ticketing workflows, diagnosing and resolving hardware, networking, and application issues under strict operational SLA targets.</li>
+          <li>Maintained logistics terminal hardware, barcode diagnostic peripherals, and warehouse workstations to eliminate operational downtime.</li>
+          <li>Troubleshot local network connectivity and internal web platform access across enterprise warehouse operations.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- EDUCATION & CERTIFICATIONS -->
+    <div class="edu-cert-container">
+      <!-- Education -->
+      <section class="resume-section" style="margin-bottom: 0;">
+        <h2 class="section-header">EDUCATION</h2>
+        <div class="item-block">
+          <div class="item-title">Bachelor of Science in Computers and AI</div>
+          <div style="color: #334155; font-size: 0.86rem; font-weight: 500;">Helwan University — Software Engineering Dept.</div>
+          <div class="item-date" style="margin-top: 0.15rem;">Graduated: August 2025</div>
+        </div>
+      </section>
+
+      <!-- Certifications -->
+      <section class="resume-section" style="margin-bottom: 0;">
+        <h2 class="section-header">CERTIFICATIONS</h2>
+        <ul class="bullet-list">
+          <li><strong>AWS Certified Developer – Associate</strong> (AWS)</li>
+          <li><strong>Microsoft Certified: Azure Fundamentals</strong> (AZ-900)</li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- PROJECTS -->
+    <section class="resume-section">
+      <h2 class="section-header">PROJECTS</h2>
       <div id="projects-container">
         
         <!-- Project 1: MyHealthAI -->
         <article class="item-block" id="proj-myhealthai">
           <div class="item-header">
             <div class="item-title-wrap">
-              <span class="item-title">Lead Software Engineer — MyHealthAI (AI Telemedicine Platform)</span>
+              <span class="item-title">MyHealthAI — AI-Powered Telemedicine Platform</span>
             </div>
             <span class="item-date">Angular 16 • Node.js • Express • MongoDB • FastAPI</span>
           </div>
@@ -693,7 +828,7 @@
         <article class="item-block" id="proj-grandstay">
           <div class="item-header">
             <div class="item-title-wrap">
-              <span class="item-title">Full-Stack Software Engineer — GrandStay (Enterprise Hotel Platform)</span>
+              <span class="item-title">GrandStay — Enterprise Hotel Reservation Platform</span>
             </div>
             <span class="item-date">Angular 18 • Node.js 22 • Express • TypeScript • Jest • Docker</span>
           </div>
@@ -710,7 +845,7 @@
         <article class="item-block" id="proj-graphql">
           <div class="item-header">
             <div class="item-title-wrap">
-              <span class="item-title">Backend Software Engineer — GraphQL Books API (Production Backend)</span>
+              <span class="item-title">GraphQL Books API — Production-Grade Backend</span>
             </div>
             <span class="item-date">TypeScript • Node.js 22 • GraphQL Yoga v5 • MS SQL Server • Docker • CI</span>
           </div>
@@ -727,7 +862,7 @@
         <article class="item-block" id="proj-fc26">
           <div class="item-header">
             <div class="item-title-wrap">
-              <span class="item-title">Systems &amp; Concurrency Engineer — FC26 High-Throughput Desktop Suite</span>
+              <span class="item-title">FC26 High-Throughput Desktop Automation Suite</span>
             </div>
             <span class="item-date">Python 3 • CustomTkinter • ThreadPoolExecutor • Requests • Playwright</span>
           </div>
@@ -743,7 +878,7 @@
         <article class="item-block" id="proj-cinema">
           <div class="item-header">
             <div class="item-title-wrap">
-              <span class="item-title">Full-Stack Developer — Cinema Booking System (Three-Sided Marketplace)</span>
+              <span class="item-title">Cinema Booking System — Three-Sided Marketplace</span>
             </div>
             <span class="item-date">Angular 16 • Express • SQLite (better-sqlite3) • Redis • GraphQL</span>
           </div>
@@ -758,7 +893,7 @@
         <article class="item-block" id="proj-laravel">
           <div class="item-header">
             <div class="item-title-wrap">
-              <span class="item-title">Backend Developer — CustomerManager (Relational SaaS Dashboard)</span>
+              <span class="item-title">CustomerManager — Relational SaaS Dashboard</span>
             </div>
             <span class="item-date">PHP 8.2 • Laravel 11 • Eloquent ORM • Tailwind CSS • SQLite • Vite</span>
           </div>
@@ -768,25 +903,6 @@
           </ul>
         </article>
 
-      </div>
-    </section>
-
-    <!-- EDUCATION & CERTIFICATIONS -->
-    <section class="resume-section" style="margin-top: 0.4rem; margin-bottom: 0;">
-      <h2 class="section-header">EDUCATION &amp; CERTIFICATIONS</h2>
-      <div class="edu-cert-container" style="margin-top: 0.2rem;">
-        <div class="item-block" style="margin-bottom: 0;">
-          <div class="item-title">Bachelor of Science in Computers &amp; Artificial Intelligence</div>
-          <div style="color: #334155; font-size: 0.86rem; font-weight: 500;">Helwan University — Software Engineering Dept.</div>
-          <div class="item-date" style="margin-top: 0.15rem;">Graduated: August 2025</div>
-        </div>
-        <div class="item-block" style="margin-bottom: 0;">
-          <div class="item-title">Industry Credentials</div>
-          <ul class="bullet-list" style="margin-top: 0.15rem;">
-            <li><strong>AWS Certified Developer</strong> – Associate (AWS)</li>
-            <li><strong>Microsoft Certified: Azure Fundamentals</strong> (AZ-900)</li>
-          </ul>
-        </div>
       </div>
     </section>
 
@@ -900,8 +1016,8 @@ ${config.summary}
 TECHNICAL SKILLS
 ${config.skills.map(s => `${s.cat} ${s.items}`).join('\n')}
 
-PROFESSIONAL & ENGINEERING EXPERIENCE
-Lead Software Engineer — MyHealthAI (AI Telemedicine Platform)
+PROJECTS
+MyHealthAI — AI-Powered Telemedicine Platform
 Stack: Angular 16, Node.js, Express, MongoDB, FastAPI, Speakeasy TOTP, PDFKit
 - Architected a full-stack telemedicine platform (~73,000 LOC, 85 REST endpoints, 13 MongoDB models) serving Patient, Doctor, and Admin personas with end-to-end role isolation.
 - Integrated a remote Python/FastAPI deep-learning pneumonia detection model via an authenticated Node.js proxy layer, persisting diagnostic predictions and confidence metrics.
@@ -909,7 +1025,7 @@ Stack: Angular 16, Node.js, Express, MongoDB, FastAPI, Speakeasy TOTP, PDFKit
 - Optimized MongoDB data structures using Mongoose discriminator inheritance and compound indexing, cutting API response times by 30%.
 - Implemented an automated background scheduler driving appointment transitions and transactional emails, alongside server-side PDF prescription generation that reduced manual verification overhead by 70%.
 
-Full-Stack Software Engineer — GrandStay (Enterprise Hotel Platform)
+GrandStay — Enterprise Hotel Reservation Platform
 Stack: Angular 18, Node.js 22, Express, TypeScript, MongoDB, Jest, Supertest, Docker
 - Built a full-stack hotel booking platform featuring multi-attribute search, server-side pagination (X-Total-Count), and dual persistence modes (embedded JSON engine and MongoDB Atlas).
 - Developed a date-range overlap algorithm (checkIn < reqCheckOut && checkOut > reqCheckIn) that mathematically prevents room overbooking and automatically reclaims cancelled inventory.
@@ -917,7 +1033,7 @@ Stack: Angular 18, Node.js 22, Express, TypeScript, MongoDB, Jest, Supertest, Do
 - Conducted a full security audit fixing 6 production vulnerabilities, including client-side role assignment, raw CVV persistence, IDOR risks, and unhandled database callback crashes.
 - Containerized the platform with multi-stage Docker builds and Docker Compose, establishing a GitHub Actions CI pipeline executing type checks, tests, and production builds.
 
-Backend Software Engineer — GraphQL Books API (Production Backend)
+GraphQL Books API — Production-Grade GraphQL Backend
 Stack: TypeScript, Node.js 22, GraphQL Yoga v5, MS SQL Server, DataLoader, Docker, CI
 - Engineered a strict TypeScript GraphQL backend featuring 16 schema types, 16 mutations, and 3-tier JWT Role-Based Access Control (Anonymous, Member, Admin) with service-layer ownership validation.
 - Implemented Relay-specification cursor pagination on MS SQL Server with keyset SQL queries, supporting forward and backward traversal across 5 dynamic sort modes and multi-attribute filters.
@@ -925,26 +1041,36 @@ Stack: TypeScript, Node.js 22, GraphQL Yoga v5, MS SQL Server, DataLoader, Docke
 - Hardened API security using query depth limiting (max 10), complexity budgeting (max 120), sliding-window rate limiting, and production introspection guards.
 - Authored an integration test suite with 30+ test scenarios (Jest + Supertest) against real MS SQL Server instances, fully automated via Docker Compose and GitHub Actions CI.
 
-Systems & Concurrency Engineer — FC26 Automation Suite
+FC26 High-Throughput Desktop Automation Suite
 Stack: Python 3, CustomTkinter, ThreadPoolExecutor, Requests, Playwright
 - Developed a modular 3,800-line automation suite by refactoring a monolithic application into 14 cohesive packages with atomic persistence and custom UI components.
 - Designed a thread-safe producer/consumer concurrency engine managing 1 to 20 parallel worker threads communicating through callback queues with zero cross-thread UI contention.
 - Built a 100-thread proxy validation engine with microsecond latency scoring and a 48-source scraper maintaining a deduplicated pool of 8,000 proxies with automatic cooldown rotation.
 - Created a 4-step headless authentication pipeline handling OAuth code exchanges, token minting, nucleus verification, and Playwright session extraction across a 34-entry status taxonomy.
 
-Full-Stack Developer — Cinema Booking System (Three-Sided Marketplace)
+Cinema Booking System — Three-Sided Marketplace
 Stack: Angular 16, Express, SQLite (better-sqlite3), Redis, GraphQL, JWT
 - Built a 3-sided marketplace (Admin, Vendor, Customer) featuring an interactive seat-map grid backed by server-side conflict-checked writes against boolean allocation arrays.
 - Implemented a zero-dependency embedded SQLite architecture auto-seeded with 5 movies, 3 cinema halls, and 105 showtimes, enabling instant zero-configuration test runs.
 - Integrated optional Redis cache-aside caching (1-hour TTL) with automated write invalidation and graceful fallback degradation during cache downtime.
 
-Backend Developer — CustomerManager (Relational SaaS Dashboard)
+CustomerManager — Relational SaaS Dashboard
 Stack: PHP 8.2, Laravel 11, Eloquent ORM, Tailwind CSS, SQLite, Vite
 - Developed a relational management platform featuring 14 RESTful resource routes, implicit route-model binding, and database-level foreign key cascade deletions.
 - Utilized Eloquent withCount eager aggregate loading to eliminate N+1 queries when computing customer order metrics across KPI dashboards.
 
-EDUCATION & CERTIFICATIONS
-- B.Sc. in Computers & Artificial Intelligence | Helwan University (Software Engineering Dept., Graduated Aug 2025)
+EXPERIENCE
+IT Support Specialist Intern | DHL Supply Chain
+Cairo, Egypt | Nov 2025 – Dec 2025
+- Managed enterprise IT support ticketing workflows, diagnosing and resolving hardware, networking, and application issues under strict operational SLA targets.
+- Maintained logistics terminal hardware, barcode diagnostic peripherals, and warehouse workstations to eliminate operational downtime.
+- Troubleshot local network connectivity and internal web platform access across enterprise warehouse operations.
+
+EDUCATION
+Bachelor of Science in Computers and Artificial Intelligence | Helwan University
+Major: Software Engineering | Graduated: August 2025
+
+CERTIFICATIONS
 - AWS Certified Developer – Associate (AWS)
 - Microsoft Certified: Azure Fundamentals (AZ-900)`;
 

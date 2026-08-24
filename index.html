@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   
   <!-- Primary Meta Tags -->
   <title>Mohamed Hany Fathy | Software Developer • Full-Stack • Backend • AI Agents &amp; Concurrency</title>
@@ -77,16 +77,17 @@
     <nav class="navbar" aria-label="Main Navigation">
       <a href="#hero" class="nav-brand" aria-label="Home">
         <span class="brand-icon">M</span>
-        <span>Mohamed Hany</span>
+        <span class="brand-text">Mohamed Hany</span>
       </a>
 
-      <ul class="nav-menu">
+      <ul class="nav-menu" id="nav-menu">
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#skills" class="nav-link">Skills</a></li>
         <li><a href="#experience" class="nav-link">Experience</a></li>
         <li><a href="#projects" class="nav-link">Projects</a></li>
         <li><a href="#education" class="nav-link">Education</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li class="mobile-cv-item"><a href="cv.html" target="_blank" class="nav-link cv-link"><i class="fas fa-file-pdf"></i> View / Download CV</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -100,14 +101,16 @@
           </svg>
         </button>
 
-        <!-- Download CV Action -->
-        <a href="cv.html" target="_blank" class="btn btn-outline btn-sm" title="View & Download PDF Resume">
-          <i class="fas fa-file-arrow-down"></i> View / Download CV
+        <!-- Download CV Action (Desktop) -->
+        <a href="cv.html" target="_blank" class="btn btn-outline btn-sm nav-cv-btn" title="View & Download PDF Resume">
+          <i class="fas fa-file-arrow-down"></i> <span class="nav-cv-text">View / Download CV</span>
         </a>
 
         <!-- Mobile Hamburger Toggle -->
-        <button id="mobile-menu-toggle" class="mobile-toggle" aria-label="Toggle Mobile Navigation">
-          <i class="fas fa-bars"></i>
+        <button id="mobile-menu-toggle" class="mobile-toggle" aria-label="Toggle Mobile Navigation" aria-expanded="false" aria-controls="nav-menu">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
         </button>
       </div>
     </nav>
