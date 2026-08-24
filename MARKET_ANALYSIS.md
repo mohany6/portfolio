@@ -57,16 +57,28 @@ The single most common Egyptian enterprise combo. Key asks:
 6. **Breadth insurance**: Laravel/PHP + Tailwind covers the second-largest PHP market segment; Playwright automation covers QA/SDET fallback.
 7. **Cloud-certified**: AWS Developer Associate-level cert + AZ-900 — most juniors have neither.
 8. **Real workplace exposure**: DHL Supply Chain IT internship (logistics enterprise environment).
+9. **Modern TypeScript/GraphQL backend** (new): GraphQL Books API — strict-TS GraphQL Yoga server with JWT/RBAC, Relay cursor pagination, DataLoader, subscriptions, security hardening, tests, Docker & CI. Closes the "no tests / no Docker / no TS / legacy GraphQL" gaps in one repo (see §3b).
 
 ## 3. GAPS & HONEST MITIGATIONS
 | Gap | Mitigation |
 |---|---|
-| No public automated tests | Add Jest/Supertest smoke tests to Cinema repo (1 evening); then claim "unit-tested critical paths" |
-| Docker/CI-CD undemonstrated | Add Dockerfile + docker-compose + GitHub Actions badge to cinema-booking-system |
+| ~~No public automated tests~~ | ✅ **CLOSED** — GraphQL Books API ships a Jest/Supertest integration suite (auth, RBAC, pagination, security); Cinema smoke tests still pending |
+| ~~Docker/CI-CD undemonstrated~~ | ✅ **CLOSED** — GraphQL Books API has Dockerfile + docker-compose (SQL Server) + GitHub Actions CI; Cinema still pending |
+| ~~TypeScript backend~~ | ✅ **CLOSED** — GraphQL Books API rewritten in strict TypeScript (2026 "must" ticked on a backend project) |
+| ~~GraphQL stack was express-graphql (deprecated)~~ | ✅ **CLOSED** — migrated to GraphQL Yoga v5 + GraphQL 16 |
+| ~~hardcoded sa credentials in graphql-server~~ | ✅ **CLOSED** — all secrets now env-based (dotenv); DELETE the legacy `graphql-mutation/` folder before pushing |
 | No .NET | Don't apply as .NET dev; target Node/Laravel/QA-Automation/AI-integration roles where demand also exceeds supply |
 | Two showcase repos are README-only (private source) | Acceptable if screenshots + architecture diagrams are strong (they are); state "code walkthrough available on request" |
 | `hotel-booking-mean-stack-master` is a cloned tutorial repo (satishjhanwer) | NEVER list it; keep private or delete |
-| graphql-server has hardcoded sa credentials | Remove before any public push (already flagged in PROJECTS_ANALYSIS.md) |
+
+## 3b. NEW SELLING POINT — Production-Grade GraphQL Backend (TypeScript)
+
+The upgraded **GraphQL Books API** closes four documented gaps at once and adds a dedicated portfolio card:
+
+1. **TypeScript on a backend** — the single biggest 2026 market gap for Node devs; proven with strict mode, typed entities/resolvers/services.
+2. **Modern GraphQL** — GraphQL Yoga v5 + GraphQL 16 (recruiters now flag `express-graphql` as legacy).
+3. **Security depth** — depth/complexity limits, rate limiting, JWT/RBAC, error masking, env secrets: the "security beyond junior" story now has a second project.
+4. **Engineering breadth** — Relay cursor pagination (keyset), DataLoader N+1 batching, subscriptions, Docker, CI, and a real test suite — all in one small, explainable repo that is **easy to walk a recruiter through in 10 minutes**.
 
 ## 4. TARGET ROLE TITLES TO APPLY TO (in priority order)
 1. Backend Developer (Node.js) — Junior/Mid

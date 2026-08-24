@@ -1,0 +1,102 @@
+# Prompt for Gemini 3.7 Flash — Modern Redesign of Two Projects
+
+> Copy everything below this line into Gemini 3.7 Flash. Adjust placeholders like `[YOUR_DOMAIN]` and brand names first.
+
+---
+
+You are a senior Product Designer and Frontend Engineer. I need you to **redesign the UI/UX of two existing web applications** so they look modern, polished, and ready for the marketplace, while keeping all existing functionality intact.
+
+For each project, follow this workflow:
+
+## GLOBAL WORKFLOW (do this for both projects)
+
+1. **Audit first.** Open the project, read the existing screens/components, note the current layout, colors, fonts, spacing, and every page/screen.
+2. **Define a design system.** Create one consistent design language per project (see "Design Direction" below) and apply it to EVERY screen. Consistency is non-negotiable.
+3. **Redesign screen by screen.** Rewrite templates/components. Do not leave any page with the old look. Update both desktop and responsive/mobile states.
+4. **Do NOT change:** business logic, API contracts, routes/URLs, database schema, auth logic, backend behavior. This is a UI-only redesign.
+5. **Deliver** a summary of what changed, a design-token table, and a checklist of every screen updated.
+
+---
+
+## DESIGN DIRECTION (shared baseline — customize per project)
+
+Build everything on top of these principles so it feels like a real 2025 product:
+
+- **Visual style:** Clean, airy, modern SaaS / marketplace aesthetic. Subtle shadows, generous whitespace, rounded corners (8–16px), 1px borders with low-opacity color, soft gradient accents. Light theme by default with a polished dark-mode-ready palette.
+- **Typography:** Use system font stack or Inter (self-host or CDN). Clear hierarchy: large bold headings, medium body text (14–16px), readable line-height (1.5–1.6).
+- **Color system (tokens):** Define CSS custom properties / Tailwind theme extension / SCSS variables with: `--primary`, `--primary-hover`, `--surface`, `--surface-muted`, `--border`, `--text`, `--text-muted`, `--success`, `--warning`, `--danger`, `--bg`. Use one primary + one accent color per project.
+- **Components:** Rebuild these as reusable components everywhere they appear: buttons (primary/secondary/ghost/danger, with hover + active + disabled + focus-visible states), form inputs (with floating or clear labels, error states), cards, badges, avatars, tables (with sticky header, hover rows, empty state), modals, toast/notification, empty states (icon + title + description + CTA), skeleton loading, page headers (title + subtitle + actions), and pagination.
+- **Navigation:** Sticky top navbar with logo, nav links, active state, user menu. Sidebar for admin/vendor dashboards.
+- **Polish details:** Focus rings (`focus-visible`), smooth transitions (150–200ms), hover lift on cards, micro-animations, meaningful icons (inline SVG or a light icon lib), accessible contrast (WCAG AA), proper `aria` labels, and semantic HTML.
+- **Empty & loading states everywhere** — never show a raw blank page or "loading…" text.
+
+---
+
+## PROJECT 1 — CustomerManager (Laravel 11 + Blade + Tailwind CSS)
+
+- **Path:** `D:\New folder (5)\my-project`
+- **Stack:** Laravel 11 / Blade / Tailwind CSS 3 / Vite / SQLite
+- **What it does:** CRUD app managing **Customers** (name, email, phone) and their **Orders** (item, amount, date, customer). One-to-many relationship. Flash success messages. Server-side validation with inline errors.
+- **Screens to redesign:** Customers index (table), customer create/edit forms, customer detail/show page, Orders index, order create/edit forms, order show page, and the shared app layout (navbar, footer, flash messages).
+
+### Project 1 specific instructions
+- Replace the current basic `bg-gray-100` + indigo navbar look with a modern dashboard feel:
+  - **Sidebar or top navbar** with brand, "Customers" and "Orders" links, active states, and a badge showing record counts.
+  - **Dashboard-style index pages:** stat cards at top (Total Customers, Total Orders, Total Revenue, This Week), then a table with search/filter input (client-side filtering), sortable column headers, hover rows, a clear empty state, and a prominent "Add Customer / Add Order" button.
+  - **Detail pages:** profile-style layout — avatar/initials block, contact info card, orders summary table for that customer, and an order-total summary. No plain stacked rows.
+  - **Forms:** two-column responsive grid, well-grouped fields, helper text, inline validation error messages in red with icons, and disabled/loading button state on submit.
+  - **Flash messages:** styled toast-style alerts that auto-dismiss.
+- Extend `tailwind.config.js` with the design tokens (colors, spacing, font, border-radius, shadows) rather than hardcoding classes everywhere.
+- Keep using Vite + Tailwind 3; do not add new heavy JS frameworks. Vanilla JS or Alpine.js (if already present) is fine for interactivity.
+
+---
+
+## PROJECT 2 — Cinema Booking Marketplace (Angular 16 + Node/Express)
+
+- **Path:** `D:\projectD`  (frontend: `D:\projectD\frontend`, backend: `D:\projectD\backend`)
+- **Stack:** Angular 16 (TypeScript, SCSS), Node.js/Express, ~~MongoDB/Mongoose~~ **→ SQLite (`better-sqlite3`)**, ~~Redis~~ (not needed for test setup), REST + GraphQL, JWT auth with roles (admin / vendor / customer).
+- **Critical task — Replace MongoDB with SQLite for zero-setup testing:** The project currently uses MongoDB + Mongoose. Convert the entire backend to use **SQLite via `better-sqlite3`** (or `sql.js`). Remove Mongoose, models, and MongoDB connection entirely. Do NOT keep MongoDB as an option — this is a full migration.
+  - Create a simple, file-based `backend/src/database.js` (or `backend/db.js`) helper that opens/initializes SQLite (stored as `backend/database.sqlite`). Use a single shared DB instance. Export a small query helper (e.g. `all(sql, params)`, `get(sql, params)`, `run(sql, params)`) mirroring the current model usage.
+  - Convert each of these Mongoose models into a SQLite table with matching columns, types, and constraints (foreign keys, unique, not null, defaults): `src/models/User.js`, `src/models/Movies.js`, `src/models/CinemaHall.js`, `src/models/Showtime.js`, `src/models/Booking.js`. Preserve the exact field names and enums the controllers expect.
+  - Rewrite every DB query in `src/controllers/*.js`, `src/routes/*.js`, and `src/graphql/cinema.graphql.js` from Mongoose calls to the SQLite helper. Keep the same function names, parameter shapes, and returned object shapes so API responses don't change.
+  - Remove the `src/config/redis.config` usage OR make Redis optional (skip gracefully when no server is running) — do not let a missing Redis crash the app.
+  - Seed the database with mock data on first run — create a `seed.js` that inserts sample admins, vendors, movies, halls, showtimes, and bookings so the app works out of the box.
+  - Update `backend/.env`: remove `MONGO_URI`; keep just `PORT=3000` and `JWT_SECRET`. No external services needed.
+  - Wrap JWT + bcrypt as-is (those stay unchanged). Verify the backend starts with `node server.js` and all routes respond without MongoDB or Redis running.
+- **Screens to redesign (frontend only — do not touch the backend logic/API):**
+  - Customer: navbar, slideshow/hero, home page, movies listing, now-showing, coming-soon, showtime, seat-selection (seat map), booking page, profile, login, register, footer.
+  - Vendor: vendor panel/dashboard, hall create, hall actions, movie create, movie actions.
+  - Admin: vendors-operations (CRUD table), admin layout.
+
+### Project 2 specific instructions
+- Give the customer-facing side a **premium entertainment/cinema marketplace** feel:
+  - **Hero:** full-width poster hero with layered gradients, movie title, "Now Showing" tag, rating badge, synopsis, and CTA buttons ("Book Now", "View Showtimes"). Overlaid on a dark cinematic background.
+  - **Movie cards:** poster-first cards with hover zoom, title, genre/year chips, rating, and a "Book" overlay. Horizontal scroll rows for "Now Showing" / "Coming Soon".
+  - **Navbar:** dark, sticky, with brand logo, links, search bar, auth buttons or user menu.
+  - **Seat map:** redesign the seat grid — visually distinct seat states (available / selected / booked), legend, a summary side panel with movie, hall, date/time, selected seats, total price, and a sticky "Continue to Payment / Confirm" bar. Screen indicator at the top.
+  - **Booking:** clear step indicator (Select Showtime → Pick Seats → Confirm), summary card, and confirmation state.
+- Give vendor + admin panels a **professional dashboard** look:
+  - Left sidebar (or clean top nav) with menu sections, collapsible on mobile, with icons.
+  - Stat cards, recent-activity lists, and a data table with status badges (active/inactive), search, and action buttons (edit/delete) with confirmation modals.
+- **Implementation constraints:** refactor the SCSS per component into a shared design system — use a global `styles.scss` with SCSS variables/mixins (tokens), keep component styles scoped but token-driven. Reuse Angular Material OR build small shared components; prefer lightweight custom components to keep bundle small. Keep all existing routing, guards, services, and API calls unchanged.
+
+---
+
+## DELIVERABLES
+For each project, after finishing, provide:
+1. A **design token summary** (colors, fonts, radii, shadows, spacing) as a table.
+2. A **screenshot-friendly checklist** of every screen you redesigned (old → new).
+3. A short list of any **edge cases** you handled (empty states, long names, mobile layout, error states, dark-mode tokens if added).
+4. Any **CSS/JSX/HTML you added** explained briefly (max 2 lines each).
+
+## RULES
+- Keep all existing features working — redesign, don't rewrite functionality.
+- Match the existing tech stack of each project. Do not suggest installing new heavy frameworks or migrating stacks.
+- Prioritize accessibility, responsiveness, and consistency over decoration.
+- If you must make a choice, ask me — otherwise decide and document it.
+
+---
+
+*Project paths (for reference):*
+- Project 1 — CustomerManager: `D:\New folder (5)\my-project`
+- Project 2 — Cinema Booking: `D:\projectD` (frontend: `D:\projectD\frontend`)

@@ -3,11 +3,8 @@
  * Mohamed Hany Fathy — Portfolio Projects Data Store
  * ==============================================================================
  * 
- * INSTRUCTIONS FOR ADDING / EDITING PROJECTS:
- * To add a new project, simply copy one of the commented template objects at 
- * the bottom of the `PROJECTS_DATA` array, uncomment it, fill in your details,
- * and save this file. The portfolio will automatically re-render the project cards, 
- * filter tags, tech badges, and modal deep-dive views!
+ * Sourced directly from PROJECTS_ANALYSIS.md — Verified codebase analysis,
+ * engineering metrics, live endpoints, and verified feature screenshots.
  * 
  * Supported Categories:
  * - "Full-Stack"
@@ -20,6 +17,9 @@
  */
 
 const PROJECTS_DATA = [
+  // ============================================================================
+  // 1. MyHealthAI — AI-Powered Telemedicine Platform ⭐ FLAGSHIP
+  // ============================================================================
   {
     id: "myhealthai-telemedicine",
     title: "MyHealthAI — AI-Powered Telemedicine Platform",
@@ -29,7 +29,7 @@ const PROJECTS_DATA = [
     secondaryCategory: "AI",
     featured: true, // Renders as extra-large flagship Hero card
     badge: "⭐ Flagship Graduation Project",
-    period: "2024 – 2025",
+    period: "2026",
     stats: [
       { label: "REST Endpoints", value: "85+" },
       { label: "AI Accuracy", value: "95%" },
@@ -42,7 +42,7 @@ const PROJECTS_DATA = [
       "Express",
       "MongoDB / Mongoose",
       "FastAPI",
-      "Python AI",
+      "Python AI / PyTorch",
       "JWT / TOTP 2FA",
       "Leaflet OSM",
       "PDFKit",
@@ -142,6 +142,9 @@ const PROJECTS_DATA = [
     ]
   },
 
+  // ============================================================================
+  // 2. FC26 Automation Suite ⚡ — High-Throughput Desktop Tool ⭐ STRONG
+  // ============================================================================
   {
     id: "fc26-automation-suite",
     title: "FC26 Automation Suite — High-Throughput Desktop Pipeline",
@@ -151,7 +154,7 @@ const PROJECTS_DATA = [
     secondaryCategory: "Data",
     featured: false,
     badge: "⭐ Concurrency & Reverse-Engineering",
-    period: "2024",
+    period: "2026",
     stats: [
       { label: "Concurrency", value: "100 Threads" },
       { label: "Modular Design", value: "14 Packages" },
@@ -170,7 +173,7 @@ const PROJECTS_DATA = [
     ],
     summary: "Built strictly for educational research to master desktop concurrency, reverse-engineering, and web scraping in the absence of a public EA API. Reverse-engineered undocumented REST endpoints, session cookie flows, and OAuth redirects into a resilient 4-step headless authentication and verification pipeline (~3,800 LOC across 14 modules).",
     highlights: [
-      "Reverse-Engineered Protocol Pipeline (Educational Research): Analyzed undocumented REST endpoints, token minting (JWT → Gateway PID → authCode), and UTAS account gateway flows to overcome the lack of an official public API.",
+      "Reverse-Engineered Protocol Pipeline: Analyzed undocumented REST endpoints, token minting (JWT → Gateway PID → authCode), and UTAS account gateway flows without a public API.",
       "Thread-Safe Producer/Consumer Concurrency: Orchestrated 1–20 background workers via callback-fed queues drained by an 80ms main-thread UI pump — eliminating cross-thread UI contention.",
       "100-Thread Proxy Subsystem & Scraper: Built a 100-thread health validator testing against live endpoints and a 48-source concurrent scraper with 5 parsers (8k deduplicated pool) and dynamic cooldown-aware rotation.",
       "34-Entry Status Taxonomy (ResultClassifier): Engineered a unified single source of truth mapping raw response payloads to 8 real-time KPI counters, sliding-window ETA estimators, regex search tables, and atomic file persistence."
@@ -208,116 +211,138 @@ const PROJECTS_DATA = [
     ]
   },
 
+  // ============================================================================
+  // 3. Cinema Booking System — Three-Sided Marketplace ✅ REDESIGNED & LIVE
+  // ============================================================================
   {
     id: "cinema-booking-system",
     title: "Cinema Booking System — 3-Sided Marketplace",
     shortTitle: "Cinema Booking Marketplace",
-    tagline: "High-Availability Ticket Reservation Platform with Redis Cache-Aside & Hybrid GraphQL",
+    tagline: "High-Availability Ticket Reservation Platform with Zero-Setup SQLite, Redis Cache-Aside & Hybrid GraphQL",
     category: "Full-Stack",
     secondaryCategory: "Labs",
     featured: false,
     badge: "Full-Stack Marketplace",
-    period: "2024",
+    period: "2026",
     stats: [
       { label: "Marketplace Roles", value: "3 Personas" },
+      { label: "Database Engine", value: "Auto-Seeded SQLite" },
       { label: "Caching Layer", value: "Redis Cache-Aside" },
-      { label: "API Pattern", value: "Hybrid REST + GraphQL" },
-      { label: "Seat Engine", value: "Zero-Conflict Arrays" }
+      { label: "API Pattern", value: "Hybrid REST + GraphQL" }
     ],
     techStack: [
       "Angular 16",
       "Node.js",
       "Express",
-      "MongoDB / Mongoose",
-      "Redis",
+      "SQLite / better-sqlite3",
+      "Redis (Graceful Fallback)",
       "express-graphql",
       "JWT / RBAC",
       "SCSS"
     ],
-    summary: "A three-sided cinema marketplace catering to Admins, Vendors, and Customers. Features an interactive visual seat-map with server-side atomic inventory locks and a Redis-backed movie catalog.",
+    summary: "A three-sided cinema marketplace catering to Admins, Vendors, and Customers. Features an interactive visual seat-map with server-side atomic inventory locks, auto-seeded SQLite test environment with demo accounts, optional Redis caching, and a modern cinematic UI redesign with 12 verified screenshots.",
     highlights: [
       "Engineered an interactive seat-map grid (available / booked / selected) with server-side conflict-checked seat inventory and live availability calculations across showtimes.",
-      "Implemented a Redis cache-aside catalog layer with 1-hour TTL and write-through invalidation to serve high-volume movie listings with minimal database load.",
-      "Delivered a hybrid REST + GraphQL architecture where hall creation and deep catalog mutations are consumed directly via GraphQL from the Angular client."
+      "Delivered a zero-setup test environment migrating from MongoDB to auto-seeded SQLite (better-sqlite3) with 5 movies, 3 halls, 105 showtimes, and ready-to-use demo accounts.",
+      "Implemented a Redis cache-aside catalog layer with 1-hour TTL and write-through invalidation that gracefully degrades when Redis is not running.",
+      "Built a hybrid REST + GraphQL architecture with fixed JWT execution context for authenticated mutations and persona-driven Angular layouts."
     ],
     architecturalDetails: [
-      "Persona-driven Angular layout modules with lazy loading and route guard protection matching backend middleware.",
-      "Vendor cinema management allowing creation of custom hall layouts, dynamic showtime scheduling, and capacity calculations.",
-      "Comprehensive admin oversight dashboard for vendor onboarding and dispute resolution."
+      "Zero-Setup Test Pipeline: SQLite database (database.sqlite) is auto-created and populated with complete demo data on server startup — eliminating all external database prerequisites.",
+      "Fixed GraphQL Context Bug: Converted express-graphql static context to function form, enabling requireVendor middleware to correctly receive request headers and verify JWT tokens.",
+      "Marketplace-Modern UI: Curved ambient screen indicator, sticky booking summary panel, and full administrative vendor CRUD dashboards."
     ],
     links: {
-      github: "https://github.com/mohany6/cinema-booking-system", // Replace with your repository URL
-      live: "https://cinema-booking-demo.vercel.app",             // Replace with your live demo URL
+      github: "https://github.com/mohany6/cinema-booking-system",
+      live: "https://cinema-booking-demo.vercel.app",
       demoVideo: ""
     },
     image: {
-      banner: "assets/images/projects/cinema-booking.svg",
-      caption: "Seat Map Selector & 3-Role Cinema Portal"
-    }
-  },
-
-  {
-    id: "laravel-customer-manager",
-    title: "CustomerManager — Laravel 11 CRUD Application",
-    shortTitle: "CustomerManager (Laravel 11)",
-    tagline: "Relational Resource Management System with Eloquent Cascade Deletes & Vite-Powered Blade UI",
-    category: "Full-Stack",
-    secondaryCategory: "Labs",
-    featured: false,
-    badge: "PHP & Laravel 11",
-    period: "2024",
-    stats: [
-      { label: "Framework", value: "Laravel 11" },
-      { label: "Runtime", value: "PHP 8.2" },
-      { label: "Architecture", value: "RESTful CRUD" },
-      { label: "ORM Layer", value: "Eloquent 1:M" }
-    ],
-    techStack: [
-      "PHP 8.2",
-      "Laravel 11",
-      "Eloquent ORM",
-      "Blade Templates",
-      "Tailwind CSS",
-      "Vite",
-      "SQLite / MySQL",
-      "Form Validation"
-    ],
-    summary: "A relational Customer & Order management platform engineered on Laravel 11 and PHP 8.2. Features full resource controllers, Eloquent one-to-many relationships with foreign-key cascade deletes, server-side validation rules, and a responsive Tailwind CSS Blade UI.",
-    highlights: [
-      "Built complete RESTful resource controllers for Customers and Orders with strict server-side validation (unique phone formats, foreign key existence).",
-      "Engineered Eloquent one-to-many relationships with database migration foreign keys and automated cascade deletion.",
-      "Delivered a modern responsive Tailwind CSS UI compiled via Vite with session flash messages, inline validation errors, and seeded demo databases."
-    ],
-    architecturalDetails: [
-      "Clean MVC architecture following Laravel 11 streamlined directory layout and route definitions.",
-      "Seeded database factories generating realistic customer portfolios and order histories for testing."
-    ],
-    links: {
-      github: "https://github.com/mohany6/laravel-customer-manager",
-      live: "",
-      demoVideo: ""
+      banner: "screenshots/cinema-booking-system/1-home.png",
+      caption: "VOX Cinemas — Premier 3-Role Booking Marketplace"
     },
-    image: {
-      banner: "assets/images/projects/customer-manager.svg",
-      caption: "Laravel 11 Resource Management Dashboard"
-    }
+    gallery: [
+      {
+        url: "screenshots/cinema-booking-system/1-home.png",
+        caption: "Home Showcase — Luxury Hero Banner & Now Premiering Lineup",
+        category: "Portal"
+      },
+      {
+        url: "screenshots/cinema-booking-system/2-movies.png",
+        caption: "Movie Catalogue — High-Resolution Poster Grid & Showtimes Browser",
+        category: "Catalogue"
+      },
+      {
+        url: "screenshots/cinema-booking-system/5-showtimes.png",
+        caption: "Showtimes Engine — Date Selection Strip & Dolby Atmos Schedules",
+        category: "Showtimes"
+      },
+      {
+        url: "screenshots/cinema-booking-system/6-seat-selection.png",
+        caption: "Auditorium Seat Map — Curved Screen Glow & Live Seat Selection",
+        category: "Seat Engine"
+      },
+      {
+        url: "screenshots/cinema-booking-system/7-booking-confirmed.png",
+        caption: "Instant Confirmation — Booking Success Notification & Flow",
+        category: "Booking"
+      },
+      {
+        url: "screenshots/cinema-booking-system/8-profile.png",
+        caption: "VIP Member Profile — Platinum Tier Status & Security Hub",
+        category: "Profile"
+      },
+      {
+        url: "screenshots/cinema-booking-system/3-login.png",
+        caption: "Customer & VIP Authentication — Frosted Glass Login Portal",
+        category: "Security"
+      },
+      {
+        url: "screenshots/cinema-booking-system/4-register.png",
+        caption: "VIP Registration — Account Creation with Password Visibility Toggle",
+        category: "Security"
+      },
+      {
+        url: "screenshots/cinema-booking-system/9-vendor-panel.png",
+        caption: "Vendor Control Center — Movie Catalogue & Cinema Hall Overview",
+        category: "Vendor Portal"
+      },
+      {
+        url: "screenshots/cinema-booking-system/10-vendor-create-movie.png",
+        caption: "Vendor Movie Publisher — Showtime Scheduler & Hall Assignment",
+        category: "Vendor Portal"
+      },
+      {
+        url: "screenshots/cinema-booking-system/11-vendor-create-hall.png",
+        caption: "Vendor Hall Creator — Auditorium Capacity & Seat Grid Setup",
+        category: "Vendor Portal"
+      },
+      {
+        url: "screenshots/cinema-booking-system/12-admin-vendors.png",
+        caption: "Superadmin Control Center — Cinema Vendor Partner CRUD Operations",
+        category: "Admin"
+      }
+    ]
   },
 
+  // ============================================================================
+  // 4. GrandStay — Enterprise Hotel Booking (MEAN Stack) ✅ PRODUCTION-GRADE
+  // ============================================================================
   {
     id: "grandstay-hotel-booking",
-    title: "GrandStay — Full-Stack Hotel Booking Platform",
+    title: "GrandStay — Enterprise Hotel Reservation Platform",
     shortTitle: "GrandStay Hotel Booking (MEAN)",
-    tagline: "Enterprise Reservation & Hospitality Suite with Collision Detection & Role-Based Management",
+    tagline: "Full-Stack Hospitality Platform with Dual Persistence, Overbooking Collision Prevention & 22 Jest Tests",
     category: "Full-Stack",
     secondaryCategory: "Labs",
     featured: false,
     badge: "Angular 18 & Node.js",
-    period: "2024",
+    period: "2026",
     stats: [
       { label: "Frontend", value: "Angular 18 SPA" },
-      { label: "Backend", value: "Node.js + TS" },
-      { label: "Collision Engine", value: "Date Overlap" },
-      { label: "Security", value: "JWT & RBAC" }
+      { label: "Backend", value: "Node.js 22 + TS" },
+      { label: "Integration Tests", value: "22 Jest Tests" },
+      { label: "CI / CD", value: "GitHub Actions" }
     ],
     techStack: [
       "Angular 18",
@@ -325,19 +350,24 @@ const PROJECTS_DATA = [
       "Node.js 22",
       "Express",
       "MongoDB / Mongoose",
+      "Embedded JSON Engine",
       "Tailwind CSS",
       "JWT / RBAC",
-      "RxJS"
+      "Jest + Supertest",
+      "Docker Compose",
+      "GitHub Actions"
     ],
-    summary: "A full-stack hotel reservation platform engineered with the MEAN Stack (Angular 18, Node.js 22, Express, MongoDB). Features multi-attribute hotel discovery, mathematical date-range collision detection, customer booking lifecycles, and a complete administrative hotel inventory management suite.",
+    summary: "A production-grade full-stack hotel booking platform featuring guest discovery and reservations alongside a complete administrative property management suite. Hardened through a security audit that resolved 6 real vulnerabilities and backed by a 22-test integration suite, multi-stage Dockerfiles, and GitHub Actions CI.",
     highlights: [
-      "Built full-text hotel discovery with multi-attribute filtering (city, state, rating) and server-side pagination.",
-      "Engineered room availability and collision detection via date-range overlap queries (checkIn < reqCheckOut && checkOut > reqCheckIn) preventing room overbooking.",
-      "Constructed role-based administrative dashboards for hotel property CRUD, room tier pricing, user management, and booking status lifecycles."
+      "Engineered mathematical room collision detection via date-range overlap queries (checkIn < reqCheckOut && checkOut > reqCheckIn) that prevents overbooking and auto-frees capacity on cancellation.",
+      "Architected dual persistence behind a single unified REST contract: zero-dependency embedded JSON engine for immediate testing ⇄ MongoDB/Atlas mode via single DB_URI flag.",
+      "Hardened security lifecycle: fixed privilege escalation, rate-limited auth endpoints, sanitized card tokenization with CVV never persisted, and resolved 6 CVEs with regression tests.",
+      "Constructed full testing & CI pipeline with 22 Jest/Supertest tests, multi-stage Docker builds (nginx + Node), and automated GitHub Actions verification."
     ],
     architecturalDetails: [
-      "TypeScript-hardened architecture across both Angular 18 standalone components and Express REST services.",
-      "Sanitized payment workflows with client credit card masking to meet PCI-DSS data privacy standards."
+      "Dual Persistence Architecture: Single codebase effortlessly switches between zero-dependency embedded engine and MongoDB Atlas without altering API contracts or Angular service interfaces.",
+      "Full Test Coverage: 22 integration tests covering privilege-escalation prevention, overbooking capacity boundaries, admin role security, and ownership validation.",
+      "Angular 18 Modern Patterns: Standalone components, functional route guards, functional HTTP interceptors, and RxJS reactive streams."
     ],
     links: {
       github: "https://github.com/mohany6/hotel-booking-system",
@@ -345,11 +375,187 @@ const PROJECTS_DATA = [
       demoVideo: ""
     },
     image: {
-      banner: "assets/images/projects/hotel-booking.svg",
-      caption: "Hotel Search, Room Selector & Admin Management Portal"
+      banner: "screenshots/grandstay/01-home-hero.png",
+      caption: "GrandStay Hotel Booking — Enterprise MEAN Platform"
+    },
+    gallery: [
+      {
+        url: "screenshots/grandstay/01-home-hero.png",
+        caption: "GrandStay Hero Portal — Luxury Hotel Discovery & Booking Search",
+        category: "Discovery"
+      },
+      {
+        url: "screenshots/grandstay/04-search-pagination-page2.png",
+        caption: "Multi-Attribute Hotel Search — Paginated Results with Ratings & Amenities",
+        category: "Search Engine"
+      },
+      {
+        url: "screenshots/grandstay/05-booking-payment-form.png",
+        caption: "Collision-Checked Reservation Form — Guest Details & Card Masking",
+        category: "Reservation"
+      },
+      {
+        url: "screenshots/grandstay/03-guest-profile-bookings.png",
+        caption: "Guest Dashboard — Active Booking Cards & Reservation History",
+        category: "Guest Portal"
+      },
+      {
+        url: "screenshots/grandstay/02-login-portal.png",
+        caption: "Secure Authentication — Role-Based Guest & Admin Access",
+        category: "Security"
+      },
+      {
+        url: "screenshots/grandstay/06-admin-dashboard.png",
+        caption: "Admin Control Center — Hotel Property Management & Room Inventory",
+        category: "Admin"
+      },
+      {
+        url: "screenshots/grandstay/07-live-api-health.png",
+        caption: "Backend Telemetry — Live REST API Health & Microservice Diagnostics",
+        category: "API Engine"
+      }
+    ]
+  },
+
+  // ============================================================================
+  // 5. CustomerManager (Laravel 11) ✅ REDESIGNED & VERIFIED LIVE
+  // ============================================================================
+  {
+    id: "laravel-customer-manager",
+    title: "CustomerManager — Laravel 11 CRUD Application",
+    shortTitle: "CustomerManager (Laravel 11)",
+    tagline: "Relational Resource Management System with Eloquent Cascade Deletes, Eager Aggregates & SaaS Dashboard",
+    category: "Full-Stack",
+    secondaryCategory: "Labs",
+    featured: false,
+    badge: "PHP & Laravel 11",
+    period: "2026",
+    stats: [
+      { label: "Framework", value: "Laravel 11 (PHP 8.2)" },
+      { label: "REST Routes", value: "14 Resource Routes" },
+      { label: "Query Speed", value: "withCount (Zero N+1)" },
+      { label: "UI Pipeline", value: "Tailwind 3 + Vite 5" }
+    ],
+    techStack: [
+      "PHP 8.2",
+      "Laravel 11.34",
+      "Eloquent ORM",
+      "Blade Templates",
+      "Tailwind CSS 3",
+      "Vite 5",
+      "SQLite / MySQL",
+      "Form Validation"
+    ],
+    summary: "A relational Customer & Order management platform engineered on Laravel 11 and PHP 8.2. Features 14 RESTful resource routes, Eloquent one-to-many relationships with foreign-key cascade deletes, withCount eager aggregate loading, server-side validation with self-exclusion rules, and a redesigned SaaS analytics dashboard verified live with 5 screenshots.",
+    highlights: [
+      "Built complete 14 RESTful resource controllers for Customers and Orders with strict server-side validation (unique phone formats with update self-exclusion, foreign-key existence).",
+      "Engineered Eloquent one-to-many relationships with foreign-key cascade deletion at migration level and withCount eager aggregates to eliminate N+1 queries.",
+      "Delivered a modern responsive Tailwind CSS SaaS UI compiled via Vite with metric KPI cards, client-side live search filters, initials avatar generators, and session flash alerts.",
+      "Verified end-to-end on a live server (fresh migration/seed → Vite production build → HTTP 200 on all 5 key routes) with complete screenshot documentation."
+    ],
+    architecturalDetails: [
+      "Clean MVC architecture following Laravel 11 streamlined directory layout, implicit route-model binding, and route resource definitions.",
+      "Seeded database factories generating realistic customer portfolios and order histories with formatted reference codes.",
+      "Reusable Blade partials for form validation error displays and auto-dismissing toast notifications."
+    ],
+    links: {
+      github: "https://github.com/mohany6/laravel-customer-manager",
+      live: "",
+      demoVideo: ""
+    },
+    image: {
+      banner: "screenshots/customer-manager/customers.png",
+      caption: "Laravel 11 Resource Management Dashboard"
+    },
+    gallery: [
+      {
+        url: "screenshots/customer-manager/customers.png",
+        caption: "Customers Dashboard — KPI Cards & Filterable Contact Registry",
+        category: "Dashboard"
+      },
+      {
+        url: "screenshots/customer-manager/customer-show.png",
+        caption: "Customer Profile — Lifetime Value, Overview Grid & Order History",
+        category: "Profile"
+      },
+      {
+        url: "screenshots/customer-manager/customer-create.png",
+        caption: "New Customer Form — Responsive Layout & Validated Contact Capture",
+        category: "Create"
+      },
+      {
+        url: "screenshots/customer-manager/orders.png",
+        caption: "Orders Dashboard — Revenue Metrics & Live Searchable Order Registry",
+        category: "Dashboard"
+      },
+      {
+        url: "screenshots/customer-manager/order-create.png",
+        caption: "New Order Form — Customer Selector & Suggested Code Generation",
+        category: "Create"
+      }
+    ]
+  },
+
+  // ============================================================================
+  // 6. GraphQL Books API — Production-Grade Backend ✅ UPGRADED
+  // ============================================================================
+  {
+    id: "graphql-books-api",
+    title: "GraphQL Books API — Production-Grade Backend",
+    shortTitle: "GraphQL Books API",
+    tagline: "Strict-TypeScript GraphQL Yoga Server with JWT/RBAC, Relay Cursor Pagination, DataLoader N+1 Fix & Layered Security",
+    category: "Labs",
+    secondaryCategory: "Full-Stack",
+    featured: false,
+    badge: "Production-Grade Backend",
+    period: "2026",
+    stats: [
+      { label: "GraphQL Types", value: "16" },
+      { label: "Mutations", value: "16" },
+      { label: "Security Layers", value: "5+" },
+      { label: "Integration Tests", value: "30+" }
+    ],
+    techStack: [
+      "TypeScript (strict)",
+      "GraphQL Yoga v5",
+      "GraphQL 16",
+      "Node.js 22",
+      "MS SQL Server",
+      "JWT / bcrypt / RBAC",
+      "DataLoader",
+      "graphql-depth-limit",
+      "rate-limiter-flexible",
+      "Jest + Supertest",
+      "Docker Compose",
+      "GitHub Actions"
+    ],
+    summary: "A production-grade GraphQL API for a book store (authors, categories, reviews, users) rewritten from a legacy express-graphql demo into strict TypeScript on GraphQL Yoga v5. Features JWT authentication with role-based access control, Relay-spec cursor pagination, DataLoader-based N+1 elimination, real-time subscriptions, layered security hardening, 30+ integration tests, and Docker/CI.",
+    highlights: [
+      "Migrated from deprecated express-graphql to GraphQL Yoga v5 + GraphQL 16 in strict TypeScript with complete JWT signup/login, MEMBER/ADMIN RBAC, and granular review ownership enforcement.",
+      "Engineered Relay-spec cursor pagination with keyset SQL queries supporting forward (first/after) and backward (last/before) traversal, 5 sort modes, 4 filters, and totalCount.",
+      "Eliminated N+1 query bottlenecks with 7 per-request DataLoaders that batch authors, categories, reviews, users, and books into single STRING_SPLIT SQL queries.",
+      "Hardened the API with query depth limiting (max 10), complexity budgeting (120), per-IP rate limiting, domain error code masking, production-gated introspection, and parameterized SQL.",
+      "Authored 30+ scenario integration test suite (Jest + Supertest) running in CI via multi-stage Docker and GitHub Actions against a containerized MS SQL Server."
+    ],
+    architecturalDetails: [
+      "Layered Request Architecture: Express (Helmet, rate limit) → Yoga context (JWT verify + DataLoaders) → validation rules (depth/complexity/introspection gate) → resolvers → service authorization → parameterized SQL repositories.",
+      "Real-time Subscriptions: In-memory PubSub broadcasting bookAdded, bookUpdated, and reviewAdded event streams with filtered per-book channels.",
+      "Relational Schema on MS SQL: Users, Authors, Categories, Books, Reviews with foreign keys, indexes, CHECK constraints, UNIQUE(book,user), and cascade deletions."
+    ],
+    links: {
+      github: "https://github.com/mohany6/graphql-server",
+      live: "",
+      demoVideo: ""
+    },
+    image: {
+      banner: "assets/images/projects/graphql-api.svg",
+      caption: "GraphQL Books API — Schema, Pagination & Security"
     }
   },
 
+  // ============================================================================
+  // 7. Headless Login Automation & MFA Pipeline
+  // ============================================================================
   {
     id: "login-automation-playwright",
     title: "Headless Login Automation & MFA Pipeline",
@@ -359,7 +565,7 @@ const PROJECTS_DATA = [
     secondaryCategory: "Data",
     featured: false,
     badge: "Automation Engineering",
-    period: "2024",
+    period: "2026",
     stats: [
       { label: "Driver Engine", value: "Playwright" },
       { label: "Parallelism", value: "Multiprocessing" },
@@ -394,6 +600,9 @@ const PROJECTS_DATA = [
     }
   },
 
+  // ============================================================================
+  // 8. Market Monitor & Real-Time Alerting Pipeline
+  // ============================================================================
   {
     id: "market-monitor-scraper",
     title: "Market Monitor & Real-Time Alerting Pipeline",
@@ -403,7 +612,7 @@ const PROJECTS_DATA = [
     secondaryCategory: "Automation",
     featured: false,
     badge: "Data & Alerting",
-    period: "2024",
+    period: "2026",
     stats: [
       { label: "Data Pipeline", value: "HTML & JSON" },
       { label: "Scoring Engine", value: "Activity Index" },
@@ -436,157 +645,5 @@ const PROJECTS_DATA = [
       banner: "assets/images/projects/market-monitor.svg",
       caption: "Data Ingestion & Discord Alerting Pipeline"
     }
-  },
-
-  {
-    id: "graphql-sqlserver-api",
-    title: "GraphQL SQL Server Enterprise Service",
-    shortTitle: "GraphQL SQL Server API",
-    tagline: "High-Performance Data Layer Implementing SDL & Code-First Schemas over MS SQL Server",
-    category: "Labs",
-    secondaryCategory: "Full-Stack",
-    featured: false,
-    badge: "Backend Lab",
-    period: "2024",
-    stats: [
-      { label: "Schema Styles", value: "SDL + Code-First" },
-      { label: "Database", value: "MS SQL Server" },
-      { label: "Query Safety", value: "Parameterized" },
-      { label: "Pool Engine", value: "Connection Pooling" }
-    ],
-    techStack: [
-      "Node.js",
-      "express-graphql",
-      "MS SQL Server (mssql)",
-      "GraphQL SDL",
-      "JavaScript ES6+"
-    ],
-    summary: "A backend service demonstrating complete CRUD queries and mutations over Microsoft SQL Server using both Schema Definition Language (SDL) and code-first programmatic schema definitions.",
-    highlights: [
-      "Implemented full CRUD GraphQL queries and mutations interfacing with Microsoft SQL Server using optimized connection pools.",
-      "Constructed parallel schema architectures: compared declarative SDL (buildSchema) against programmatic GraphQLObjectType definitions.",
-      "Enforced parameterized queries across all database resolvers to guarantee safety against SQL injection."
-    ],
-    architecturalDetails: [
-      "Modular resolver pattern mapping GraphQL fields directly to async SQL stored procedures and queries.",
-      "Centralized database connection pool configuration with automated reconnect and error handling."
-    ],
-    links: {
-      github: "https://github.com/mohany6/graphql-sqlserver-api",
-      live: "",
-      demoVideo: ""
-    },
-    image: {
-      banner: "assets/images/projects/graphql-api.svg",
-      caption: "GraphQL Schema Visualizer & MS SQL Resolvers"
-    }
   }
-
-  /*
-  // ===========================================================================
-  // 📝 COMMENTED-OUT EXAMPLE 1: Standard Full-Stack / Web Project
-  // ===========================================================================
-  // To add a new web project, copy this block, uncomment it, fill in your details,
-  // and make sure it has a unique 'id'.
-  //
-  // {
-  //   id: "my-new-web-app",
-  //   title: "CloudTask — Distributed Task Orchestrator",
-  //   shortTitle: "CloudTask Orchestrator",
-  //   tagline: "Microservices-Based Workflow Engine with Redis Queues & Real-Time WebSockets",
-  //   category: "Full-Stack", // Options: "Full-Stack", "AI", "Desktop Automation", "Automation", "Data", "Labs"
-  //   secondaryCategory: "Backend",
-  //   featured: false, // Set to true if you want it prominently displayed
-  //   badge: "New Release",
-  //   period: "2025",
-  //   stats: [
-  //     { label: "Throughput", value: "10k req/s" },
-  //     { label: "Latency", value: "< 15ms" },
-  //     { label: "Test Coverage", value: "94%" },
-  //     { label: "Architecture", value: "Event-Driven" }
-  //   ],
-  //   techStack: [
-  //     "React",
-  //     "TypeScript",
-  //     "Node.js",
-  //     "Docker",
-  //     "Redis",
-  //     "PostgreSQL"
-  //   ],
-  //   summary: "A scalable workflow orchestration platform allowing developers to coordinate distributed cron jobs and worker queues with live WebSocket telemetry.",
-  //   highlights: [
-  //     "Designed an event-driven task distribution engine capable of handling 10,000+ jobs/second across Redis-backed consumer pools.",
-  //     "Built an interactive React/TypeScript monitoring canvas with live node status visualizations and drag-and-drop workflow authoring.",
-  //     "Containerized the entire stack with Docker Compose and automated testing pipelines via GitHub Actions."
-  //   ],
-  //   architecturalDetails: [
-  //     "Implemented BullMQ worker queues with exponential backoff retries and dead-letter queues.",
-  //     "Secured API gateway using JWT bearer tokens and rate limiting middleware."
-  //   ],
-  //   links: {
-  //     github: "https://github.com/mohany6/cloudtask",
-  //     live: "https://cloudtask.example.com",
-  //     demoVideo: ""
-  //   },
-  //   image: {
-  //     banner: "assets/images/projects/cloudtask.svg",
-  //     caption: "CloudTask Workflow Engine Dashboard"
-  //   }
-  // },
-
-  // ===========================================================================
-  // 📝 COMMENTED-OUT EXAMPLE 2: Python / AI / Automation / Data Project
-  // ===========================================================================
-  // To add a new Python, AI, or Data pipeline project, use this template.
-  //
-  // {
-  //   id: "ai-log-anomaly-detector",
-  //   title: "NeuralLog — AI Server Log Anomaly Detector",
-  //   shortTitle: "NeuralLog Anomaly Detector",
-  //   tagline: "Unsupervised Machine Learning Pipeline for Real-Time Server Anomaly Classification",
-  //   category: "AI", // Options: "Full-Stack", "AI", "Desktop Automation", "Automation", "Data", "Labs"
-  //   secondaryCategory: "Data",
-  //   featured: false,
-  //   badge: "AI & ML",
-  //   period: "2025",
-  //   stats: [
-  //     { label: "F1 Score", value: "0.96" },
-  //     { label: "Processing Speed", value: "50 MB/s" },
-  //     { label: "False Positives", value: "< 2%" },
-  //     { label: "Model", value: "Isolation Forest" }
-  //   ],
-  //   techStack: [
-  //     "Python 3",
-  //     "FastAPI",
-  //     "Scikit-Learn",
-  //     "Pandas",
-  //     "Docker",
-  //     "Prometheus"
-  //   ],
-  //   summary: "An end-to-end unsupervised ML pipeline analyzing live server access logs to detect DDoS patterns, brute-force attempts, and unauthorized data exfiltration.",
-  //   highlights: [
-  //     "Streamed and vectorized high-volume Nginx/Apache logs using custom tokenizers and TF-IDF feature extractors.",
-  //     "Trained Isolation Forest and Autoencoder models achieving a 0.96 F1 score on real-world intrusion datasets.",
-  //     "Exposed FastAPI inference endpoints with Prometheus metrics export for real-time Grafana dashboards."
-  //   ],
-  //   architecturalDetails: [
-  //     "Optimized NumPy matrix transformations reducing classification latency to under 8ms per log batch.",
-  //     "Deployed as a lightweight Docker container with automated health probes and rolling memory recycling."
-  //   ],
-  //   links: {
-  //     github: "https://github.com/mohany6/neurallog",
-  //     live: "",
-  //     demoVideo: ""
-  //   },
-  //   image: {
-  //     banner: "assets/images/projects/neurallog.svg",
-  //     caption: "Anomaly Scoring Pipeline & Metric Telemetry"
-  //   }
-  // }
-  */
 ];
-
-// Export for ES modules and standard script tags
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = { PROJECTS_DATA };
-}

@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mohamed Hany Fathy — Software Developer CV / Resume</title>
-  <meta name="description" content="Resume of Mohamed Hany Fathy — Full-Stack & Backend Developer, Automation Engineer, Python & Angular Specialist." />
+  <title>Mohamed Hany Fathy — ATS Resume & Curriculum Vitae</title>
+  <meta name="description" content="ATS-Optimized Resume of Mohamed Hany Fathy — Backend Developer, Full-Stack MEARN Engineer, and AI-Integration Specialist." />
   
   <!-- Google Fonts: Inter & Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
   
   <!-- FontAwesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <style>
     /* ==============================================================================
-       RESUME STYLESHEET — ATS-FRIENDLY & PRINT-OPTIMIZED (A4)
+       DESIGN SYSTEM & CSS VARIABLES
        ============================================================================== */
     :root {
       --primary: #0f172a;
@@ -27,9 +27,10 @@
       --text-dark: #0f172a;
       --text-muted: #64748b;
       --border: #e2e8f0;
-      --bg-page: #f8fafc;
+      --bg-page: #f1f5f9;
       --bg-paper: #ffffff;
-      --tag-bg: #f1f5f9;
+      --tag-bg: #f8fafc;
+      --highlight: #0284c7;
     }
 
     * {
@@ -42,23 +43,33 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: var(--bg-page);
       color: var(--text);
-      line-height: 1.5;
-      font-size: 13.5px;
+      line-height: 1.45;
+      font-size: 13px;
       -webkit-font-smoothing: antialiased;
-      padding: 2rem 1rem;
+      padding: 1.5rem 1rem 3rem 1rem;
     }
 
-    /* Floating Action Bar */
+    /* ==============================================================================
+       INTERACTIVE CONTROL & ACTION BAR (HIDDEN IN PRINT)
+       ============================================================================== */
+    .control-container {
+      max-width: 860px;
+      margin: 0 auto 1.25rem auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
     .action-bar {
-      max-width: 850px;
-      margin: 0 auto 1.5rem auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
       background: #ffffff;
-      padding: 0.85rem 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      padding: 0.85rem 1.25rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       border: 1px solid var(--border);
     }
 
@@ -73,148 +84,196 @@
 
     .action-buttons {
       display: flex;
-      gap: 0.75rem;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
-      padding: 0.5rem 1.15rem;
-      border-radius: 8px;
-      font-size: 0.85rem;
+      gap: 0.4rem;
+      padding: 0.45rem 1rem;
+      border-radius: 7px;
+      font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
       text-decoration: none;
-      transition: all 0.2s ease;
-      border: none;
+      transition: all 0.15s ease-in-out;
+      border: 1px solid transparent;
     }
 
     .btn-primary {
       background: var(--accent);
       color: #ffffff;
     }
-
     .btn-primary:hover {
       background: var(--accent-dark);
       transform: translateY(-1px);
     }
 
     .btn-outline {
-      background: transparent;
-      border: 1px solid var(--border);
+      background: #ffffff;
+      border-color: var(--border);
       color: var(--text-dark);
     }
-
     .btn-outline:hover {
       background: var(--tag-bg);
       border-color: #cbd5e1;
     }
 
-    /* A4 Resume Paper Container */
+    .btn-copy {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+      color: #334155;
+    }
+    .btn-copy:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    /* Role Switcher Toolbar */
+    .role-switcher-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #ffffff;
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .role-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-right: 0.25rem;
+    }
+
+    .role-tab {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .role-tab:hover {
+      background: #e2e8f0;
+      color: var(--text-dark);
+    }
+
+    .role-tab.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.2);
+    }
+
+    /* ==============================================================================
+       RESUME PAPER CONTAINER (A4 DIMENSIONS & ATS COMPLIANCE)
+       ============================================================================== */
     .resume-paper {
-      max-width: 850px;
+      max-width: 860px;
       margin: 0 auto;
       background: var(--bg-paper);
-      padding: 3rem 3.5rem;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      padding: 2.75rem 3.25rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
       border: 1px solid var(--border);
     }
 
-    /* Header Section */
+    /* Resume Header */
     .resume-header {
       text-align: center;
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 1.5rem;
-      margin-bottom: 1.5rem;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 1rem;
+      margin-bottom: 1.15rem;
     }
 
     .resume-name {
       font-family: 'Outfit', sans-serif;
-      font-size: 2.25rem;
+      font-size: 2.1rem;
       font-weight: 800;
       color: var(--text-dark);
       letter-spacing: -0.5px;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.25rem;
+      text-transform: uppercase;
     }
 
     .resume-role-title {
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-bottom: 0.75rem;
+      letter-spacing: 0.75px;
+      margin-bottom: 0.6rem;
     }
 
     .resume-contact-bar {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0.85rem 1.25rem;
-      font-size: 0.88rem;
+      gap: 0.5rem 1rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
     }
 
     .resume-contact-item {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.35rem;
       color: var(--text);
-      text-decoration: none;
     }
 
     .resume-contact-item a {
       color: var(--text);
       text-decoration: none;
-      transition: color 0.15s;
+      font-weight: 500;
     }
-
     .resume-contact-item a:hover {
       color: var(--accent);
       text-decoration: underline;
     }
 
-    .resume-contact-item i {
-      color: var(--accent);
-      font-size: 0.95rem;
-    }
-
     .separator {
       color: #cbd5e1;
+      font-weight: 300;
     }
 
     /* Section Component */
     .resume-section {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.15rem;
     }
 
     .section-header {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
       font-family: 'Outfit', sans-serif;
-      font-size: 1.05rem;
+      font-size: 0.98rem;
       font-weight: 800;
       color: var(--text-dark);
       text-transform: uppercase;
-      letter-spacing: 0.75px;
-      border-bottom: 1.5px solid #e2e8f0;
-      padding-bottom: 0.35rem;
-      margin-bottom: 0.85rem;
+      letter-spacing: 0.8px;
+      border-bottom: 1.5px solid #cbd5e1;
+      padding-bottom: 0.25rem;
+      margin-bottom: 0.65rem;
     }
 
-    .section-header i {
-      color: var(--accent);
-      font-size: 0.95rem;
-    }
-
-    /* Paragraph */
+    /* Summary */
     .summary-text {
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       color: #334155;
-      line-height: 1.6;
+      line-height: 1.55;
       text-align: justify;
     }
 
@@ -222,15 +281,16 @@
     .skills-container {
       display: flex;
       flex-direction: column;
-      gap: 0.45rem;
+      gap: 0.3rem;
     }
 
     .skill-row {
       display: grid;
-      grid-template-columns: 140px 1fr;
+      grid-template-columns: 165px 1fr;
       align-items: baseline;
       gap: 0.5rem;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
+      line-height: 1.4;
     }
 
     .skill-category {
@@ -239,12 +299,14 @@
     }
 
     .skill-items {
-      color: #475569;
+      color: #334155;
     }
 
-    /* Experience & Projects */
+    /* Project & Experience Item Blocks */
     .item-block {
-      margin-bottom: 1.15rem;
+      margin-bottom: 0.9rem;
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
 
     .item-block:last-child {
@@ -256,30 +318,30 @@
       justify-content: space-between;
       align-items: baseline;
       flex-wrap: wrap;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.15rem;
     }
 
     .item-title-wrap {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      align-items: baseline;
+      gap: 0.4rem;
       flex-wrap: wrap;
     }
 
     .item-title {
-      font-size: 0.98rem;
+      font-size: 0.92rem;
       font-weight: 700;
       color: var(--text-dark);
     }
 
     .item-subtitle {
       font-weight: 600;
-      color: var(--accent);
-      font-size: 0.9rem;
+      color: var(--accent-dark);
+      font-size: 0.86rem;
     }
 
     .item-date {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 600;
       color: var(--text-muted);
       font-family: 'JetBrains Mono', monospace;
@@ -288,8 +350,8 @@
     .item-tech-stack {
       font-size: 0.8rem;
       font-weight: 600;
-      color: var(--accent-dark);
-      margin-bottom: 0.35rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
       font-family: 'JetBrains Mono', monospace;
     }
 
@@ -298,116 +360,205 @@
       padding-left: 0;
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
+      gap: 0.25rem;
     }
 
     .bullet-list li {
       position: relative;
-      padding-left: 1.2rem;
-      font-size: 0.88rem;
+      padding-left: 1.1rem;
+      font-size: 0.86rem;
       color: #334155;
-      line-height: 1.5;
+      line-height: 1.45;
     }
 
     .bullet-list li::before {
       content: '•';
       position: absolute;
       left: 0.2rem;
-      color: var(--accent);
-      font-size: 1.1rem;
+      color: var(--text-dark);
+      font-size: 0.95rem;
       line-height: 1;
-      top: 0;
+      top: 0.05rem;
     }
 
     .bullet-list li strong {
       color: var(--text-dark);
+      font-weight: 600;
     }
 
-    /* Education & Certs */
-    .edu-cert-grid {
+    /* Education & Certifications Layout */
+    .edu-cert-container {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 1.5rem;
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
 
-    @media (max-width: 650px) {
-      .edu-cert-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      .skill-row {
-        grid-template-columns: 1fr;
-      }
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--primary);
+      color: #ffffff;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.25s ease;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* ==============================================================================
-       PRINT STYLESHEET — PERFECT A4 PRINT & PDF GENERATION
+       PRINT STYLESHEET — PERFECT A4 PDF GENERATION
        ============================================================================== */
     @page {
       size: A4 portrait;
-      margin: 10mm 12mm;
+      margin: 8mm 10mm;
     }
 
     @media print {
       body {
-        background: #ffffff;
-        padding: 0;
-        color: #000000;
-        font-size: 11.5pt;
+        background: #ffffff !important;
+        padding: 0 !important;
+        color: #000000 !important;
+        font-size: 10.2pt !important;
       }
 
-      .action-bar {
+      .control-container, .toast, .action-bar, .role-switcher-bar {
         display: none !important;
       }
 
       .resume-paper {
-        padding: 0;
-        box-shadow: none;
-        border: none;
-        max-width: 100%;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        max-width: 100% !important;
       }
 
       .resume-header {
-        border-bottom-color: #cbd5e1;
-        padding-bottom: 0.8rem;
-        margin-bottom: 0.8rem;
+        border-bottom: 1.5pt solid #000000 !important;
+        padding-bottom: 0.5rem !important;
+        margin-bottom: 0.65rem !important;
       }
 
       .resume-name {
-        font-size: 20pt;
+        font-size: 18pt !important;
+        color: #000000 !important;
+        margin-bottom: 0.15rem !important;
       }
 
       .resume-role-title {
-        font-size: 10.5pt;
-        color: #0369a1;
+        font-size: 9.8pt !important;
+        color: #0f172a !important;
+        margin-bottom: 0.4rem !important;
+      }
+
+      .resume-contact-bar {
+        font-size: 8.5pt !important;
+        color: #000000 !important;
+      }
+
+      .resume-contact-item a {
+        color: #000000 !important;
+        text-decoration: none !important;
       }
 
       .resume-section {
-        margin-bottom: 0.9rem;
+        margin-bottom: 0.65rem !important;
+        page-break-inside: avoid;
+        break-inside: avoid;
       }
 
       .section-header {
-        font-size: 10pt;
-        padding-bottom: 0.2rem;
-        margin-bottom: 0.5rem;
-        border-bottom-color: #cbd5e1;
+        font-size: 9.5pt !important;
+        border-bottom: 1pt solid #000000 !important;
+        padding-bottom: 0.15rem !important;
+        margin-bottom: 0.35rem !important;
+        color: #000000 !important;
+      }
+
+      .summary-text {
+        font-size: 8.8pt !important;
+        line-height: 1.38 !important;
+        color: #000000 !important;
+      }
+
+      .skill-row {
+        grid-template-columns: 140px 1fr !important;
+        font-size: 8.6pt !important;
+        line-height: 1.3 !important;
+      }
+
+      .skill-category {
+        color: #000000 !important;
+      }
+
+      .skill-items {
+        color: #000000 !important;
+      }
+
+      .item-block {
+        margin-bottom: 0.55rem !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      .item-title {
+        font-size: 9pt !important;
+        color: #000000 !important;
+      }
+
+      .item-subtitle {
+        font-size: 8.6pt !important;
+        color: #000000 !important;
+      }
+
+      .item-date {
+        font-size: 8pt !important;
+        color: #000000 !important;
+      }
+
+      .item-tech-stack {
+        font-size: 7.8pt !important;
+        color: #333333 !important;
+        margin-bottom: 0.15rem !important;
       }
 
       .bullet-list {
-        gap: 0.25rem;
+        gap: 0.18rem !important;
       }
 
       .bullet-list li {
-        font-size: 9.5pt;
-        line-height: 1.35;
+        font-size: 8.5pt !important;
+        line-height: 1.3 !important;
+        color: #000000 !important;
+        padding-left: 0.9rem !important;
+      }
+
+      .bullet-list li::before {
+        color: #000000 !important;
+      }
+
+      .bullet-list li strong {
+        color: #000000 !important;
       }
 
       a {
         text-decoration: none !important;
-        color: inherit !important;
-      }
-
-      .resume-contact-item a {
         color: #000000 !important;
       }
     }
@@ -415,237 +566,427 @@
 </head>
 <body>
 
-  <!-- Floating Download / Print Control Bar -->
-  <div class="action-bar">
-    <div class="action-title">
-      <i class="fas fa-file-alt" style="color: var(--accent);"></i>
-      <span>Mohamed Hany Fathy — Curriculum Vitae</span>
+  <!-- FLOATING CONTROL & TAILORING BAR -->
+  <div class="control-container">
+    <div class="action-bar">
+      <div class="action-title">
+        <i class="fas fa-file-invoice" style="color: var(--accent);"></i>
+        <span>Mohamed Hany Fathy — ATS Resume</span>
+      </div>
+      <div class="action-buttons">
+        <a href="index.html" class="btn btn-outline">
+          <i class="fas fa-arrow-left"></i> Portfolio
+        </a>
+        <button onclick="copyPlainText()" class="btn btn-copy" title="Copy raw ATS text to paste into job portals">
+          <i class="fas fa-copy"></i> Copy ATS Text
+        </button>
+        <button onclick="window.print()" class="btn btn-primary" title="Print or save as high-quality PDF">
+          <i class="fas fa-print"></i> Print / Save as PDF
+        </button>
+      </div>
     </div>
-    <div class="action-buttons">
-      <a href="index.html" class="btn btn-outline">
-        <i class="fas fa-arrow-left"></i> Back to Portfolio
-      </a>
-      <button onclick="window.print()" class="btn btn-primary">
-        <i class="fas fa-print"></i> Print / Save as PDF
+
+    <!-- TARGET ROLE SWITCHER -->
+    <div class="role-switcher-bar">
+      <span class="role-label"><i class="fas fa-sliders-h"></i> Tailor for Role:</span>
+      <button class="role-tab active" onclick="setRole('backend')" id="tab-backend">
+        <i class="fas fa-server"></i> Backend (Node.js/TS)
+      </button>
+      <button class="role-tab" onclick="setRole('fullstack')" id="tab-fullstack">
+        <i class="fas fa-layer-group"></i> Full-Stack (MEARN)
+      </button>
+      <button class="role-tab" onclick="setRole('ai')" id="tab-ai">
+        <i class="fas fa-brain"></i> AI Agents & Integration
       </button>
     </div>
   </div>
 
-  <!-- Main Resume Paper -->
-  <div class="resume-paper">
+  <!-- MAIN ATS RESUME PAPER -->
+  <main class="resume-paper" id="resume-content">
     
     <!-- HEADER -->
     <header class="resume-header">
       <h1 class="resume-name">Mohamed Hany Fathy</h1>
-      <div class="resume-role-title">Software Developer | Full-Stack • Backend • Automation • Data Systems</div>
+      <div class="resume-role-title" id="role-title-display">Backend Developer | Node.js • TypeScript • Cloud & System Architectures</div>
       
       <div class="resume-contact-bar">
-        <span class="resume-contact-item">
-          <i class="fas fa-phone-alt"></i>
-          <a href="tel:01003672318">+20 100 367 2318</a>
-        </span>
-        <span class="separator">|</span>
-        <span class="resume-contact-item">
-          <i class="fas fa-envelope"></i>
-          <a href="mailto:mahamedhany8@gmail.com">mahamedhany8@gmail.com</a>
-        </span>
-        <span class="separator">|</span>
-        <span class="resume-contact-item">
-          <i class="fab fa-github"></i>
-          <a href="https://github.com/mohany6" target="_blank">github.com/mohany6</a>
-        </span>
-        <span class="separator">|</span>
-        <span class="resume-contact-item">
-          <i class="fas fa-globe"></i>
-          <a href="https://mohany-portfolio.vercel.app" target="_blank">Portfolio</a>
-        </span>
-        <span class="separator">|</span>
-        <span class="resume-contact-item">
-          <i class="fab fa-linkedin"></i>
-          <a href="https://www.linkedin.com/in/mohanyoo/" target="_blank">linkedin.com/in/mohanyoo</a>
-        </span>
+        <span class="resume-contact-item">Cairo, Egypt</span>
+        <span class="separator">•</span>
+        <span class="resume-contact-item"><a href="tel:+201003672318">+20 100 367 2318</a></span>
+        <span class="separator">•</span>
+        <span class="resume-contact-item"><a href="mailto:mahamedhany8@gmail.com">mahamedhany8@gmail.com</a></span>
+        <span class="separator">•</span>
+        <span class="resume-contact-item"><a href="https://mohany-portfolio.vercel.app" target="_blank">Portfolio</a></span>
+        <span class="separator">•</span>
+        <span class="resume-contact-item"><a href="https://github.com/mohany6" target="_blank">GitHub</a></span>
+        <span class="separator">•</span>
+        <span class="resume-contact-item"><a href="https://www.linkedin.com/in/mohanyoo/" target="_blank">LinkedIn</a></span>
       </div>
     </header>
 
-    <!-- PROFESSIONAL SUMMARY -->
+    <!-- SUMMARY -->
     <section class="resume-section">
-      <h2 class="section-header"><i class="fas fa-user-check"></i> Professional Summary</h2>
-      <p class="summary-text">
-        <strong>Software Developer</strong> with specialized expertise in full-stack architecture (<strong>Angular 16/19, Node.js, Express, MongoDB</strong>), remote <strong>AI microservice integration (FastAPI, PyTorch)</strong>, and high-concurrency <strong>Python automation engines</strong>. Proven track record in designing resilient multi-threaded pipelines (≤100 threads), implementing bank-grade security protocols (TOTP 2FA, IP session audits, SHA-256 device fingerprinting), and optimizing database queries to achieve a <strong>30% reduction in API response times</strong> and a <strong>70% drop in manual verification overhead</strong>. Seeking Backend, Full-Stack, Automation/QA, or Data Engineering roles.
+      <h2 class="section-header">SUMMARY</h2>
+      <p class="summary-text" id="summary-display">
+        Backend Developer and AWS Certified Developer with proven expertise in building scalable RESTful and GraphQL APIs using Node.js, Express, TypeScript, and Python. Demonstrated success architecting high-throughput systems, including an 85-endpoint enterprise platform, a strict-TypeScript GraphQL API with DataLoader N+1 batching, and multi-threaded concurrency engines supporting up to 100 parallel workers. Experienced in SQL/NoSQL database optimization, Redis caching, Docker containerization, and automated CI/CD testing with Jest and Supertest.
       </p>
     </section>
 
     <!-- TECHNICAL SKILLS -->
     <section class="resume-section">
-      <h2 class="section-header"><i class="fas fa-laptop-code"></i> Technical Skills</h2>
-      <div class="skills-container">
-        <div class="skill-row">
-          <span class="skill-category">Languages:</span>
-          <span class="skill-items">JavaScript (ES6+), TypeScript, Python 3, PHP 8.2, SQL, HTML5, SCSS/CSS3</span>
-        </div>
+      <h2 class="section-header">TECHNICAL SKILLS</h2>
+      <div class="skills-container" id="skills-display">
         <div class="skill-row">
           <span class="skill-category">Backend & APIs:</span>
-          <span class="skill-items">Node.js, Express.js (85+ endpoints), FastAPI, Laravel 11, RESTful APIs, GraphQL, Eloquent ORM, JWT, Speakeasy TOTP 2FA, RBAC, Mongoose ODM</span>
+          <span class="skill-items">Node.js, Express.js, TypeScript, GraphQL (Yoga v5, SDL, Relay Keyset Pagination), FastAPI, RESTful APIs, DataLoader, Mongoose ODM, Eloquent ORM</span>
         </div>
         <div class="skill-row">
-          <span class="skill-category">Frontend:</span>
-          <span class="skill-items">Angular 16/19 (Standalone Components, Signals, RxJS), React, Blade Templates, Tailwind CSS, CustomTkinter (Desktop GUI), Bootstrap 5, Leaflet OSM, Chart.js</span>
+          <span class="skill-category">Databases & Caching:</span>
+          <span class="skill-items">MongoDB, Microsoft SQL Server, PostgreSQL, MySQL, SQLite (better-sqlite3), Redis (Cache-Aside)</span>
         </div>
         <div class="skill-row">
-          <span class="skill-category">Databases & Cache:</span>
-          <span class="skill-items">MongoDB (Discriminators, compound indexes, virtuals), PostgreSQL, MySQL, SQLite, Redis (Cache-aside)</span>
+          <span class="skill-category">Testing & DevOps:</span>
+          <span class="skill-items">Jest, Supertest (22+ tests), Docker, Docker Compose, GitHub Actions CI/CD, Git, GitHub, Postman, Linux/Bash</span>
         </div>
         <div class="skill-row">
-          <span class="skill-category">Concurrency & Auto:</span>
-          <span class="skill-items">Multi-threading (<code>ThreadPoolExecutor</code> ≤ 100 threads), <code>queue.Queue</code>, Producer-Consumer (<code>UiBridge</code>), Playwright, Requests, Proxy Rotation</span>
+          <span class="skill-category">Security & Auth:</span>
+          <span class="skill-items">JWT, Role-Based Access Control (RBAC), Speakeasy TOTP 2FA, SHA-256 Device Fingerprinting, Helmet, Rate Limiting</span>
         </div>
         <div class="skill-row">
-          <span class="skill-category">Tools & DevOps:</span>
-          <span class="skill-items">Git, GitHub, Docker, Postman, Linux/Bash, Windows <code>ctypes</code> (DPI scaling), Vite, Vercel, PDFKit, Nodemailer</span>
+          <span class="skill-category">Languages:</span>
+          <span class="skill-items">JavaScript (ES6+), TypeScript, Python 3, PHP 8.2, SQL, HTML5, CSS3</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-category">Frontend & UI:</span>
+          <span class="skill-items">Angular (16–19, Standalone Components, RxJS, Reactive Forms), Blade, Tailwind CSS, Bootstrap 5, CustomTkinter</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-category">AI-Native &amp; Tooling:</span>
+          <span class="skill-items">Google Antigravity, Cursor, Claude Code, GitHub Copilot, Multi-Agent Orchestration, Self-Healing Test Loops</span>
         </div>
       </div>
     </section>
 
-    <!-- WORK EXPERIENCE -->
+    <!-- PROJECTS -->
     <section class="resume-section">
-      <h2 class="section-header"><i class="fas fa-briefcase"></i> Work Experience</h2>
-      
-      <!-- Experience 1 -->
-      <div class="item-block">
-        <div class="item-header">
-          <div class="item-title-wrap">
-            <span class="item-title">Lead Software Engineer — Telemedicine Platform</span>
-            <span class="separator">|</span>
-            <span class="item-subtitle">MyHealthAI (Enterprise System)</span>
+      <h2 class="section-header">PROJECTS</h2>
+      <div id="projects-container">
+        
+        <!-- Project 1: MyHealthAI -->
+        <article class="item-block" id="proj-myhealthai">
+          <div class="item-header">
+            <div class="item-title-wrap">
+              <span class="item-title">MyHealthAI — AI-Powered Telemedicine Platform</span>
+            </div>
+            <span class="item-date">Angular 16 • Node.js • Express • MongoDB • FastAPI</span>
           </div>
-          <span class="item-date">Aug 2024 – Jun 2025</span>
-        </div>
-        <ul class="bullet-list">
-          <li>Architected and delivered an enterprise-scale full-stack platform (<strong>~73,000 LOC, 85 REST endpoints, 13 MongoDB models</strong>) across 3 role-based portals (Patient, Doctor, Admin).</li>
-          <li>Integrated a remote <strong>Python/FastAPI deep-learning pneumonia detection model (95% accuracy)</strong> via a secured Node.js proxy with persisted confidence scores and diagnostic scan history.</li>
-          <li>Engineered <strong>bank-grade security</strong>: Speakeasy TOTP & email 2FA, SHA-256 trusted-device hardware fingerprints (with 2FA bypass), and IP-geolocated active session management with remote revocation.</li>
-          <li>Optimized MongoDB schema using Mongoose discriminator inheritance and compound indexing, <strong>cutting API response times by 30%</strong>.</li>
-          <li>Built Leaflet geospatial clinic discovery, a conflict-checked multi-step booking wizard, a minute-interval automated appointment scheduler, and server-side PDF prescription/invoice generation, <strong>reducing manual verification overhead by 70%</strong>.</li>
-        </ul>
-      </div>
+          <ul class="bullet-list">
+            <li>Architected a full-stack telemedicine platform (<strong>~73,000 LOC, 85 REST endpoints, 13 MongoDB models</strong>) serving Patient, Doctor, and Admin personas with strict role isolation.</li>
+            <li>Integrated a remote <strong>Python/FastAPI deep-learning pneumonia detection model</strong> via an authenticated Node.js proxy layer, persisting diagnostic predictions and confidence metrics.</li>
+            <li>Engineered bank-grade security: <strong>Speakeasy TOTP & email 2FA</strong>, SHA-256 hardware device fingerprints with bypass rules, and IP-geolocated session inventory with remote revocation.</li>
+            <li>Optimized MongoDB data structures using Mongoose discriminator inheritance and compound indexing, <strong>cutting API response times by 30%</strong>.</li>
+            <li>Implemented an automated background scheduler driving appointment transitions and transactional emails, alongside server-side PDF prescription generation that <strong>reduced manual verification overhead by 70%</strong>.</li>
+          </ul>
+        </article>
 
-      <!-- Experience 2 -->
+        <!-- Project 2: GrandStay -->
+        <article class="item-block" id="proj-grandstay">
+          <div class="item-header">
+            <div class="item-title-wrap">
+              <span class="item-title">GrandStay — Enterprise Hotel Reservation Platform</span>
+            </div>
+            <span class="item-date">Angular 18 • Node.js 22 • Express • TypeScript • Jest • Docker</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Built a full-stack hotel booking platform featuring multi-attribute search, server-side pagination (<code>X-Total-Count</code>), and dual persistence modes (embedded JSON engine and MongoDB Atlas).</li>
+            <li>Developed a date-range overlap algorithm (<code>checkIn &lt; reqCheckOut &amp;&amp; checkOut &gt; reqCheckIn</code>) that mathematically prevents room overbooking and automatically reclaims cancelled inventory.</li>
+            <li>Wrote an automated test suite of <strong>22 Jest and Supertest integration tests across 5 suites</strong>, locking in privilege-escalation guards, authentication boundaries, and inventory capacity limits.</li>
+            <li>Conducted a security audit fixing <strong>6 production vulnerabilities</strong>, including client-side admin assignment, raw CVV persistence, IDOR risks, and unhandled database callback crashes.</li>
+            <li>Containerized the platform with multi-stage Docker builds and Docker Compose, establishing a <strong>GitHub Actions CI pipeline</strong> executing type checks, tests, and production builds.</li>
+          </ul>
+        </article>
+
+        <!-- Project 3: GraphQL Books API -->
+        <article class="item-block" id="proj-graphql">
+          <div class="item-header">
+            <div class="item-title-wrap">
+              <span class="item-title">GraphQL Books API — Production-Grade Backend</span>
+            </div>
+            <span class="item-date">TypeScript • Node.js 22 • GraphQL Yoga v5 • MS SQL Server • Docker • CI</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Engineered a strict TypeScript GraphQL backend featuring <strong>16 schema types, 16 mutations</strong>, and 3-tier JWT Role-Based Access Control (Anonymous, Member, Admin) with service-layer ownership checks.</li>
+            <li>Implemented <strong>Relay-specification cursor pagination</strong> on MS SQL Server with keyset SQL queries, supporting forward/backward traversal across 5 dynamic sort modes and multi-attribute filters.</li>
+            <li>Eliminated N+1 query overhead by implementing <strong>7 per-request DataLoaders</strong> that batch relational entity queries via <code>STRING_SPLIT</code> into single database operations.</li>
+            <li>Hardened API security using query depth limiting (max 10), complexity budgeting (max 120), sliding-window rate limiting, and production introspection guards.</li>
+            <li>Authored an integration test suite with <strong>30+ test scenarios</strong> (Jest + Supertest) against real MS SQL Server instances, fully automated via Docker Compose and GitHub Actions CI.</li>
+          </ul>
+        </article>
+
+        <!-- Project 4: FC26 Automation Suite -->
+        <article class="item-block" id="proj-fc26">
+          <div class="item-header">
+            <div class="item-title-wrap">
+              <span class="item-title">FC26 High-Throughput Desktop Automation Suite</span>
+            </div>
+            <span class="item-date">Python 3 • CustomTkinter • ThreadPoolExecutor • Requests • Playwright</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Developed a modular <strong>~3,800-line automation suite</strong> by refactoring a monolithic application into 14 cohesive packages with atomic persistence and custom UI components.</li>
+            <li>Designed a thread-safe producer/consumer concurrency engine managing <strong>1 to 20 parallel worker threads</strong> communicating through callback queues with zero cross-thread UI contention.</li>
+            <li>Built a <strong>100-thread proxy validation engine</strong> with microsecond latency scoring and a 48-source scraper maintaining a deduplicated pool of 8,000 proxies with automatic cooldown rotation.</li>
+            <li>Created a 4-step headless authentication pipeline handling OAuth code exchanges, token minting, nucleus verification, and Playwright session extraction across a <strong>34-entry status taxonomy</strong>.</li>
+          </ul>
+        </article>
+
+        <!-- Project 5: Cinema Booking System -->
+        <article class="item-block" id="proj-cinema">
+          <div class="item-header">
+            <div class="item-title-wrap">
+              <span class="item-title">Cinema Booking System — Three-Sided Marketplace</span>
+            </div>
+            <span class="item-date">Angular 16 • Express • SQLite (better-sqlite3) • Redis • GraphQL</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Built a 3-sided marketplace (Admin, Vendor, Customer) featuring an interactive seat-map grid backed by server-side conflict-checked writes against boolean allocation arrays.</li>
+            <li>Implemented a zero-dependency embedded SQLite architecture auto-seeded with <strong>5 movies, 3 halls, and 105 showtimes</strong>, enabling instant zero-configuration test runs.</li>
+            <li>Integrated optional <strong>Redis cache-aside caching (1h TTL)</strong> with automated write invalidation and graceful fallback degradation during cache downtime.</li>
+          </ul>
+        </article>
+
+        <!-- Project 6: CustomerManager -->
+        <article class="item-block" id="proj-laravel">
+          <div class="item-header">
+            <div class="item-title-wrap">
+              <span class="item-title">CustomerManager — Relational SaaS Dashboard</span>
+            </div>
+            <span class="item-date">PHP 8.2 • Laravel 11 • Eloquent ORM • Tailwind CSS • SQLite • Vite</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Developed a relational management platform featuring <strong>14 RESTful resource routes</strong>, implicit route-model binding, and database-level foreign key cascade deletions.</li>
+            <li>Utilized Eloquent <code>withCount</code> eager aggregate loading to eliminate N+1 queries when computing customer order metrics across KPI dashboards.</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="resume-section">
+      <h2 class="section-header">EXPERIENCE</h2>
       <div class="item-block">
         <div class="item-header">
           <div class="item-title-wrap">
             <span class="item-title">IT Support Specialist Intern</span>
             <span class="separator">|</span>
-            <span class="item-subtitle">DHL Supply Chain (Enterprise Diagnostics & Systems)</span>
+            <span class="item-subtitle">DHL Supply Chain</span>
           </div>
           <span class="item-date">Nov 2025 – Dec 2025</span>
         </div>
         <ul class="bullet-list">
-          <li>Managed enterprise IT support ticketing workflows, resolving hardware, networking, and software issues for on-site personnel with high operational SLA compliance.</li>
-          <li>Repaired and maintained essential terminal devices, diagnostic tools, and peripheral hardware to prevent operational bottlenecks.</li>
-          <li>Provided first-line troubleshooting for internal web systems and network connectivity, ensuring seamless data flow across logistics operations.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- KEY PROJECTS -->
-    <section class="resume-section">
-      <h2 class="section-header"><i class="fas fa-project-diagram"></i> Featured Engineering Projects</h2>
-      
-      <!-- Project 1 -->
-      <div class="item-block">
-        <div class="item-header">
-          <span class="item-title">High-Throughput Automation & Proxy Suite (Desktop)</span>
-          <span class="item-date">Python 3 • CustomTkinter • ThreadPoolExecutor • Requests</span>
-        </div>
-        <ul class="bullet-list">
-          <li>Engineered a modular <strong>~3,800-line desktop automation suite</strong> (14 packages) running 1–20 parallel worker threads via a thread-safe producer/consumer queue (<code>UiBridge</code>) with zero cross-thread UI contention.</li>
-          <li>Built a <strong>100-thread proxy validator</strong> with microsecond latency measurement and a 48-source scraper with pluggable parsers (8k deduplicated pool) and dynamic cooldown-aware rotation.</li>
-          <li>Designed a 34-entry status taxonomy, O(1) real-time KPI metrics, sliding-window ETA estimators, regex search tables, and thread-safe atomic file persistence.</li>
-        </ul>
-      </div>
-
-      <!-- Project 2 -->
-      <div class="item-block">
-        <div class="item-header">
-          <span class="item-title">Cinema Booking Marketplace & Real-Time Seat Engine</span>
-          <span class="item-date">Angular 16 • Node.js • Express • MongoDB • Redis • GraphQL</span>
-        </div>
-        <ul class="bullet-list">
-          <li>Built a 3-sided marketplace (Admin, Vendor, Customer) featuring an interactive seat-map grid with server-side conflict-checked writes against boolean seat allocation arrays.</li>
-          <li>Introduced <strong>Redis cache-aside caching (1h TTL)</strong> with write-through invalidation and a hybrid REST + GraphQL API consumed directly from the Angular SPA client.</li>
-        </ul>
-      </div>
-
-      <!-- Project 3 -->
-      <div class="item-block">
-        <div class="item-header">
-          <span class="item-title">GrandStay — Full-Stack Hotel Reservation Platform</span>
-          <span class="item-date">Angular 18 • TypeScript • Node.js • Express • MongoDB</span>
-        </div>
-        <ul class="bullet-list">
-          <li>Engineered a full-stack hotel reservation suite with multi-attribute search filtering, room tier modeling, and mathematical date-range collision detection preventing room overbooking.</li>
-          <li>Implemented role-based administrative dashboards for hotel property CRUD, room pricing tiers, user management, and booking status lifecycles.</li>
-        </ul>
-      </div>
-
-      <!-- Project 4 -->
-      <div class="item-block">
-        <div class="item-header">
-          <span class="item-title">CustomerManager — Relational Resource Management</span>
-          <span class="item-date">PHP 8.2 • Laravel 11 • Eloquent ORM • Blade • Tailwind CSS</span>
-        </div>
-        <ul class="bullet-list">
-          <li>Built a relational Customer-Order management platform on Laravel 11 featuring RESTful resource controllers, Eloquent one-to-many relationships, database cascade deletes, and server-side validation rules.</li>
-          <li>Engineered a responsive Tailwind CSS UI compiled via Vite with session flash notifications, inline validation handling, and database seeders.</li>
-        </ul>
-      </div>
-
-      <!-- Project 5 -->
-      <div class="item-block">
-        <div class="item-header">
-          <span class="item-title">Login Automation & MFA Worker Pool</span>
-          <span class="item-date">Python • Playwright • Multiprocessing • OAuth/MFA</span>
-        </div>
-        <ul class="bullet-list">
-          <li>Automated complex OAuth2 and TOTP multi-factor authentication workflows across parallel worker instances with session cookie serialization, structured JSON logging, and error screenshot capture.</li>
-        </ul>
-      </div>
-
-      <!-- Project 6 -->
-      <div class="item-block">
-        <div class="item-header">
-          <span class="item-title">Market Activity Monitor & Alerting Engine</span>
-          <span class="item-date">Python • Requests • Discord Webhooks • Analytics</span>
-        </div>
-        <ul class="bullet-list">
-          <li>Built an automated scraping pipeline with HTML/JSON parsing, activity scoring algorithms, tiered Discord webhook notifications, and daily JSON analytics summaries.</li>
+          <li>Managed enterprise IT support ticketing workflows, diagnosing and resolving hardware, networking, and application issues under strict operational SLA targets.</li>
+          <li>Maintained logistics terminal hardware, barcode diagnostic peripherals, and warehouse workstations to eliminate operational downtime.</li>
+          <li>Troubleshot local network connectivity and internal web platform access across enterprise warehouse operations.</li>
         </ul>
       </div>
     </section>
 
     <!-- EDUCATION & CERTIFICATIONS -->
-    <div class="edu-cert-grid">
+    <div class="edu-cert-container">
       <!-- Education -->
       <section class="resume-section" style="margin-bottom: 0;">
-        <h2 class="section-header"><i class="fas fa-graduation-cap"></i> Education</h2>
+        <h2 class="section-header">EDUCATION</h2>
         <div class="item-block">
-          <div class="item-title" style="font-size: 0.95rem;">B.Sc. in Computers & Artificial Intelligence</div>
-          <div style="color: #475569; font-size: 0.88rem; font-weight: 500;">Helwan University — Software Engineering Dept.</div>
+          <div class="item-title">Bachelor of Science in Computers and AI</div>
+          <div style="color: #334155; font-size: 0.86rem; font-weight: 500;">Helwan University — Software Engineering Dept.</div>
           <div class="item-date" style="margin-top: 0.15rem;">Graduated: August 2025</div>
         </div>
       </section>
 
       <!-- Certifications -->
       <section class="resume-section" style="margin-bottom: 0;">
-        <h2 class="section-header"><i class="fas fa-certificate"></i> Certifications</h2>
-        <ul class="bullet-list" style="gap: 0.4rem;">
-          <li><strong>AWS Certified Developer</strong> — Amazon Web Services</li>
-          <li><strong>Microsoft Azure Fundamentals (AZ-900)</strong> — Microsoft</li>
+        <h2 class="section-header">CERTIFICATIONS</h2>
+        <ul class="bullet-list">
+          <li><strong>AWS Certified Developer – Associate</strong> (AWS)</li>
+          <li><strong>Microsoft Certified: Azure Fundamentals</strong> (AZ-900)</li>
         </ul>
       </section>
     </div>
 
+  </main>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="toast">
+    <i class="fas fa-check-circle" style="color: #38bdf8;"></i>
+    <span id="toast-text">ATS Plain Text copied to clipboard!</span>
   </div>
 
+  <script>
+    // Role Configuration Profiles
+    const roleConfigs = {
+      backend: {
+        title: "Backend Developer | Node.js • TypeScript • Cloud & System Architectures",
+        summary: "Backend Developer and AWS Certified Developer with proven expertise in building scalable RESTful and GraphQL APIs using Node.js, Express, TypeScript, and Python. Demonstrated success architecting high-throughput systems, including an 85-endpoint enterprise platform, a strict-TypeScript GraphQL API with DataLoader N+1 batching, and multi-threaded concurrency engines supporting up to 100 parallel workers. Experienced in SQL/NoSQL database optimization, Redis caching, Docker containerization, and automated CI/CD testing with Jest and Supertest.",
+        skills: [
+          { cat: "Backend & APIs:", items: "Node.js, Express.js, TypeScript, GraphQL (Yoga v5, SDL, Relay Keyset Pagination), FastAPI, RESTful APIs, DataLoader, Mongoose ODM, Eloquent ORM" },
+          { cat: "Databases & Caching:", items: "MongoDB, Microsoft SQL Server, PostgreSQL, MySQL, SQLite (better-sqlite3), Redis (Cache-Aside)" },
+          { cat: "Testing & DevOps:", items: "Jest, Supertest (22+ tests), Docker, Docker Compose, GitHub Actions CI/CD, Git, GitHub, Postman, Linux/Bash" },
+          { cat: "AI-Native & Tooling:", items: "Google Antigravity, Cursor, Claude Code, GitHub Copilot, Multi-Agent Orchestration, Self-Healing Test Loops" },
+          { cat: "Security & Auth:", items: "JWT, Role-Based Access Control (RBAC), Speakeasy TOTP 2FA, SHA-256 Device Fingerprinting, Helmet, Rate Limiting" },
+          { cat: "Languages:", items: "JavaScript (ES6+), TypeScript, Python 3, PHP 8.2, SQL, HTML5, CSS3" },
+          { cat: "Frontend & UI:", items: "Angular (16–19, Standalone Components, RxJS, Reactive Forms), Blade, Tailwind CSS, Bootstrap 5, CustomTkinter" }
+        ],
+        projectOrder: ["proj-graphql", "proj-grandstay", "proj-myhealthai", "proj-fc26", "proj-cinema", "proj-laravel"]
+      },
+      fullstack: {
+        title: "Full-Stack Developer | Angular (16–19) • Node.js • MEARN / MEAN Ecosystems",
+        summary: "Full-Stack Developer (MEARN/MEAN) and AWS Certified Developer specializing in Angular (16–19), Node.js, Express, and MongoDB/SQL ecosystems. Shipped multiple end-to-end web applications featuring complex state management, role-based access control (RBAC), and conflict-checked reservation engines. Combines modern frontend development with robust backend engineering, containerized Docker environments, automated Jest/Supertest testing suites, and bank-grade authentication architectures (TOTP 2FA, session revocation).",
+        skills: [
+          { cat: "Frontend & UI:", items: "Angular (16–19, Standalone Components, Signals, RxJS, Reactive Forms), Blade, Tailwind CSS, Bootstrap 5, CustomTkinter" },
+          { cat: "Backend & APIs:", items: "Node.js, Express.js, RESTful APIs, GraphQL (Yoga v5), FastAPI, Mongoose ODM, DataLoader, Eloquent ORM" },
+          { cat: "Languages:", items: "TypeScript, JavaScript (ES6+), HTML5, CSS3, Python 3, PHP 8.2, SQL" },
+          { cat: "Databases & Caching:", items: "MongoDB, SQLite (better-sqlite3), Redis (Cache-Aside), Microsoft SQL Server, MySQL, PostgreSQL" },
+          { cat: "Testing & DevOps:", items: "Jest, Supertest (22+ tests), Docker, Docker Compose, GitHub Actions CI/CD, Git, GitHub, Postman" },
+          { cat: "AI-Native & Tooling:", items: "Google Antigravity, Cursor, Claude Code, GitHub Copilot, Multi-Agent Orchestration, Self-Healing Test Loops" },
+          { cat: "Security & Auth:", items: "JWT, Role-Based Access Control (RBAC), Speakeasy TOTP 2FA, SHA-256 Device Fingerprints, Helmet" }
+        ],
+        projectOrder: ["proj-grandstay", "proj-myhealthai", "proj-cinema", "proj-graphql", "proj-laravel", "proj-fc26"]
+      },
+      ai: {
+        title: "Software Engineer — AI Agents & Integration | FastAPI • Node.js • Autonomous Workflows",
+        summary: "Software Engineer and AWS Certified Developer specializing in AI-integrated platforms, agentic workflows, and high-concurrency backend services. Proven track record integrating remote machine learning microservices (FastAPI, PyTorch) and LLM tool-calling pipelines into Node.js architectures with persisted inference scoring, diagnostic history, and rate-limited API proxies. Proficient in full-stack JavaScript/TypeScript, Python concurrency engines (<= 100 threads), Docker containerization, and secure cloud-native deployment patterns.",
+        skills: [
+          { cat: "AI & Agentic Systems:", items: "Google Antigravity, Cursor, Claude Code, Multi-Agent Orchestration, Self-Healing Test Loops, LLM Tool Calling, FastAPI Microservices, PyTorch" },
+          { cat: "Architecture & Concurrency:", items: "Microservice Proxies, Multi-Threading (ThreadPoolExecutor <= 100 threads), Producer-Consumer Queues, Connection Pooling" },
+          { cat: "Backend & APIs:", items: "Node.js, Express.js, RESTful APIs, GraphQL Yoga v5, Mongoose ODM, DataLoader, Connection Pooling" },
+          { cat: "Languages:", items: "Python 3, TypeScript, JavaScript (ES6+), SQL, PHP 8.2, HTML5, CSS3" },
+          { cat: "Testing & DevOps:", items: "Docker, Docker Compose, GitHub Actions CI/CD, Jest, Supertest, Git, GitHub, Linux/Bash" },
+          { cat: "Databases & Caching:", items: "MongoDB, Microsoft SQL Server, Redis (Cache-Aside), SQLite, PostgreSQL" },
+          { cat: "Security & Auth:", items: "JWT, API Key Authentication, Rate Limiting, Speakeasy TOTP 2FA, SHA-256 Device Fingerprints" }
+        ],
+        projectOrder: ["proj-myhealthai", "proj-fc26", "proj-grandstay", "proj-graphql", "proj-cinema", "proj-laravel"]
+      }
+    };
+
+    let currentRole = 'backend';
+
+    function setRole(roleKey) {
+      currentRole = roleKey;
+      const config = roleConfigs[roleKey];
+      if (!config) return;
+
+      // Update Tab Styles
+      document.querySelectorAll('.role-tab').forEach(tab => tab.classList.remove('active'));
+      const activeTab = document.getElementById('tab-' + roleKey);
+      if (activeTab) activeTab.classList.add('active');
+
+      // Update Title & Summary
+      document.getElementById('role-title-display').innerText = config.title;
+      document.getElementById('summary-display').innerText = config.summary;
+
+      // Update Skills Grid
+      const skillsContainer = document.getElementById('skills-display');
+      skillsContainer.innerHTML = config.skills.map(s => `
+        <div class="skill-row">
+          <span class="skill-category">${s.cat}</span>
+          <span class="skill-items">${s.items}</span>
+        </div>
+      `).join('');
+
+      // Re-order Projects
+      const projectsContainer = document.getElementById('projects-container');
+      config.projectOrder.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) projectsContainer.appendChild(el);
+      });
+
+      showToast(`Tailored for: ${roleKey.toUpperCase()}`);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-text');
+      text.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function copyPlainText() {
+      const config = roleConfigs[currentRole];
+      let plainText = `MOHAMED HANY FATHY
+Cairo, Egypt | +20 100 367 2318 | mahamedhany8@gmail.com
+Portfolio: https://mohany-portfolio.vercel.app | GitHub: https://github.com/mohany6 | LinkedIn: https://www.linkedin.com/in/mohanyoo/
+
+SUMMARY
+${config.summary}
+
+TECHNICAL SKILLS
+${config.skills.map(s => `${s.cat} ${s.items}`).join('\n')}
+
+PROJECTS
+MyHealthAI — AI-Powered Telemedicine Platform
+Stack: Angular 16, Node.js, Express, MongoDB, FastAPI, Speakeasy TOTP, PDFKit
+- Architected a full-stack telemedicine platform (~73,000 LOC, 85 REST endpoints, 13 MongoDB models) serving Patient, Doctor, and Admin personas with end-to-end role isolation.
+- Integrated a remote Python/FastAPI deep-learning pneumonia detection model via an authenticated Node.js proxy layer, persisting diagnostic predictions and confidence metrics.
+- Engineered bank-grade security: Speakeasy TOTP and email 2FA, SHA-256 hardware device fingerprints with bypass rules, and IP-geolocated session inventory with remote revocation.
+- Optimized MongoDB data structures using Mongoose discriminator inheritance and compound indexing, cutting API response times by 30%.
+- Implemented an automated background scheduler driving appointment transitions and transactional emails, alongside server-side PDF prescription generation that reduced manual verification overhead by 70%.
+
+GrandStay — Enterprise Hotel Reservation Platform
+Stack: Angular 18, Node.js 22, Express, TypeScript, MongoDB, Jest, Supertest, Docker
+- Built a full-stack hotel booking platform featuring multi-attribute search, server-side pagination (X-Total-Count), and dual persistence modes (embedded JSON engine and MongoDB Atlas).
+- Developed a date-range overlap algorithm (checkIn < reqCheckOut && checkOut > reqCheckIn) that mathematically prevents room overbooking and automatically reclaims cancelled inventory.
+- Wrote an automated test suite of 22 Jest and Supertest integration tests across 5 suites, locking in privilege-escalation guards, authentication boundaries, and inventory capacity limits.
+- Conducted a full security audit fixing 6 production vulnerabilities, including client-side role assignment, raw CVV persistence, IDOR risks, and unhandled database callback crashes.
+- Containerized the platform with multi-stage Docker builds and Docker Compose, establishing a GitHub Actions CI pipeline executing type checks, tests, and production builds.
+
+GraphQL Books API — Production-Grade GraphQL Backend
+Stack: TypeScript, Node.js 22, GraphQL Yoga v5, MS SQL Server, DataLoader, Docker, CI
+- Engineered a strict TypeScript GraphQL backend featuring 16 schema types, 16 mutations, and 3-tier JWT Role-Based Access Control (Anonymous, Member, Admin) with service-layer ownership validation.
+- Implemented Relay-specification cursor pagination on MS SQL Server with keyset SQL queries, supporting forward and backward traversal across 5 dynamic sort modes and multi-attribute filters.
+- Eliminated N+1 query overhead by implementing 7 per-request DataLoaders that batch relational entity queries via STRING_SPLIT into single database operations.
+- Hardened API security using query depth limiting (max 10), complexity budgeting (max 120), sliding-window rate limiting, and production introspection guards.
+- Authored an integration test suite with 30+ test scenarios (Jest + Supertest) against real MS SQL Server instances, fully automated via Docker Compose and GitHub Actions CI.
+
+FC26 High-Throughput Desktop Automation Suite
+Stack: Python 3, CustomTkinter, ThreadPoolExecutor, Requests, Playwright
+- Developed a modular 3,800-line automation suite by refactoring a monolithic application into 14 cohesive packages with atomic persistence and custom UI components.
+- Designed a thread-safe producer/consumer concurrency engine managing 1 to 20 parallel worker threads communicating through callback queues with zero cross-thread UI contention.
+- Built a 100-thread proxy validation engine with microsecond latency scoring and a 48-source scraper maintaining a deduplicated pool of 8,000 proxies with automatic cooldown rotation.
+- Created a 4-step headless authentication pipeline handling OAuth code exchanges, token minting, nucleus verification, and Playwright session extraction across a 34-entry status taxonomy.
+
+Cinema Booking System — Three-Sided Marketplace
+Stack: Angular 16, Express, SQLite (better-sqlite3), Redis, GraphQL, JWT
+- Built a 3-sided marketplace (Admin, Vendor, Customer) featuring an interactive seat-map grid backed by server-side conflict-checked writes against boolean allocation arrays.
+- Implemented a zero-dependency embedded SQLite architecture auto-seeded with 5 movies, 3 cinema halls, and 105 showtimes, enabling instant zero-configuration test runs.
+- Integrated optional Redis cache-aside caching (1-hour TTL) with automated write invalidation and graceful fallback degradation during cache downtime.
+
+CustomerManager — Relational SaaS Dashboard
+Stack: PHP 8.2, Laravel 11, Eloquent ORM, Tailwind CSS, SQLite, Vite
+- Developed a relational management platform featuring 14 RESTful resource routes, implicit route-model binding, and database-level foreign key cascade deletions.
+- Utilized Eloquent withCount eager aggregate loading to eliminate N+1 queries when computing customer order metrics across KPI dashboards.
+
+EXPERIENCE
+IT Support Specialist Intern | DHL Supply Chain
+Cairo, Egypt | Nov 2025 – Dec 2025
+- Managed enterprise IT support ticketing workflows, diagnosing and resolving hardware, networking, and application issues under strict operational SLA targets.
+- Maintained logistics terminal hardware, barcode diagnostic peripherals, and warehouse workstations to eliminate operational downtime.
+- Troubleshot local network connectivity and internal web platform access across enterprise warehouse operations.
+
+EDUCATION
+Bachelor of Science in Computers and Artificial Intelligence | Helwan University
+Major: Software Engineering | Graduated: August 2025
+
+CERTIFICATIONS
+- AWS Certified Developer – Associate (AWS)
+- Microsoft Certified: Azure Fundamentals (AZ-900)`;
+
+      navigator.clipboard.writeText(plainText).then(() => {
+        showToast("ATS Plain Text copied to clipboard!");
+      }).catch(err => {
+        showToast("Press Ctrl+C to copy");
+      });
+    }
+  </script>
 </body>
 </html>

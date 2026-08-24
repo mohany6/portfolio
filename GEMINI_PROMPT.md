@@ -37,10 +37,20 @@ Three-sided marketplace (Admin/Vendor/Customer). Angular 16 + Express + MongoDB 
 PROJECT 4 — CustomerManager (github.com/mohany6/laravel-customer-manager, full source public)
 Laravel 11 / PHP 8.2 / Tailwind / Vite / SQLite. Resource controllers for Customers+Orders, Eloquent one-to-many w/ FK cascade deletes, server-side validation (unique phone, FK existence), seeders, tested end-to-end.
 
-PROJECT 5 (labs, mention briefly) — GraphQL API over MS SQL Server: SDL + code-first schemas, parameterized queries, connection pooling.
+PROJECT 5 — GraphQL Books API (github.com/mohany6/graphql-server, full source public) — PRODUCTION-GRADE
+Strict-TypeScript GraphQL backend rebuilt from a legacy 100-line express-graphql demo.
+- Stack: TypeScript (strict), GraphQL Yoga v5 + GraphQL 16, Node.js 22, MS SQL Server (mssql pooling), JWT/bcrypt, DataLoader, Helmet, rate-limiter-flexible, graphql-depth-limit, graphql-query-complexity, Jest + Supertest, Docker + docker-compose + GitHub Actions CI.
+- 16 schema types, 16 mutations across Users/Authors/Categories/Books/Reviews with full graph traversal (author.books, book.reviews, review.user, etc.).
+- Auth: JWT signup/login (issuer + expiry), bcrypt 10 rounds, MEMBER/ADMIN RBAC + ownership checks, authorization enforced in the service (business-logic) layer.
+- Pagination: Relay-spec cursor connections with keyset SQL — forward (first/after) + backward (last/before), 5 sort modes (NEWEST/OLDEST/PRICE_ASC/PRICE_DESC/TITLE_ASC), filters (search/category/minPrice/maxPrice), totalCount + pageInfo.
+- Performance: 7 per-request DataLoaders batching via STRING_SPLIT eliminate N+1; per-book reviewCount/averageRating via correlated subqueries.
+- Security hardening: max query depth (10), complexity budget (120), per-IP sliding-window rate limiting (429), error masking preserving typed codes (VALIDATION_ERROR/FORBIDDEN/NOT_FOUND/CONFLICT/AUTH_REQUIRED/INVALID_CREDENTIALS/RATE_LIMITED), introspection disabled in production, Helmet headers, env-based secrets (dotenv) — no hardcoded credentials.
+- Subscriptions: bookAdded/bookUpdated/reviewAdded over in-memory pub/sub with filtered streams.
+- Testing & DevOps: 30+ Jest/Supertest integration scenarios (auth, RBAC, pagination walk, depth/complexity/error-code security); multi-stage Dockerfile; docker-compose (SQL Server 2022 + API); GitHub Actions CI runs typecheck → build → tests against a containerized database.
+
 PROJECT 6 (automation labs) — Playwright OAuth/MFA headless login pipeline w/ session serialization + failure telemetry; scraping/alerting pipeline w/ Discord webhooks.
 
-SKILLS: JavaScript(ES6+)/TypeScript, Python 3, PHP 8.2, SQL · Node/Express (85+ endpoints), FastAPI integration, Laravel 11, REST, GraphQL, Mongoose, JWT, TOTP 2FA, RBAC, bcrypt · Angular 16 (lazy loading, guards, interceptors), RxJS, Bootstrap 5, Tailwind, Blade, Chart.js, Leaflet · MongoDB (discriminators, compound indexes, virtuals), Redis cache-aside, MySQL, SQLite · Python concurrency (ThreadPoolExecutor ≤100 threads, queue.Queue), Playwright, Requests, proxy rotation · Git/GitHub, Postman, Docker (basics), Linux/Bash, Vite, Vercel, PDFKit, Nodemailer.
+SKILLS: JavaScript(ES6+)/TypeScript, Python 3, PHP 8.2, SQL · Node/Express (85+ endpoints), GraphQL (Yoga v5, Relay cursor pagination, subscriptions), DataLoader, FastAPI integration, Laravel 11, REST, Mongoose, JWT, TOTP 2FA, RBAC, bcrypt · Angular 16 (lazy loading, guards, interceptors), RxJS, Bootstrap 5, Tailwind, Blade, Chart.js, Leaflet · MongoDB (discriminators, compound indexes, virtuals), MS SQL Server (mssql pooling, parameterized SQL, FKs/indexes), Redis cache-aside, MySQL, SQLite · Python concurrency (ThreadPoolExecutor ≤100 threads, queue.Queue), Playwright, Requests, proxy rotation · Jest, Supertest, Git/GitHub, GitHub Actions CI, Docker & docker-compose, Postman, Linux/Bash, Vite, Vercel, PDFKit, Nodemailer.
 
 # YOUR TASKS — produce ALL sections, clearly numbered
 ## TASK 1 — Master ATS CV (English, no tables/columns/graphics/colors):

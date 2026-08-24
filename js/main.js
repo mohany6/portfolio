@@ -167,11 +167,11 @@ function initRoleTyper() {
   if (!typerElement) return;
 
   const roles = [
-    "Full-Stack Developer",
+    "Full-Stack Developer (MEARN)",
     "Backend & API Architect",
-    "Python Automation Engineer",
-    "High-Throughput Systems Builder",
-    "Data & Pipeline Specialist"
+    "AI Agents & Autonomous Workflows",
+    "AI-Integrated Systems (FastAPI)",
+    "High-Concurrency Python Pipelines"
   ];
 
   let roleIndex = 0;
