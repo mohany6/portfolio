@@ -54,9 +54,6 @@ Portfolio/
 ├── start-local.bat              # 1-click local development launcher
 ├── vercel.json                  # Edge routing, security headers & immutable asset caching
 ├── README.md                    # Site documentation & setup guide
-├── ProjectStructure.txt         # Project layout reference
-├── PROJECTS_ANALYSIS.md         # Full codebase analysis reference
-├── MARKET_ANALYSIS.md           # Egypt tech hiring market strategy & gap plan
 │
 ├── css/
 │   └── styles.css               # Design system: tokens, dark/light themes,

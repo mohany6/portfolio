@@ -30,3 +30,11 @@ yarn-error.log*
 scratch/
 tmp/
 temp/
+
+# Internal working documents (not part of the published site)
+GEMINI_*.md
+GEMINI_*.txt
+GITHUB_PROFILE_README.md
+MARKET_ANALYSIS.md
+PROJECTS_ANALYSIS.md
+ProjectStructure.txt
