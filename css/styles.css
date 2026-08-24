@@ -199,6 +199,11 @@ img, svg {
   position: relative;
 }
 
+.section:not(#hero) {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 750px;
+}
+
 /* Section Header */
 .section-header {
   text-align: center;

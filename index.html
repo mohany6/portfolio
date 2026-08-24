@@ -25,9 +25,15 @@
   <meta property="twitter:description" content="Full-Stack developer, AI Agent integrator, and high-concurrency systems engineer." />
   <meta property="twitter:image" content="assets/images/projects/healthcare-ai.svg" />
 
-  <!-- Google Fonts: Inter, Outfit & JetBrains Mono -->
+  <!-- Resource Hints & CDN Preconnections -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+  
+  <!-- Preload Critical LCP Avatar Image -->
+  <link rel="preload" as="image" href="assets/images/profile.jpg" type="image/jpeg" fetchpriority="high" />
+
+  <!-- Google Fonts: Inter, Outfit & JetBrains Mono -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
 
   <!-- FontAwesome 6 Icons -->
@@ -175,7 +181,7 @@
         <div class="hero-visual">
           <div class="avatar-frame">
             <div class="avatar-img-wrapper">
-              <img src="assets/images/profile.jpg" alt="Mohamed Hany Fathy" class="avatar-img" onerror="this.src='assets/images/profile.jpg'" />
+              <img src="assets/images/profile.jpg" alt="Mohamed Hany Fathy" class="avatar-img" width="320" height="380" fetchpriority="high" decoding="async" onerror="this.src='assets/images/profile.jpg'" />
             </div>
           </div>
 

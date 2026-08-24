@@ -49,8 +49,9 @@ function initParticleCanvas() {
   let width, height;
   let particles = [];
   let mouse = { x: null, y: null, radius: 120 };
-  let animationFrameId;
+  let animationFrameId = null;
   let isMobile = window.innerWidth <= 768;
+  let isCanvasActive = true;
   const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function resize() {
@@ -63,7 +64,6 @@ function initParticleCanvas() {
   function createParticles() {
     particles = [];
     if (prefersReducedMotion) {
-      // Very light static/sparse particles for reduced motion
       const count = isMobile ? 8 : 20;
       for (let i = 0; i < count; i++) {
         particles.push({
@@ -78,12 +78,11 @@ function initParticleCanvas() {
       return;
     }
 
-    // Dynamic density: mobile uses much fewer particles to conserve battery & maintain 60fps touch
     const divisor = isMobile ? 32000 : 18000;
     const density = Math.floor((width * height) / divisor);
     const particleCount = isMobile 
       ? Math.min(Math.max(density, 12), 22) 
-      : Math.min(Math.max(density, 35), 90);
+      : Math.min(Math.max(density, 35), 85);
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
@@ -97,7 +96,25 @@ function initParticleCanvas() {
     }
   }
 
+  function startLoop() {
+    if (!animationFrameId && !prefersReducedMotion && isCanvasActive) {
+      animationFrameId = requestAnimationFrame(draw);
+    }
+  }
+
+  function stopLoop() {
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    }
+  }
+
   function draw() {
+    if (!isCanvasActive) {
+      animationFrameId = null;
+      return;
+    }
+
     ctx.clearRect(0, 0, width, height);
 
     const isLight = document.documentElement.getAttribute("data-theme") === "light";
@@ -107,7 +124,6 @@ function initParticleCanvas() {
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
 
-      // Move (if not reduced motion)
       if (!prefersReducedMotion) {
         p.x += p.vx;
         p.y += p.vy;
@@ -115,7 +131,6 @@ function initParticleCanvas() {
         if (p.x < 0 || p.x > width) p.vx *= -1;
         if (p.y < 0 || p.y > height) p.vy *= -1;
 
-        // Mouse Interaction (desktop only)
         if (!isMobile && mouse.x !== null && mouse.y !== null) {
           const dx = mouse.x - p.x;
           const dy = mouse.y - p.y;
@@ -128,13 +143,11 @@ function initParticleCanvas() {
         }
       }
 
-      // Draw particle
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
       ctx.fillStyle = particleColor + p.alpha + ")";
       ctx.fill();
 
-      // Connect nearby particles (lightened on mobile to save GPU cycles)
       if (!prefersReducedMotion) {
         const maxDist = isMobile ? 80 : 110;
         for (let j = i + 1; j < particles.length; j++) {
@@ -155,8 +168,10 @@ function initParticleCanvas() {
       }
     }
 
-    if (!prefersReducedMotion) {
+    if (!prefersReducedMotion && isCanvasActive) {
       animationFrameId = requestAnimationFrame(draw);
+    } else {
+      animationFrameId = null;
     }
   }
 
@@ -164,17 +179,24 @@ function initParticleCanvas() {
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      cancelAnimationFrame(animationFrameId);
+      stopLoop();
       resize();
       draw();
+      startLoop();
     }, 150);
   });
 
   if (!isMobile) {
+    let mouseRaf = null;
     window.addEventListener("mousemove", (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
+      if (!mouseRaf) {
+        mouseRaf = requestAnimationFrame(() => {
+          mouse.x = e.clientX;
+          mouse.y = e.clientY;
+          mouseRaf = null;
+        });
+      }
+    }, { passive: true });
 
     window.addEventListener("mouseout", () => {
       mouse.x = null;
@@ -182,17 +204,34 @@ function initParticleCanvas() {
     });
   }
 
-  // Pause when tab is not active to conserve GPU/CPU
+  // Pause rendering when hero is scrolled out of view to save battery & GPU
+  const heroSection = document.getElementById("hero");
+  if (heroSection && "IntersectionObserver" in window) {
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        isCanvasActive = entry.isIntersecting;
+        if (isCanvasActive) {
+          startLoop();
+        } else {
+          stopLoop();
+        }
+      });
+    }, { rootMargin: "200px 0px" });
+    heroObserver.observe(heroSection);
+  }
+
+  // Pause when tab is not active
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
-      cancelAnimationFrame(animationFrameId);
-    } else if (!prefersReducedMotion) {
-      draw();
+      stopLoop();
+    } else if (!prefersReducedMotion && isCanvasActive) {
+      startLoop();
     }
   });
 
   resize();
   draw();
+  startLoop();
 }
 
 /* ==============================================================================
@@ -244,7 +283,7 @@ function initRoleTyper() {
 }
 
 /* ==============================================================================
-   4. NAVBAR SCROLLSPY & ACCESSIBLE MOBILE DRAWER
+   4. NAVBAR SCROLLSPY & ACCESSIBLE MOBILE DRAWER (RAF THROTTLED)
    ============================================================================== */
 function initNavbarScrollSpy() {
   const navbar = document.querySelector(".navbar");
@@ -253,30 +292,40 @@ function initNavbarScrollSpy() {
   const navMenu = document.querySelector(".nav-menu");
   const sections = document.querySelectorAll("section[id]");
 
-  // Sticky Glass on Scroll
+  let scrollTicking = false;
+
+  // RAF throttled scrollspy to eliminate layout thrashing
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 40) {
-      navbar.classList.add("scrolled");
-    } else {
-      navbar.classList.remove("scrolled");
+    if (!scrollTicking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        
+        if (scrollY > 40) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+
+        let currentSection = "";
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop - 160;
+          const sectionHeight = section.offsetHeight;
+          if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            currentSection = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${currentSection}`) {
+            link.classList.add("active");
+          }
+        });
+
+        scrollTicking = false;
+      });
+      scrollTicking = true;
     }
-
-    // ScrollSpy active link detection
-    let currentSection = "";
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop - 160;
-      const sectionHeight = section.offsetHeight;
-      if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-        currentSection = section.getAttribute("id");
-      }
-    });
-
-    navLinks.forEach((link) => {
-      link.classList.remove("active");
-      if (link.getAttribute("href") === `#${currentSection}`) {
-        link.classList.add("active");
-      }
-    });
   }, { passive: true });
 
   // Mobile drawer toggle with accessibility & outside dismiss
