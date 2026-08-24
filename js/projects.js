@@ -28,7 +28,7 @@ const PROJECTS_DATA = [
     category: "Full-Stack",
     secondaryCategory: "AI",
     featured: true, // Renders as extra-large flagship Hero card
-    badge: "⭐ Flagship Graduation Project",
+    badge: "Flagship Graduation Project",
     period: "2026",
     stats: [
       { label: "REST Endpoints", value: "85+" },
