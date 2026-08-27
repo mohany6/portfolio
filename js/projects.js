@@ -30,6 +30,7 @@ const PROJECTS_DATA = [
     featured: true, // Renders as extra-large flagship Hero card
     badge: "Flagship Graduation Project",
     period: "2026",
+    myRole: "Solo full-stack lead — designed the end-to-end architecture, the secured FastAPI AI proxy layer, bank-grade auth system, and the database optimization that cut API latency 30%.",
     stats: [
       { label: "REST Endpoints", value: "85+" },
       { label: "AI Accuracy", value: "95%" },
@@ -155,6 +156,7 @@ const PROJECTS_DATA = [
     featured: false,
     badge: "⭐ Concurrency & Reverse-Engineering",
     period: "2026",
+    myRole: "Solo developer — reverse-engineered the undocumented protocol and architected the 14-module, 100-thread concurrency suite end to end.",
     stats: [
       { label: "Concurrency", value: "100 Threads" },
       { label: "Modular Design", value: "14 Packages" },
@@ -224,6 +226,7 @@ const PROJECTS_DATA = [
     featured: false,
     badge: "Full-Stack Marketplace",
     period: "2026",
+    myRole: "Solo full-stack developer — built the 3-role marketplace, the conflict-checked seat-map engine, and the Redis cache-aside layer with graceful fallback.",
     stats: [
       { label: "Marketplace Roles", value: "3 Personas" },
       { label: "Database Engine", value: "Auto-Seeded SQLite" },
@@ -338,6 +341,7 @@ const PROJECTS_DATA = [
     featured: false,
     badge: "Angular 18 & Node.js",
     period: "2026",
+    myRole: "Solo developer — engineered dual persistence behind one REST contract, the overbooking-collision math, and the 22-test Jest/Supertest + GitHub Actions CI pipeline.",
     stats: [
       { label: "Frontend", value: "Angular 18 SPA" },
       { label: "Backend", value: "Node.js 22 + TS" },
@@ -430,6 +434,7 @@ const PROJECTS_DATA = [
     featured: false,
     badge: "PHP & Laravel 11",
     period: "2026",
+    myRole: "Solo developer — implemented the Laravel 11 resource platform, Eloquent cascade relationships, eager aggregates, and the Tailwind SaaS dashboard.",
     stats: [
       { label: "Framework", value: "Laravel 11 (PHP 8.2)" },
       { label: "REST Routes", value: "14 Resource Routes" },
@@ -509,6 +514,7 @@ const PROJECTS_DATA = [
     featured: false,
     badge: "Production-Grade Backend",
     period: "2026",
+    myRole: "Solo developer — migrated the legacy express-graphql demo to strict TypeScript on Yoga v5, added Relay pagination, DataLoader, layered security, and 30+ integration tests.",
     stats: [
       { label: "GraphQL Types", value: "16" },
       { label: "Mutations", value: "16" },
@@ -566,6 +572,7 @@ const PROJECTS_DATA = [
     featured: false,
     badge: "Automation Engineering",
     period: "2026",
+    myRole: "Solo developer — built the multi-worker Playwright engine, session persistence, and automated OAuth/MFA resolution end to end.",
     stats: [
       { label: "Driver Engine", value: "Playwright" },
       { label: "Parallelism", value: "Multiprocessing" },
@@ -613,6 +620,7 @@ const PROJECTS_DATA = [
     featured: false,
     badge: "Data & Alerting",
     period: "2026",
+    myRole: "Solo developer — designed the multi-source scraping pipeline, the activity-scoring algorithm, and the tiered Discord webhook alerting.",
     stats: [
       { label: "Data Pipeline", value: "HTML & JSON" },
       { label: "Scoring Engine", value: "Activity Index" },

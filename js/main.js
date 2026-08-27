@@ -53,6 +53,16 @@ function initParticleCanvas() {
   let isMobile = window.innerWidth <= 768;
   let isCanvasActive = true;
   const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const saveDataMode =
+    (navigator.connection && navigator.connection.saveData === true) ||
+    (navigator.deviceMemory && navigator.deviceMemory < 4);
+
+  // On low-power devices / data-saver mode, render a single static frame and stop.
+  if (saveDataMode) {
+    resize();
+    draw();
+    return;
+  }
 
   function resize() {
     width = canvas.width = window.innerWidth;
@@ -566,6 +576,8 @@ function createFeaturedProjectHTML(project) {
           <p class="project-tagline">${escapeHtml(project.tagline)}</p>
           <p class="project-summary">${escapeHtml(project.summary)}</p>
 
+          ${project.myRole ? `<div class="project-role-strip"><i class="fas fa-user-cog"></i> <strong>My Role:</strong> ${escapeHtml(project.myRole)}</div>` : ""}
+
           <ul class="project-highlights-list">
             ${highlights}
           </ul>
@@ -631,13 +643,13 @@ function createStandardProjectCardHTML(project) {
     .join("");
 
   const githubBtn = project.links.github
-    ? `<a href="${project.links.github}" target="_blank" rel="noopener noreferrer" class="social-link-icon" title="View Source Code">
+    ? `<a href="${project.links.github}" target="_blank" rel="noopener noreferrer" class="social-link-icon" title="View Source Code" aria-label="View ${escapeHtml(project.title)} source code on GitHub">
         <i class="fab fa-github"></i>
       </a>`
     : "";
 
   const liveBtn = project.links.live
-    ? `<a href="${project.links.live}" target="_blank" rel="noopener noreferrer" class="social-link-icon" title="Live Preview">
+    ? `<a href="${project.links.live}" target="_blank" rel="noopener noreferrer" class="social-link-icon" title="Live Preview" aria-label="Open ${escapeHtml(project.title)} live demo">
         <i class="fas fa-external-link-alt"></i>
       </a>`
     : "";
@@ -655,7 +667,9 @@ function createStandardProjectCardHTML(project) {
         
         <h4 class="project-card-title" style="font-size: 1.25rem; margin-bottom: 0.4rem;">${escapeHtml(project.title)}</h4>
         <p class="project-tagline" style="font-size: 0.85rem; margin-bottom: 0.85rem;">${escapeHtml(project.tagline)}</p>
-        
+
+        ${project.myRole ? `<div class="project-role-tag"><i class="fas fa-user-cog"></i> ${escapeHtml(project.myRole)}</div>` : ""}
+
         <ul class="project-highlights-list" style="margin-bottom: 1.2rem;">
           ${highlights}
         </ul>
@@ -748,6 +762,13 @@ function attachProjectModalTriggers() {
           <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Executive Overview</h4>
           <p style="color: var(--text-secondary); line-height: 1.7;">${escapeHtml(project.summary)}</p>
         </div>
+
+        ${project.myRole ? `
+        <div style="margin-bottom: 1.75rem; padding: 1rem; border-radius: var(--radius-md); background: var(--bg-tertiary); border: 1px solid var(--border-color);">
+          <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--accent-cyan);"><i class="fas fa-user-cog"></i> My Role</h4>
+          <p style="color: var(--text-primary); line-height: 1.6;">${escapeHtml(project.myRole)}</p>
+        </div>
+        ` : ""}
 
         <div style="margin-bottom: 1.75rem;">
           <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Key Architectural Highlights</h4>
@@ -853,6 +874,24 @@ function attachProjectModalTriggers() {
 /* ==============================================================================
    8. CONTACT FORM & CLIPBOARD ACTIONS
    ============================================================================== */
+
+// Builds a mailto: URI from the form action (recipient) and submitted fields.
+function buildMailtoUri(actionUrl, dataObj) {
+  const recipient = actionUrl.replace(/^mailto:/, "").split("?")[0];
+  const subject = `Portfolio Contact from ${dataObj.name || "Recruiter"}`;
+  const body = `${dataObj.message || ""}%0D%0A%0D%0AFrom: ${dataObj.email || ""}`;
+  return `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+// Shows mail-client dispatch feedback and opens the mail client.
+function showMailtoFeedback(statusMsg, mailtoUri) {
+  if (statusMsg) {
+    statusMsg.className = "form-status-msg success";
+    statusMsg.innerHTML = "✓ Opening default mail client for direct dispatch...";
+  }
+  window.location.href = mailtoUri;
+}
+
 function initContactForm() {
   const form = document.getElementById("portfolio-contact-form");
   const statusMsg = document.getElementById("form-status-msg");
@@ -868,10 +907,21 @@ function initContactForm() {
 
       const formData = new FormData(form);
       const dataObj = Object.fromEntries(formData.entries());
+      const actionUrl = form.action;
+      const isMailto = actionUrl.startsWith("mailto:");
+
+      // Direct mail-client dispatch when the form action is a mailto: URI.
+      if (isMailto) {
+        const mailtoUri = buildMailtoUri(actionUrl, dataObj);
+        showMailtoFeedback(statusMsg, mailtoUri);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        return;
+      }
 
       try {
-        // Attempt Formspree submission if configured, else graceful fallback
-        const response = await fetch(form.action, {
+        // Attempt Formspree submission when an https endpoint is configured
+        const response = await fetch(actionUrl, {
           method: "POST",
           body: formData,
           headers: {
@@ -890,17 +940,9 @@ function initContactForm() {
           throw new Error("Submission returned non-200");
         }
       } catch (err) {
-        // Mailto fallback if endpoint is placeholder or fails
-        if (statusMsg) {
-          statusMsg.className = "form-status-msg success";
-          statusMsg.innerHTML = `✓ Opening default mail client for direct dispatch...`;
-        }
-        const mailtoUri = `mailto:mahamedhany8@gmail.com?subject=${encodeURIComponent(
-          "Portfolio Contact from " + (dataObj.name || "Recruiter")
-        )}&body=${encodeURIComponent(dataObj.message || "")}%0D%0A%0D%0AFrom: ${encodeURIComponent(
-          dataObj.email || ""
-        )}`;
-        window.location.href = mailtoUri;
+        // Mailto fallback if endpoint is unreachable
+        const mailtoUri = buildMailtoUri(form.action, dataObj);
+        showMailtoFeedback(statusMsg, mailtoUri);
         showToast("Opened mail client for message delivery", "info");
       } finally {
         submitBtn.disabled = false;

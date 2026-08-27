@@ -1,0 +1,10 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mohamed Hany Fathy — personal developer portfolio (static, no build)",
+  "scripts": {
+    "test": "node --test \"tests/**/*.test.js\"",
+    "start": "npx serve -l 3000 ."
+  }
+}
