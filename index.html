@@ -133,7 +133,7 @@
   <section id="hero" class="hero section">
     <div class="container">
       <div class="hero-grid">
-        <div class="hero-content">
+        <div class="hero-content reveal-init">
           <div class="hero-status">
             <span class="status-dot"></span>
             <span>Available for Backend, Full-Stack &amp; AI Agent Roles</span>
@@ -169,7 +169,7 @@
             <a href="#projects" class="btn btn-primary">
               <i class="fas fa-bolt"></i> View Projects
             </a>
-            <a href="cv.html" target="_blank" class="btn btn-outline" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">
+            <a href="cv.html" target="_blank" class="btn btn-outline" style="border-color: var(--border-glow); color: var(--accent-cyan);">
               <i class="fas fa-file-invoice"></i> View / Download CV
             </a>
             <a href="#contact" class="btn btn-outline">
@@ -179,37 +179,70 @@
 
           <div class="hero-social-strip">
             <span>Connect with me:</span>
-            <a href="https://github.com/mohany6" target="_blank" rel="noopener noreferrer" class="social-link-icon" title="GitHub Profile">
+            <a href="https://github.com/mohany6" target="_blank" rel="noopener noreferrer" class="social-link-icon" title="GitHub Profile" aria-label="GitHub Profile">
               <i class="fab fa-github"></i>
             </a>
-            <a href="https://www.linkedin.com/in/mohanyoo/" target="_blank" rel="noopener noreferrer" class="social-link-icon" title="LinkedIn Profile">
+            <a href="https://www.linkedin.com/in/mohanyoo/" target="_blank" rel="noopener noreferrer" class="social-link-icon" title="LinkedIn Profile" aria-label="LinkedIn Profile">
               <i class="fab fa-linkedin-in"></i>
             </a>
-            <a href="mailto:mahamedhany8@gmail.com" class="social-link-icon" title="Send Direct Email">
+            <a href="mailto:mahamedhany8@gmail.com" class="social-link-icon" title="Send Direct Email" aria-label="Send Direct Email">
               <i class="fas fa-envelope"></i>
             </a>
-            <a href="tel:01003672318" class="social-link-icon" title="Call Phone">
+            <a href="tel:01003672318" class="social-link-icon" title="Call Phone" aria-label="Call Phone">
               <i class="fas fa-phone"></i>
             </a>
           </div>
         </div>
 
-        <div class="hero-visual">
+        <div class="hero-visual reveal-init delay-1">
+          <!-- Abstract Engineering Flow-Field SVG Side-Art Motif -->
+          <svg class="hero-bg-motif" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="250" cy="250" r="210" stroke="url(#hero-circle-grad)" stroke-width="1.5" stroke-dasharray="6 8" opacity="0.6" />
+            <circle cx="250" cy="250" r="160" stroke="url(#hero-circle-grad2)" stroke-width="1" stroke-dasharray="4 6" opacity="0.4" />
+            <path d="M 50 250 H 450 M 250 50 V 450" stroke="rgba(6,182,212,0.15)" stroke-width="1" stroke-dasharray="3 5" />
+            <circle cx="398" cy="146" r="5" fill="var(--accent-cyan)" />
+            <circle cx="102" cy="354" r="4" fill="var(--accent-indigo)" />
+            <circle cx="354" cy="398" r="6" fill="var(--accent-violet)" />
+            <path d="M 398 146 L 430 114 M 102 354 L 70 386" stroke="rgba(6,182,212,0.4)" stroke-width="1.5" />
+            <defs>
+              <linearGradient id="hero-circle-grad" x1="0" y1="0" x2="500" y2="500" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#06b6d4" stop-opacity="0.8" />
+                <stop offset="0.5" stop-color="#3b82f6" stop-opacity="0.3" />
+                <stop offset="1" stop-color="#8b5cf6" stop-opacity="0.8" />
+              </linearGradient>
+              <linearGradient id="hero-circle-grad2" x1="500" y1="0" x2="0" y2="500" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#10b981" stop-opacity="0.6" />
+                <stop offset="1" stop-color="#06b6d4" stop-opacity="0.2" />
+              </linearGradient>
+            </defs>
+          </svg>
+
+          <!-- Conic-Gradient Avatar Frame -->
           <div class="avatar-frame">
             <div class="avatar-img-wrapper">
               <img src="assets/images/profile.jpg" alt="Mohamed Hany Fathy" class="avatar-img" width="320" height="380" fetchpriority="high" decoding="async" onerror="this.src='assets/images/profile.jpg'" />
             </div>
           </div>
 
-          <!-- Floating Badges -->
+          <!-- Redesigned Metric Badges / Chips -->
           <div class="floating-badge badge-top-left">
-            <i class="fas fa-gauge-high" style="color: var(--accent-emerald);"></i>
-            <span>-30% API Response Latency</span>
+            <div class="badge-chip-icon" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.3);">
+              <i class="fas fa-gauge-high"></i>
+            </div>
+            <div class="badge-chip-info">
+              <span class="badge-chip-val">-30% Latency</span>
+              <span class="badge-chip-lbl">API Optimization</span>
+            </div>
           </div>
 
           <div class="floating-badge badge-bottom-right">
-            <i class="fas fa-robot" style="color: var(--accent-cyan);"></i>
-            <span>100-Thread Automation Engine</span>
+            <div class="badge-chip-icon" style="background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); border: 1px solid rgba(6, 182, 212, 0.3);">
+              <i class="fas fa-microchip"></i>
+            </div>
+            <div class="badge-chip-info">
+              <span class="badge-chip-val">100 Threads</span>
+              <span class="badge-chip-lbl">Automation Engine</span>
+            </div>
           </div>
         </div>
       </div>
@@ -217,12 +250,19 @@
   </section>
 
   <!-- ========================================================================
-       2. STATS STRIP SECTION (Animated Counters)
+       2. STATS STRIP SECTION (Animated Impact Band)
        ======================================================================== -->
   <section class="stats-strip" aria-label="Key Performance Statistics">
+    <!-- SVG Watermark Grid Pattern -->
+    <svg class="stats-watermark" viewBox="0 0 380 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0 30H380M0 90H380M0 150H380" stroke="currentColor" stroke-width="1.5" stroke-dasharray="8 8" />
+      <path d="M60 0V180M180 0V180M300 0V180" stroke="currentColor" stroke-width="1.5" stroke-dasharray="8 8" />
+      <circle cx="180" cy="90" r="40" stroke="currentColor" stroke-width="1.5" />
+    </svg>
+
     <div class="container">
       <div class="stats-grid">
-        <div class="stat-item">
+        <div class="stat-item reveal-init">
           <div class="stat-value-wrapper">
             <span class="stat-number" data-target="30">0</span>
             <span class="stat-symbol">%</span>
@@ -230,46 +270,49 @@
           <div class="stat-label">Faster API Response Times</div>
         </div>
 
-        <div class="stat-item">
+        <div class="stat-item reveal-init delay-1">
           <div class="stat-value-wrapper">
             <span class="stat-number" data-target="70">0</span>
             <span class="stat-symbol">%</span>
           </div>
-          <div class="stat-label">Reduction in Manual Verification</div>
+          <div class="stat-label">Reduction in Manual Overhead</div>
         </div>
 
-        <div class="stat-item">
+        <div class="stat-item reveal-init delay-2">
           <div class="stat-value-wrapper">
             <span class="stat-number" data-target="85">0</span>
             <span class="stat-symbol">+</span>
           </div>
-          <div class="stat-label">Production Endpoints Engineered</div>
+          <div class="stat-label">Production Endpoints Built</div>
         </div>
 
-        <div class="stat-item">
+        <div class="stat-item reveal-init delay-3">
           <div class="stat-value-wrapper">
             <span class="stat-number" data-target="3800">0</span>
             <span class="stat-symbol">+</span>
           </div>
-          <div class="stat-label">Lines of Concurrent Python Pipelines</div>
+          <div class="stat-label">Lines of Concurrent Python</div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Section Hairline -->
+  <div class="section-hairline"></div>
 
   <!-- ========================================================================
        3. ABOUT ME SECTION
        ======================================================================== -->
   <section id="about" class="section">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal-init">
         <span class="section-tag"><i class="fas fa-user-astronaut"></i> Background</span>
         <h2 class="section-title">Architecting Resilient Web &amp; Automation Systems</h2>
         <p class="section-subtitle">Bridging full-stack software development, cloud backends, high-throughput concurrency, and AI integrations.</p>
       </div>
 
       <div class="about-grid">
-        <div class="about-bio">
+        <div class="about-bio reveal-init delay-1">
           <p>
             I am a <strong>Software Developer</strong> with extensive hands-on experience building full-stack applications with <strong>Angular, Node.js, Express, and MongoDB</strong>, alongside engineering production-grade <strong>Python automation systems</strong> (Playwright, multithreaded worker pools, proxy rotation pipelines).
           </p>
@@ -280,7 +323,54 @@
             Whether implementing bank-grade authentication (TOTP 2FA, IP-geolocated session managers), configuring Redis cache-aside architectures, or building high-concurrency 100-thread desktop scraping engines, I build software engineered for scale and reliability.
           </p>
 
-          <div style="margin-top: 1.75rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <!-- Inline Vector Architecture Systems Flow Diagram -->
+          <div class="architecture-flow-wrapper">
+            <svg viewBox="0 0 600 130" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;" aria-label="System Architecture Flow Diagram">
+              <!-- Node 1: Client -->
+              <rect x="10" y="35" width="105" height="60" rx="10" fill="rgba(6,182,212,0.12)" stroke="var(--accent-cyan)" stroke-width="1.5" />
+              <text x="62" y="62" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="700" text-anchor="middle">Angular UI</text>
+              <text x="62" y="78" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="9" text-anchor="middle">Lazy Components</text>
+
+              <!-- Arrow 1 -->
+              <path d="M 115 65 H 155" stroke="var(--accent-cyan)" stroke-width="1.5" stroke-dasharray="4 3" />
+              <polygon points="155,62 162,65 155,68" fill="var(--accent-cyan)" />
+
+              <!-- Node 2: Gateway & Auth -->
+              <rect x="165" y="25" width="125" height="80" rx="10" fill="rgba(99,102,241,0.14)" stroke="var(--accent-indigo)" stroke-width="1.5" />
+              <text x="227" y="55" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="700" text-anchor="middle">Node / Express</text>
+              <text x="227" y="72" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="9" text-anchor="middle">TOTP 2FA + RBAC</text>
+              <text x="227" y="87" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="8.5" text-anchor="middle">~85 REST Endpoints</text>
+
+              <!-- Arrow 2: Top to AI, Bottom to DB -->
+              <path d="M 290 50 H 330 V 35 H 345" stroke="var(--accent-emerald)" stroke-width="1.5" stroke-dasharray="4 3" />
+              <polygon points="345,32 352,35 345,38" fill="var(--accent-emerald)" />
+
+              <path d="M 290 80 H 330 V 95 H 345" stroke="var(--accent-violet)" stroke-width="1.5" stroke-dasharray="4 3" />
+              <polygon points="345,92 352,95 345,98" fill="var(--accent-violet)" />
+
+              <!-- Node 3: AI Microservice -->
+              <rect x="355" y="10" width="115" height="50" rx="8" fill="rgba(16,185,129,0.12)" stroke="var(--accent-emerald)" stroke-width="1.5" />
+              <text x="412" y="32" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="11" font-weight="700" text-anchor="middle">FastAPI AI Proxy</text>
+              <text x="412" y="47" fill="var(--accent-emerald)" font-family="var(--font-mono)" font-size="8.5" text-anchor="middle">95% Pneumonia ML</text>
+
+              <!-- Node 4: DB & Cache -->
+              <rect x="355" y="70" width="115" height="50" rx="8" fill="rgba(139,92,246,0.12)" stroke="var(--accent-violet)" stroke-width="1.5" />
+              <text x="412" y="92" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="11" font-weight="700" text-anchor="middle">MongoDB &amp; Redis</text>
+              <text x="412" y="107" fill="var(--accent-violet)" font-family="var(--font-mono)" font-size="8.5" text-anchor="middle">Cache-Aside Model</text>
+
+              <!-- Arrow 3 to Python Concurrency Worker -->
+              <path d="M 470 35 H 495" stroke="var(--accent-cyan)" stroke-width="1.5" stroke-dasharray="3 3" />
+              <path d="M 470 95 H 495" stroke="var(--accent-cyan)" stroke-width="1.5" stroke-dasharray="3 3" />
+
+              <!-- Node 5: Concurrency Engine -->
+              <rect x="495" y="30" width="95" height="70" rx="8" fill="rgba(6,182,212,0.14)" stroke="var(--accent-cyan)" stroke-width="1.5" />
+              <text x="542" y="58" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="10.5" font-weight="700" text-anchor="middle">ThreadPool</text>
+              <text x="542" y="74" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="8" text-anchor="middle">100 Workers</text>
+              <text x="542" y="87" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="7.5" text-anchor="middle">Playwright</text>
+            </svg>
+          </div>
+
+          <div style="margin-top: 1.85rem; display: flex; gap: 1rem; flex-wrap: wrap;">
             <a href="#projects" class="btn btn-primary btn-sm">
               <i class="fas fa-folder-open"></i> Explore Flagship Projects
             </a>
@@ -290,7 +380,7 @@
           </div>
         </div>
 
-        <div class="about-metrics-list">
+        <div class="about-metrics-list reveal-init delay-2">
           <div class="metric-card glass-card">
             <div class="metric-icon-box">
               <i class="fas fa-database"></i>
@@ -302,7 +392,7 @@
           </div>
 
           <div class="metric-card glass-card">
-            <div class="metric-icon-box">
+            <div class="metric-icon-box" style="background: rgba(99, 102, 241, 0.12); color: var(--accent-indigo); border-color: rgba(99, 102, 241, 0.28);">
               <i class="fas fa-network-wired"></i>
             </div>
             <div>
@@ -312,7 +402,7 @@
           </div>
 
           <div class="metric-card glass-card">
-            <div class="metric-icon-box">
+            <div class="metric-icon-box" style="background: rgba(139, 92, 246, 0.12); color: var(--accent-violet); border-color: rgba(139, 92, 246, 0.28);">
               <i class="fas fa-shield-halved"></i>
             </div>
             <div>
@@ -322,7 +412,7 @@
           </div>
 
           <div class="metric-card glass-card">
-            <div class="metric-icon-box" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald); border-color: rgba(16, 185, 129, 0.25);">
+            <div class="metric-icon-box" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald); border-color: rgba(16, 185, 129, 0.28);">
               <i class="fas fa-brain"></i>
             </div>
             <div>
@@ -335,12 +425,15 @@
     </div>
   </section>
 
+  <!-- Section Hairline -->
+  <div class="section-hairline"></div>
+
   <!-- ========================================================================
        4. SKILLS MATRIX SECTION
        ======================================================================== -->
-  <section id="skills" class="section" style="background: var(--bg-secondary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+  <section id="skills" class="section" style="background: var(--surface-1);">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal-init">
         <span class="section-tag"><i class="fas fa-layer-group"></i> Technical Arsenal</span>
         <h2 class="section-title">Skills &amp; Technologies</h2>
         <p class="section-subtitle">A comprehensive toolkit spanning full-stack frameworks, backend architectures, concurrency engines, and cloud tools.</p>
@@ -348,7 +441,7 @@
 
       <div class="skills-container">
         <!-- 1. Languages -->
-        <div class="skill-category-card glass-card">
+        <div class="skill-category-card glass-card reveal-init">
           <div class="skill-category-header">
             <div class="category-icon-wrapper"><i class="fas fa-code"></i></div>
             <h3 class="skill-category-title">Programming Languages</h3>
@@ -362,7 +455,7 @@
         </div>
 
         <!-- 2. AI Agents & Intelligent Systems -->
-        <div class="skill-category-card glass-card" style="border-color: rgba(16, 185, 129, 0.35);">
+        <div class="skill-category-card glass-card reveal-init delay-1" style="border-color: rgba(16, 185, 129, 0.35);">
           <div class="skill-category-header">
             <div class="category-icon-wrapper" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);"><i class="fas fa-brain"></i></div>
             <h3 class="skill-category-title">AI Agents &amp; AI-Native Engineering</h3>
@@ -380,7 +473,7 @@
         </div>
 
         <!-- 3. Backend & APIs -->
-        <div class="skill-category-card glass-card">
+        <div class="skill-category-card glass-card reveal-init delay-2">
           <div class="skill-category-header">
             <div class="category-icon-wrapper"><i class="fas fa-server"></i></div>
             <h3 class="skill-category-title">Backend Architecture &amp; APIs</h3>
@@ -397,8 +490,8 @@
           </div>
         </div>
 
-        <!-- 3. Frontend Development -->
-        <div class="skill-category-card glass-card">
+        <!-- 4. Frontend Engineering -->
+        <div class="skill-category-card glass-card reveal-init delay-1">
           <div class="skill-category-header">
             <div class="category-icon-wrapper"><i class="fas fa-laptop-code"></i></div>
             <h3 class="skill-category-title">Frontend Engineering</h3>
@@ -415,8 +508,8 @@
           </div>
         </div>
 
-        <!-- 4. Databases & Caching -->
-        <div class="skill-category-card glass-card">
+        <!-- 5. Databases & Caching -->
+        <div class="skill-category-card glass-card reveal-init delay-2">
           <div class="skill-category-header">
             <div class="category-icon-wrapper"><i class="fas fa-database"></i></div>
             <h3 class="skill-category-title">Databases &amp; Distributed Caching</h3>
@@ -430,8 +523,8 @@
           </div>
         </div>
 
-        <!-- 5. Automation & Concurrency -->
-        <div class="skill-category-card glass-card">
+        <!-- 6. Automation & Concurrency -->
+        <div class="skill-category-card glass-card reveal-init delay-1">
           <div class="skill-category-header">
             <div class="category-icon-wrapper"><i class="fas fa-robot"></i></div>
             <h3 class="skill-category-title">Automation &amp; Concurrency Engineering</h3>
@@ -445,8 +538,8 @@
           </div>
         </div>
 
-        <!-- 6. AI Agents, Data Pipelines & Monitoring -->
-        <div class="skill-category-card glass-card">
+        <!-- 7. AI Agents, Data Pipelines & Monitoring -->
+        <div class="skill-category-card glass-card reveal-init delay-2">
           <div class="skill-category-header">
             <div class="category-icon-wrapper"><i class="fas fa-brain"></i></div>
             <h3 class="skill-category-title">AI Agents, Data &amp; Monitoring</h3>
@@ -461,8 +554,8 @@
           </div>
         </div>
 
-        <!-- 7. DevOps & Tools -->
-        <div class="skill-category-card glass-card">
+        <!-- 8. DevOps & Tools -->
+        <div class="skill-category-card glass-card reveal-init delay-1">
           <div class="skill-category-header">
             <div class="category-icon-wrapper"><i class="fas fa-toolbox"></i></div>
             <h3 class="skill-category-title">DevOps, Cloud &amp; Tools</h3>
@@ -475,19 +568,22 @@
             <span class="skill-badge"><i class="fab fa-jenkins skill-badge-icon" style="color: #d24939;"></i> Jenkins CI/CD</span>
             <span class="skill-badge"><i class="fab fa-aws skill-badge-icon" style="color: #ff9900;"></i> AWS Certified Developer</span>
             <span class="skill-badge"><i class="fab fa-microsoft skill-badge-icon" style="color: #0078d4;"></i> Microsoft Azure Fundamentals</span>
-            <span class="skill-badge"><i class="fas fa-cubes skill-badge-icon" style="color: #000000;"></i> Vercel &amp; Netlify Edge</span>
+            <span class="skill-badge"><i class="fas fa-cubes skill-badge-icon" style="color: var(--accent-cyan);"></i> Vercel &amp; Netlify Edge</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Section Hairline -->
+  <div class="section-hairline"></div>
+
   <!-- ========================================================================
        5. WORK EXPERIENCE SECTION
        ======================================================================== -->
   <section id="experience" class="section">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal-init">
         <span class="section-tag"><i class="fas fa-briefcase"></i> Track Record</span>
         <h2 class="section-title">Work &amp; Project Experience</h2>
         <p class="section-subtitle">Delivering high-impact systems within fast-paced engineering teams.</p>
@@ -495,7 +591,7 @@
 
       <div class="timeline-wrap">
         <!-- Experience 1: Graduation Project Flagship -->
-        <div class="timeline-item">
+        <div class="timeline-item reveal-init">
           <div class="timeline-node"></div>
           <div class="timeline-card glass-card">
             <div class="timeline-meta">
@@ -516,7 +612,7 @@
         </div>
 
         <!-- Experience 2: DHL Internship -->
-        <div class="timeline-item">
+        <div class="timeline-item reveal-init delay-1">
           <div class="timeline-node"></div>
           <div class="timeline-card glass-card">
             <div class="timeline-meta">
@@ -537,19 +633,22 @@
     </div>
   </section>
 
+  <!-- Section Hairline -->
+  <div class="section-hairline"></div>
+
   <!-- ========================================================================
        6. PROJECTS SECTION (Hero Featured Card + Filterable Standard Grid)
        ======================================================================== -->
-  <section id="projects" class="section" style="background: var(--bg-secondary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+  <section id="projects" class="section" style="background: var(--surface-1);">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal-init">
         <span class="section-tag"><i class="fas fa-diagram-project"></i> Portfolio Showcase</span>
         <h2 class="section-title">Featured Engineering Projects</h2>
         <p class="section-subtitle">Real-world production codebases analyzed for concurrency, security, and algorithmic efficiency.</p>
       </div>
 
       <!-- Controls: Category Filters + Live Search Bar -->
-      <div class="projects-controls">
+      <div class="projects-controls reveal-init delay-1">
         <div class="filter-pills-bar" role="tablist" aria-label="Project Categories">
           <button class="filter-btn active" data-filter="All">All Projects</button>
           <button class="filter-btn" data-filter="Full-Stack">Full-Stack</button>
@@ -585,12 +684,15 @@
     </div>
   </section>
 
+  <!-- Section Hairline -->
+  <div class="section-hairline"></div>
+
   <!-- ========================================================================
        7. EDUCATION & CERTIFICATIONS SECTION
        ======================================================================== -->
   <section id="education" class="section">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal-init">
         <span class="section-tag"><i class="fas fa-graduation-cap"></i> Academic &amp; Cloud Credentials</span>
         <h2 class="section-title">Education &amp; Certifications</h2>
         <p class="section-subtitle">Solid academic foundation paired with industry-recognized cloud certifications.</p>
@@ -598,7 +700,7 @@
 
       <div class="credentials-grid">
         <!-- Column 1: Academic Education -->
-        <div>
+        <div class="reveal-init delay-1">
           <h3 class="credential-column-title">
             <i class="fas fa-university" style="color: var(--accent-cyan);"></i> Formal Education
           </h3>
@@ -611,21 +713,21 @@
               </div>
               <span class="credential-date">Graduation: Aug 2025</span>
             </div>
-            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.75rem; line-height: 1.6;">
+            <p style="font-size: var(--type-body-sm); color: var(--text-secondary); margin-top: 0.75rem; line-height: 1.65;">
               Comprehensive curriculum focused on Data Structures, Algorithms, Distributed Systems, Software Architecture, Database Management, and Artificial Intelligence integration. Completed flagship full-stack healthcare platform as Graduation Project.
             </p>
           </div>
         </div>
 
         <!-- Column 2: Industry Certifications -->
-        <div>
+        <div class="reveal-init delay-2">
           <h3 class="credential-column-title">
             <i class="fas fa-certificate" style="color: var(--accent-emerald);"></i> Cloud Certifications
           </h3>
 
-          <div class="credential-card glass-card" style="margin-bottom: 1.25rem;">
+          <div class="credential-card glass-card">
             <div style="display: flex; gap: 1rem; align-items: center;">
-              <div class="cert-badge-icon" style="background: rgba(255, 153, 0, 0.12); color: #ff9900;">
+              <div class="cert-badge-icon" style="background: rgba(255, 153, 0, 0.12); color: #ff9900; border-color: rgba(255, 153, 0, 0.25);">
                 <i class="fab fa-aws"></i>
               </div>
               <div style="flex-grow: 1;">
@@ -634,14 +736,14 @@
               </div>
               <span class="credential-date">Verified</span>
             </div>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">
+            <p style="font-size: var(--type-caption); color: var(--text-muted); margin-top: 0.75rem; line-height: 1.5;">
               Demonstrated proficiency in developing, deploying, and debugging cloud-based applications using AWS core services (Lambda, API Gateway, DynamoDB, S3, ECS).
             </p>
           </div>
 
           <div class="credential-card glass-card">
             <div style="display: flex; gap: 1rem; align-items: center;">
-              <div class="cert-badge-icon" style="background: rgba(0, 120, 212, 0.12); color: #0078d4;">
+              <div class="cert-badge-icon" style="background: rgba(0, 120, 212, 0.12); color: #0078d4; border-color: rgba(0, 120, 212, 0.25);">
                 <i class="fab fa-microsoft"></i>
               </div>
               <div style="flex-grow: 1;">
@@ -650,7 +752,7 @@
               </div>
               <span class="credential-date">Verified</span>
             </div>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">
+            <p style="font-size: var(--type-caption); color: var(--text-muted); margin-top: 0.75rem; line-height: 1.5;">
               Foundational knowledge of cloud concepts, Azure architectural components, security, privacy, compliance, and cloud governance frameworks.
             </p>
           </div>
@@ -659,12 +761,15 @@
     </div>
   </section>
 
+  <!-- Section Hairline -->
+  <div class="section-hairline"></div>
+
   <!-- ========================================================================
        8. CONTACT SECTION & WORKING FORM
        ======================================================================== -->
-  <section id="contact" class="section" style="background: var(--bg-secondary); border-top: 1px solid var(--border-color);">
+  <section id="contact" class="section" style="background: var(--surface-1);">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal-init">
         <span class="section-tag"><i class="fas fa-paper-plane"></i> Get In Touch</span>
         <h2 class="section-title">Let's Build Something Exceptional</h2>
         <p class="section-subtitle">Interested in discussing a backend, full-stack, automation, or data role? Send a message or reach out directly.</p>
@@ -672,7 +777,7 @@
 
       <div class="contact-grid">
         <!-- Direct Contact Info Cards -->
-        <div class="contact-info-cards">
+        <div class="contact-info-cards reveal-init delay-1">
           <!-- Email Card -->
           <div class="contact-tile glass-card">
             <div class="contact-tile-icon">
@@ -689,7 +794,7 @@
 
           <!-- Phone Card -->
           <div class="contact-tile glass-card">
-            <div class="contact-tile-icon" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald); border-color: rgba(16, 185, 129, 0.25);">
+            <div class="contact-tile-icon" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald); border-color: rgba(16, 185, 129, 0.28);">
               <i class="fas fa-phone"></i>
             </div>
             <div>
@@ -703,7 +808,7 @@
 
           <!-- Location Card -->
           <div class="contact-tile glass-card">
-            <div class="contact-tile-icon" style="background: rgba(99, 102, 241, 0.12); color: var(--accent-indigo); border-color: rgba(99, 102, 241, 0.25);">
+            <div class="contact-tile-icon" style="background: rgba(99, 102, 241, 0.12); color: var(--accent-indigo); border-color: rgba(99, 102, 241, 0.28);">
               <i class="fas fa-location-dot"></i>
             </div>
             <div>
@@ -714,7 +819,7 @@
 
           <!-- GitHub & LinkedIn Links -->
           <div class="contact-tile glass-card">
-            <div class="contact-tile-icon" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan); border-color: rgba(56, 189, 248, 0.25);">
+            <div class="contact-tile-icon" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan); border-color: rgba(56, 189, 248, 0.28);">
               <i class="fab fa-github"></i>
             </div>
             <div>
@@ -724,7 +829,7 @@
           </div>
 
           <div class="contact-tile glass-card">
-            <div class="contact-tile-icon" style="background: rgba(0, 119, 181, 0.12); color: #0077b5; border-color: rgba(0, 119, 181, 0.25);">
+            <div class="contact-tile-icon" style="background: rgba(0, 119, 181, 0.12); color: #0077b5; border-color: rgba(0, 119, 181, 0.28);">
               <i class="fab fa-linkedin-in"></i>
             </div>
             <div>
@@ -735,11 +840,8 @@
         </div>
 
         <!-- Interactive Contact Form -->
-        <div class="contact-form-card glass-card">
+        <div class="contact-form-card glass-card reveal-init delay-2">
           <form id="portfolio-contact-form" action="mailto:mahamedhany8@gmail.com" method="POST" enctype="text/plain">
-            <!-- To route submissions to Formspree instead of the mail client, replace the
-                 action above with your endpoint, e.g. action="https://formspree.io/f/YOUR_ID".
-                 The JS handler will use Formspree automatically when the action is an https URL. -->
             <div class="form-group">
               <label for="form-name" class="form-label">Full Name *</label>
               <input type="text" id="form-name" name="name" class="form-input" placeholder="e.g. John Doe / Technical Recruiter" required />
@@ -778,9 +880,9 @@
     <div class="container">
       <div class="footer-content">
         <div>
-          <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
-            <span class="brand-icon" style="width: 28px; height: 28px; font-size: 0.8rem;">M</span>
-            <span style="font-family: var(--font-heading); font-weight: 700; color: var(--text-primary);">Mohamed Hany Fathy</span>
+          <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.4rem;">
+            <span class="brand-icon" style="width: 30px; height: 30px; font-size: 0.825rem;">M</span>
+            <span style="font-family: var(--font-heading); font-weight: 800; color: var(--text-primary);">Mohamed Hany Fathy</span>
           </div>
           <p class="footer-copyright">© 2025 – 2026 Mohamed Hany Fathy. Engineered with precision &amp; modern web standards.</p>
         </div>

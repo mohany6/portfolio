@@ -1,6 +1,7 @@
 /**
  * ==============================================================================
  * Mohamed Hany Fathy — Portfolio Application Core Controller
+ * Art-Directed Cybernetic Obsidian & Cyan Glassmorphism 2.0 Engine
  * ==============================================================================
  */
 
@@ -11,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initNavbarScrollSpy();
   initAnimatedCounters();
   initProjects();
+  initScrollReveal();
   initModal();
   initContactForm();
 });
@@ -422,7 +424,47 @@ function initAnimatedCounters() {
 }
 
 /* ==============================================================================
-   6. PROJECTS RENDERING, FILTERING & SEARCH
+   6. SCROLL REVEAL ENGINE (STAGGERED & ACCESSIBLE)
+   ============================================================================== */
+let revealObserver = null;
+
+function initScrollReveal() {
+  const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    document.querySelectorAll(".reveal-init").forEach((el) => el.classList.add("reveal-visible"));
+    return;
+  }
+
+  revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("reveal-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.08,
+      rootMargin: "0px 0px -20px 0px"
+    }
+  );
+
+  observeNewScrollReveals();
+}
+
+function observeNewScrollReveals() {
+  if (!revealObserver) {
+    document.querySelectorAll(".reveal-init").forEach((el) => el.classList.add("reveal-visible"));
+    return;
+  }
+  const unobserved = document.querySelectorAll(".reveal-init:not(.reveal-visible)");
+  unobserved.forEach((el) => revealObserver.observe(el));
+}
+
+/* ==============================================================================
+   7. PROJECTS RENDERING, FILTERING & SEARCH
    ============================================================================== */
 let currentCategory = "All";
 let currentSearchQuery = "";
@@ -506,8 +548,11 @@ function renderProjects() {
   // Render Standard Cards Grid
   if (standardGrid) {
     const listToRender = featuredProject ? remainingProjects : filtered;
-    standardGrid.innerHTML = listToRender.map((p) => createStandardProjectCardHTML(p)).join("");
+    standardGrid.innerHTML = listToRender.map((p, idx) => createStandardProjectCardHTML(p, idx)).join("");
   }
+
+  // Observe all newly injected cards for smooth scroll-reveal
+  observeNewScrollReveals();
 
   // Attach modal trigger listeners to all rendered cards
   attachProjectModalTriggers();
@@ -576,7 +621,7 @@ function createFeaturedProjectHTML(project) {
           <p class="project-tagline">${escapeHtml(project.tagline)}</p>
           <p class="project-summary">${escapeHtml(project.summary)}</p>
 
-          ${project.myRole ? `<div class="project-role-strip"><i class="fas fa-user-cog"></i> <strong>My Role:</strong> ${escapeHtml(project.myRole)}</div>` : ""}
+          ${project.myRole ? `<div class="project-role-strip"><i class="fas fa-user-cog"></i> <span><strong>My Role:</strong> ${escapeHtml(project.myRole)}</span></div>` : ""}
 
           <ul class="project-highlights-list">
             ${highlights}
@@ -631,7 +676,7 @@ function createFeaturedProjectHTML(project) {
   `;
 }
 
-function createStandardProjectCardHTML(project) {
+function createStandardProjectCardHTML(project, idx) {
   const techBadges = project.techStack
     .slice(0, 5)
     .map((tech) => `<span class="tech-tag">${escapeHtml(tech)}</span>`)
@@ -654,14 +699,16 @@ function createStandardProjectCardHTML(project) {
       </a>`
     : "";
 
+  const delayClass = idx % 3 === 1 ? "delay-1" : idx % 3 === 2 ? "delay-2" : "";
+
   return `
-    <div class="project-card glass-card">
+    <div class="project-card glass-card reveal-init ${delayClass}">
       <div class="card-top-image">
         <img src="${project.image.banner}" alt="${escapeHtml(project.title)}" loading="lazy" />
       </div>
       <div class="card-content-body">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-          <span class="section-tag" style="padding: 0.15rem 0.65rem; font-size: 0.75rem; margin-bottom: 0;">${escapeHtml(project.category)}</span>
+          <span class="section-tag" style="padding: 0.2rem 0.75rem; font-size: 0.72rem; margin-bottom: 0;">${escapeHtml(project.category)}</span>
           <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">${escapeHtml(project.period || "")}</span>
         </div>
         
@@ -694,7 +741,7 @@ function createStandardProjectCardHTML(project) {
 }
 
 /* ==============================================================================
-   7. PROJECT DEEP-DIVE MODAL
+   8. PROJECT DEEP-DIVE MODAL
    ============================================================================== */
 function initModal() {
   const modalOverlay = document.getElementById("project-modal");
@@ -750,28 +797,28 @@ function attachProjectModalTriggers() {
       modalBody.innerHTML = `
         <div style="margin-bottom: 1.5rem;">
           <span class="section-tag">${escapeHtml(project.category)}</span>
-          <h2 style="font-family: var(--font-heading); font-size: 1.75rem; font-weight: 800; margin: 0.5rem 0; color: var(--text-primary);">${escapeHtml(project.title)}</h2>
-          <p style="font-size: 1rem; color: var(--accent-cyan); font-weight: 600;">${escapeHtml(project.tagline)}</p>
+          <h2 style="font-family: var(--font-heading); font-size: 1.85rem; font-weight: 800; margin: 0.5rem 0; color: var(--text-primary); letter-spacing: -0.02em;">${escapeHtml(project.title)}</h2>
+          <p style="font-size: 1.05rem; color: var(--accent-cyan); font-weight: 600;">${escapeHtml(project.tagline)}</p>
         </div>
 
-        <div style="margin-bottom: 1.5rem; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-color);">
+        <div style="margin-bottom: 1.5rem; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-color); box-shadow: var(--shadow-md);">
           <img src="${project.image.banner}" alt="${escapeHtml(project.title)}" style="width: 100%; height: auto;" />
         </div>
 
         <div style="margin-bottom: 1.75rem;">
-          <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Executive Overview</h4>
+          <h4 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Executive Overview</h4>
           <p style="color: var(--text-secondary); line-height: 1.7;">${escapeHtml(project.summary)}</p>
         </div>
 
         ${project.myRole ? `
-        <div style="margin-bottom: 1.75rem; padding: 1rem; border-radius: var(--radius-md); background: var(--bg-tertiary); border: 1px solid var(--border-color);">
+        <div style="margin-bottom: 1.75rem; padding: 1.1rem; border-radius: var(--radius-md); background: var(--surface-2); border: 1px solid var(--border-color);">
           <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--accent-cyan);"><i class="fas fa-user-cog"></i> My Role</h4>
           <p style="color: var(--text-primary); line-height: 1.6;">${escapeHtml(project.myRole)}</p>
         </div>
         ` : ""}
 
         <div style="margin-bottom: 1.75rem;">
-          <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Key Architectural Highlights</h4>
+          <h4 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Key Architectural Highlights</h4>
           <ul style="padding-left: 1.25rem;">
             ${highlights}
           </ul>
@@ -781,7 +828,7 @@ function attachProjectModalTriggers() {
           archDetails
             ? `
           <div style="margin-bottom: 1.75rem;">
-            <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Engineering & Resilience Implementations</h4>
+            <h4 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Engineering & Resilience Implementations</h4>
             <ul style="padding-left: 1.25rem;">
               ${archDetails}
             </ul>
@@ -791,7 +838,7 @@ function attachProjectModalTriggers() {
         }
 
         <div style="margin-bottom: 2rem;">
-          <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--text-primary);">Full Technology Stack</h4>
+          <h4 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--text-primary);">Full Technology Stack</h4>
           <div class="tech-tags-wrap">
             ${techBadges}
           </div>
@@ -801,7 +848,7 @@ function attachProjectModalTriggers() {
           project.gallery && project.gallery.length > 0
             ? `
           <div style="margin-bottom: 2rem;">
-            <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.85rem; color: var(--text-primary);">
+            <h4 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.85rem; color: var(--text-primary);">
               <i class="fas fa-images" style="color: var(--accent-cyan); margin-right: 0.4rem;"></i> Verified Feature Screenshots (${project.gallery.length})
             </h4>
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem;">
@@ -872,7 +919,7 @@ function attachProjectModalTriggers() {
 }
 
 /* ==============================================================================
-   8. CONTACT FORM & CLIPBOARD ACTIONS
+   9. CONTACT FORM & CLIPBOARD ACTIONS
    ============================================================================== */
 
 // Builds a mailto: URI from the form action (recipient) and submitted fields.
@@ -968,7 +1015,7 @@ function initContactForm() {
 }
 
 /* ==============================================================================
-   9. TOAST NOTIFICATION MANAGER
+   10. TOAST NOTIFICATION MANAGER
    ============================================================================== */
 function showToast(message, type = "info") {
   let toastContainer = document.querySelector(".toast-container");
