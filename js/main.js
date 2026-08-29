@@ -15,6 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollReveal();
   initModal();
   initContactForm();
+  initScrollProgress();
+  initCursorSpotlight();
+  initAvatarTilt();
+  initCardTilt();
+  initMagneticButtons();
+  initProficiencyBars();
 });
 
 /* ==============================================================================
@@ -58,6 +64,13 @@ function initParticleCanvas() {
   const saveDataMode =
     (navigator.connection && navigator.connection.saveData === true) ||
     (navigator.deviceMemory && navigator.deviceMemory < 4);
+
+  // If the Three.js background successfully activates, stop this 2D canvas.
+  window.addEventListener("bg3d-active", () => {
+    isCanvasActive = false;
+    stopLoop();
+    canvas.style.display = "none";
+  });
 
   // On low-power devices / data-saver mode, render a single static frame and stop.
   if (saveDataMode) {
@@ -702,7 +715,7 @@ function createStandardProjectCardHTML(project, idx) {
   const delayClass = idx % 3 === 1 ? "delay-1" : idx % 3 === 2 ? "delay-2" : "";
 
   return `
-    <div class="project-card glass-card reveal-init ${delayClass}">
+    <div class="project-card glass-card reveal-init tilt-card ${delayClass}">
       <div class="card-top-image">
         <img src="${project.image.banner}" alt="${escapeHtml(project.title)}" loading="lazy" />
       </div>
@@ -1055,4 +1068,201 @@ function escapeHtml(str) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+/* ==============================================================================
+   11. READING PROGRESS BAR
+   ============================================================================== */
+function initScrollProgress() {
+  const bar = document.querySelector(".scroll-progress");
+  if (!bar) return;
+
+  let ticking = false;
+  const update = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
+    bar.style.width = pct + "%";
+    bar.setAttribute("aria-valuenow", Math.round(pct));
+    ticking = false;
+  };
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  }, { passive: true });
+
+  window.addEventListener("resize", update, { passive: true });
+  update();
+}
+
+/* ==============================================================================
+   12. CURSOR SPOTLIGHT (Desktop Fine-Pointer Only)
+   ============================================================================== */
+function initCursorSpotlight() {
+  const spotlight = document.querySelector(".cursor-spotlight");
+  if (!spotlight) return;
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+  let rafId = null;
+  let targetX = -9999, targetY = -9999;
+  let curX = -9999, curY = -9999;
+
+  const loop = () => {
+    curX += (targetX - curX) * 0.12;
+    curY += (targetY - curY) * 0.12;
+    spotlight.style.transform = `translate3d(${curX}px, ${curY}px, 0) translate(-50%, -50%)`;
+    rafId = requestAnimationFrame(loop);
+  };
+
+  window.addEventListener("mousemove", (e) => {
+    targetX = e.clientX;
+    targetY = e.clientY;
+    if (!spotlight.classList.contains("active")) spotlight.classList.add("active");
+    if (rafId === null) loop();
+  }, { passive: true });
+
+  window.addEventListener("mouseout", () => {
+    spotlight.classList.remove("active");
+  });
+
+  window.addEventListener("mouseleave", () => {
+    spotlight.classList.remove("active");
+    targetX = -9999; targetY = -9999;
+  });
+}
+
+/* ==============================================================================
+   13. 3D TILT AVATAR (Mouse-Responsive Perspective)
+   ============================================================================== */
+function initAvatarTilt() {
+  const tiltEl = document.querySelector(".avatar-tilt");
+  if (!tiltEl) return;
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+  const frame = tiltEl.querySelector(".avatar-frame");
+  const glare = tiltEl.querySelector(".avatar-glare");
+  const max = parseFloat(tiltEl.getAttribute("data-tilt-max")) || 12;
+  const scale = parseFloat(tiltEl.getAttribute("data-tilt-scale")) || 1.03;
+  let rafId = null;
+  let currentRotateX = 0, currentRotateY = 0;
+  let targetRotateX = 0, targetRotateY = 0;
+
+  const apply = () => {
+    currentRotateX += (targetRotateX - currentRotateX) * 0.14;
+    currentRotateY += (targetRotateY - currentRotateY) * 0.14;
+    frame.style.transform =
+      `rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) scale(${scale})`;
+    if (Math.abs(currentRotateX - targetRotateX) < 0.05 && Math.abs(currentRotateY - targetRotateY) < 0.05) {
+      rafId = null;
+      return;
+    }
+    rafId = requestAnimationFrame(apply);
+  };
+
+  tiltEl.addEventListener("mousemove", (e) => {
+    const rect = tiltEl.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width;
+    const py = (e.clientY - rect.top) / rect.height;
+    targetRotateY = (px - 0.5) * 2 * max;
+    targetRotateX = (0.5 - py) * 2 * max;
+    if (glare) {
+      glare.style.setProperty("--glare-x", px * 100 + "%");
+      glare.style.setProperty("--glare-y", py * 100 + "%");
+    }
+    tiltEl.setAttribute("data-tilt-active", "true");
+    if (rafId === null) apply();
+  }, { passive: true });
+
+  tiltEl.addEventListener("mouseleave", () => {
+    targetRotateX = 0;
+    targetRotateY = 0;
+    tiltEl.removeAttribute("data-tilt-active");
+    if (rafId === null) apply();
+  });
+}
+
+/* ==============================================================================
+   14. PROJECT CARD 3D TILT (Grid Cards)
+   ============================================================================== */
+function initCardTilt() {
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  const supports3D = CSS.supports && CSS.supports("transform-style: preserve-3d");
+  if (!supports3D) return;
+
+  document.addEventListener("mouseover", (e) => {
+    const card = e.target.closest(".tilt-card");
+    if (card) tiltCardHandler(card);
+  });
+}
+
+function tiltCardHandler(card) {
+  if (card.dataset.tiltBound) return;
+  card.dataset.tiltBound = "1";
+
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width;
+    const py = (e.clientY - rect.top) / rect.height;
+    const maxTilt = 7;
+    const rotateY = (px - 0.5) * 2 * maxTilt;
+    const rotateX = (0.5 - py) * 2 * maxTilt;
+    card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+  }, { passive: true });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "";
+  });
+}
+
+/* ==============================================================================
+   15. MAGNETIC BUTTONS (Primary CTAs Attract Pointer)
+   ============================================================================== */
+function initMagneticButtons() {
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  const buttons = document.querySelectorAll(".magnetic");
+  if (buttons.length === 0) return;
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("mousemove", (e) => {
+      const rect = btn.getBoundingClientRect();
+      const relX = e.clientX - rect.left - rect.width / 2;
+      const relY = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${relX * 0.22}px, ${relY * 0.28}px)`;
+    }, { passive: true });
+
+    btn.addEventListener("mouseleave", () => {
+      btn.style.transform = "";
+    });
+  });
+}
+
+/* ==============================================================================
+   16. CORE STACK PROFICIENCY BARS (Animated on View)
+   ============================================================================== */
+function initProficiencyBars() {
+  const panel = document.querySelector(".proficiency-panel");
+  if (!panel) return;
+
+  const fills = panel.querySelectorAll(".proficiency-fill");
+  fills.forEach((f) => {
+    f.style.setProperty("--bar-width", f.getAttribute("data-width") || "0%");
+  });
+
+  const revealProficiency = () => {
+    panel.classList.add("in-view");
+    observer.disconnect();
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) revealProficiency();
+      });
+    },
+    { threshold: 0.25 }
+  );
+  observer.observe(panel);
 }

@@ -43,3 +43,11 @@ ProjectStructure.txt
 
 # Internal research / analysis notes (not part of the published site)
 RECRUITER_EXPECTATIONS.md
+
+# AI coding assistant skills (dev tools, not part of the site)
+.opencode/
+
+# Job search automation (python-jobspy)
+__pycache__/
+jobs/__pycache__/
+jobs/results_*.json

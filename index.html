@@ -74,12 +74,21 @@
 </head>
 <body>
 
-  <!-- Interactive Particle Background Canvas -->
+  <!-- Interactive Particle Background Canvas (2D fallback) -->
   <canvas id="bg-canvas"></canvas>
+
+  <!-- Three.js 3D Background Canvas (progressive upgrade; auto-degrades to 2D) -->
+  <canvas id="bg-canvas-3d" aria-hidden="true"></canvas>
 
   <!-- Ambient Glow Elements -->
   <div class="ambient-glow ambient-glow-1"></div>
   <div class="ambient-glow ambient-glow-2"></div>
+
+  <!-- Reading Progress Bar -->
+  <div class="scroll-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Page reading progress"></div>
+
+  <!-- Cursor Spotlight (Desktop Only) -->
+  <div class="cursor-spotlight" aria-hidden="true"></div>
 
   <!-- ========================================================================
        STICKY NAVBAR
@@ -166,13 +175,13 @@
           </div>
 
           <div class="hero-cta-group">
-            <a href="#projects" class="btn btn-primary">
+            <a href="#projects" class="btn btn-primary magnetic">
               <i class="fas fa-bolt"></i> View Projects
             </a>
-            <a href="cv.html" target="_blank" class="btn btn-outline" style="border-color: var(--border-glow); color: var(--accent-cyan);">
+            <a href="cv.html" target="_blank" class="btn btn-outline magnetic" style="border-color: var(--border-glow); color: var(--accent-cyan);">
               <i class="fas fa-file-invoice"></i> View / Download CV
             </a>
-            <a href="#contact" class="btn btn-outline">
+            <a href="#contact" class="btn btn-outline magnetic">
               <i class="fas fa-paper-plane"></i> Contact Me
             </a>
           </div>
@@ -217,10 +226,13 @@
             </defs>
           </svg>
 
-          <!-- Conic-Gradient Avatar Frame -->
-          <div class="avatar-frame">
-            <div class="avatar-img-wrapper">
-              <img src="assets/images/profile.jpg" alt="Mohamed Hany Fathy" class="avatar-img" width="320" height="380" fetchpriority="high" decoding="async" onerror="this.src='assets/images/profile.jpg'" />
+          <!-- Conic-Gradient Avatar Frame (3D Tilt Reactive) -->
+          <div class="avatar-tilt" data-tilt data-tilt-max="12" data-tilt-scale="1.03">
+            <div class="avatar-frame">
+              <div class="avatar-img-wrapper">
+                <img src="assets/images/profile.jpg" alt="Mohamed Hany Fathy" class="avatar-img" width="320" height="380" fetchpriority="high" decoding="async" onerror="this.src='assets/images/profile.jpg'" />
+              </div>
+              <div class="avatar-glare" aria-hidden="true"></div>
             </div>
           </div>
 
@@ -555,22 +567,56 @@
         </div>
 
         <!-- 8. DevOps & Tools -->
-        <div class="skill-category-card glass-card reveal-init delay-1">
-          <div class="skill-category-header">
-            <div class="category-icon-wrapper"><i class="fas fa-toolbox"></i></div>
-            <h3 class="skill-category-title">DevOps, Cloud &amp; Tools</h3>
+          <div class="skill-category-card glass-card reveal-init delay-1">
+            <div class="skill-category-header">
+              <div class="category-icon-wrapper"><i class="fas fa-toolbox"></i></div>
+              <h3 class="skill-category-title">DevOps, Cloud &amp; Tools</h3>
+            </div>
+            <div class="skills-badge-wrap">
+              <span class="skill-badge"><i class="fab fa-git-alt skill-badge-icon" style="color: #f05032;"></i> Git / GitHub</span>
+              <span class="skill-badge"><i class="fab fa-docker skill-badge-icon" style="color: #2496ed;"></i> Docker / docker-compose</span>
+              <span class="skill-badge"><i class="fas fa-vial skill-badge-icon" style="color: #e11d48;"></i> Jest / Supertest / CI</span>
+              <span class="skill-badge"><i class="fab fa-github skill-badge-icon" style="color: #a78bfa;"></i> GitHub Actions</span>
+              <span class="skill-badge"><i class="fab fa-jenkins skill-badge-icon" style="color: #d24939;"></i> Jenkins CI/CD</span>
+              <span class="skill-badge"><i class="fab fa-aws skill-badge-icon" style="color: #ff9900;"></i> AWS Certified Developer</span>
+              <span class="skill-badge"><i class="fab fa-microsoft skill-badge-icon" style="color: #0078d4;"></i> Microsoft Azure Fundamentals</span>
+              <span class="skill-badge"><i class="fas fa-cubes skill-badge-icon" style="color: var(--accent-cyan);"></i> Vercel &amp; Netlify Edge</span>
+            </div>
           </div>
-          <div class="skills-badge-wrap">
-            <span class="skill-badge"><i class="fab fa-git-alt skill-badge-icon" style="color: #f05032;"></i> Git / GitHub</span>
-            <span class="skill-badge"><i class="fab fa-docker skill-badge-icon" style="color: #2496ed;"></i> Docker / docker-compose</span>
-            <span class="skill-badge"><i class="fas fa-vial skill-badge-icon" style="color: #e11d48;"></i> Jest / Supertest / CI</span>
-            <span class="skill-badge"><i class="fab fa-github skill-badge-icon" style="color: #a78bfa;"></i> GitHub Actions</span>
-            <span class="skill-badge"><i class="fab fa-jenkins skill-badge-icon" style="color: #d24939;"></i> Jenkins CI/CD</span>
-            <span class="skill-badge"><i class="fab fa-aws skill-badge-icon" style="color: #ff9900;"></i> AWS Certified Developer</span>
-            <span class="skill-badge"><i class="fab fa-microsoft skill-badge-icon" style="color: #0078d4;"></i> Microsoft Azure Fundamentals</span>
-            <span class="skill-badge"><i class="fas fa-cubes skill-badge-icon" style="color: var(--accent-cyan);"></i> Vercel &amp; Netlify Edge</span>
+
+          <!-- Core Stack Proficiency Deep-Dive Panel (Recruiter Depth Signal) -->
+          <div class="proficiency-panel glass-card reveal-init">
+            <div class="skill-category-header">
+              <div class="category-icon-wrapper" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);"><i class="fas fa-chart-simple"></i></div>
+              <h3 class="skill-category-title">Core Stack Proficiency — Depth vs. Breadth</h3>
+            </div>
+            <div class="proficiency-bars">
+              <div class="proficiency-item">
+                <div class="proficiency-meta"><span class="proficiency-name">TypeScript / JavaScript</span><span class="proficiency-val" data-level="95">95%</span></div>
+                <div class="proficiency-track"><span class="proficiency-fill" data-width="95%"></span></div>
+              </div>
+              <div class="proficiency-item">
+                <div class="proficiency-meta"><span class="proficiency-name">Node.js / Express</span><span class="proficiency-val" data-level="93">93%</span></div>
+                <div class="proficiency-track"><span class="proficiency-fill" data-width="93%"></span></div>
+              </div>
+              <div class="proficiency-item">
+                <div class="proficiency-meta"><span class="proficiency-name">Python 3 / FastAPI / Automation</span><span class="proficiency-val" data-level="90">90%</span></div>
+                <div class="proficiency-track"><span class="proficiency-fill" data-width="90%"></span></div>
+              </div>
+              <div class="proficiency-item">
+                <div class="proficiency-meta"><span class="proficiency-name">MongoDB / Redis / SQL</span><span class="proficiency-val" data-level="88">88%</span></div>
+                <div class="proficiency-track"><span class="proficiency-fill" data-width="88%"></span></div>
+              </div>
+              <div class="proficiency-item">
+                <div class="proficiency-meta"><span class="proficiency-name">Angular / Frontend Systems</span><span class="proficiency-val" data-level="85">85%</span></div>
+                <div class="proficiency-track"><span class="proficiency-fill" data-width="85%"></span></div>
+              </div>
+              <div class="proficiency-item">
+                <div class="proficiency-meta"><span class="proficiency-name">Docker / AWS / CI/CD</span><span class="proficiency-val" data-level="82">82%</span></div>
+                <div class="proficiency-track"><span class="proficiency-fill" data-width="82%"></span></div>
+              </div>
+            </div>
           </div>
-        </div>
       </div>
     </div>
   </section>
@@ -921,5 +967,8 @@
   <!-- Project Data Store & App Controller -->
   <script src="js/projects.js"></script>
   <script src="js/main.js"></script>
+
+  <!-- Three.js 3D Background (progressive enhancement; loads after main controller) -->
+  <script src="js/bg-three.js"></script>
 </body>
 </html>
