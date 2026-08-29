@@ -174,6 +174,9 @@ body {
   transition: background-color var(--transition-normal), color var(--transition-normal);
   padding-left: env(safe-area-inset-left, 0px);
   padding-right: env(safe-area-inset-right, 0px);
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Subtle SVG Noise Filter Overlay (eliminates flat generic AI aesthetic) */
@@ -236,6 +239,11 @@ button {
   border: none;
   font-family: inherit;
   background: none;
+  touch-action: manipulation;
+}
+
+a, .btn, .filter-btn, .nav-link, .social-link-icon, .theme-toggle-btn,
+.mobile-toggle, .copy-btn, .showcase-tab-btn, .view-details-btn, .back-to-top-btn {
   touch-action: manipulation;
 }
 
@@ -321,6 +329,14 @@ img, svg {
 .section {
   padding: clamp(4rem, 7.5vw, 6.5rem) 0;
   position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+/* Hero must render immediately (LCP) — never skip above-the-fold content */
+#hero {
+  content-visibility: visible;
+  contain-intrinsic-size: auto;
 }
 
 /* Layered Section Hairline Divider */
@@ -408,6 +424,19 @@ img, svg {
   position: relative;
   overflow: hidden;
   transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+/* Mobile: reduce backdrop-filter blur — it is one of the costliest effects on
+   low-end mobile GPUs and a frequent source of scroll jank. */
+@media (max-width: 768px) {
+  .glass-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .navbar {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
 }
 
 .glass-card::before {
@@ -2320,7 +2349,6 @@ img, svg {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
 }
 
 .reveal-visible {
@@ -2512,6 +2540,80 @@ img, svg {
   }
 }
 
+/* ==============================================================================
+    22. LIGHT MODE POLISH (data-theme="light" refinements)
+   ============================================================================== */
+[data-theme="light"] .ambient-glow {
+  opacity: 0.07;
+}
+
+[data-theme="light"] .section-tag {
+  background: rgba(2, 132, 199, 0.08);
+  border-color: rgba(2, 132, 199, 0.22);
+  box-shadow: 0 0 12px rgba(2, 132, 199, 0.08);
+}
+
+[data-theme="light"] .floating-badge {
+  box-shadow: var(--shadow-md);
+}
+
+[data-theme="light"] .avatar-frame {
+  box-shadow: var(--shadow-lg), 0 0 24px rgba(2, 132, 199, 0.14);
+}
+
+[data-theme="light"] .proficiency-val {
+  color: #047857;
+}
+
+[data-theme="light"] .mockup-browser {
+  background: #f8fafc;
+  box-shadow: 0 18px 40px -5px rgba(15, 23, 42, 0.12), 0 0 25px rgba(2, 132, 199, 0.08);
+}
+
+[data-theme="light"] .mockup-browser:hover {
+  box-shadow: 0 24px 50px -5px rgba(15, 23, 42, 0.16), 0 0 35px rgba(2, 132, 199, 0.12);
+}
+
+[data-theme="light"] .mockup-browser-header {
+  background: rgba(241, 245, 249, 0.96);
+  border-bottom-color: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .mockup-url-bar {
+  background: rgba(15, 23, 42, 0.05);
+  border-color: rgba(15, 23, 42, 0.08);
+  color: #475569;
+}
+
+[data-theme="light"] .mockup-status-badge {
+  color: #047857;
+}
+
+[data-theme="light"] .pulse-dot {
+  background: #059669;
+  box-shadow: 0 0 8px rgba(5, 150, 105, 0.6);
+}
+
+[data-theme="light"] .hero-status {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.25);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.08);
+}
+
+[data-theme="light"] .project-role-strip {
+  background: rgba(2, 132, 199, 0.06);
+  border-color: rgba(2, 132, 199, 0.2);
+}
+
+[data-theme="light"] .credential-card,
+[data-theme="light"] .contact-form-card {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="light"] .gradient-text {
+  filter: drop-shadow(0 2px 10px rgba(2, 132, 199, 0.2));
+}
+
 
 @media (max-width: 1024px) {
   .hero-project-grid {
@@ -2596,6 +2698,11 @@ img, svg {
 
 /* --- 3. LARGE PHONES & PHABLETS (<= 768px) --- */
 @media (max-width: 768px) {
+  /* Skip the conic-gradient spin on mobile — it repaints a large area every frame */
+  .avatar-frame::before {
+    animation: none;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
     text-align: center;

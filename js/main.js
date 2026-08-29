@@ -60,6 +60,7 @@ function initParticleCanvas() {
   let animationFrameId = null;
   let isMobile = window.innerWidth <= 768;
   let isCanvasActive = true;
+  let isStaticMode = false;
   const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const saveDataMode =
     (navigator.connection && navigator.connection.saveData === true) ||
@@ -72,8 +73,10 @@ function initParticleCanvas() {
     canvas.style.display = "none";
   });
 
-  // On low-power devices / data-saver mode, render a single static frame and stop.
-  if (saveDataMode) {
+  // On low-power devices / data-saver mode / mobile, render a single static
+  // frame and stop. Saves CPU and battery — no continuous rAF loop.
+  if (saveDataMode || isMobile) {
+    isStaticMode = true;
     resize();
     draw();
     return;
@@ -122,7 +125,7 @@ function initParticleCanvas() {
   }
 
   function startLoop() {
-    if (!animationFrameId && !prefersReducedMotion && isCanvasActive) {
+    if (!animationFrameId && !prefersReducedMotion && isCanvasActive && !isStaticMode) {
       animationFrameId = requestAnimationFrame(draw);
     }
   }
@@ -193,7 +196,7 @@ function initParticleCanvas() {
       }
     }
 
-    if (!prefersReducedMotion && isCanvasActive) {
+    if (!prefersReducedMotion && isCanvasActive && !isStaticMode) {
       animationFrameId = requestAnimationFrame(draw);
     } else {
       animationFrameId = null;
@@ -278,8 +281,12 @@ function initRoleTyper() {
   let charIndex = 0;
   let isDeleting = false;
   let typingSpeed = 90;
+  let timerId = null;
+  let isVisible = true;
 
   function type() {
+    if (!isVisible) return;
+
     const currentRole = roles[roleIndex];
 
     if (isDeleting) {
@@ -301,7 +308,24 @@ function initRoleTyper() {
       typingSpeed = 400; // Pause before next word
     }
 
-    setTimeout(type, typingSpeed);
+    timerId = setTimeout(type, typingSpeed);
+  }
+
+  // Pause the typer when the hero scrolls out of view (saves battery on mobile)
+  const heroEl = document.getElementById("hero");
+  if (heroEl && "IntersectionObserver" in window) {
+    const typerObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          if (!timerId) type();
+        } else if (timerId) {
+          clearTimeout(timerId);
+          timerId = null;
+        }
+      });
+    }, { threshold: 0.1 });
+    typerObserver.observe(heroEl);
   }
 
   type();

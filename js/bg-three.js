@@ -49,6 +49,14 @@
     (navigator.deviceMemory && navigator.deviceMemory < 4);
   const lowPower = isMobile || saveDataMode;
 
+  // On mobile / low-power devices, don't even download the Three.js bundle
+  // (~600KB). The existing 2D particle canvas is already mobile-optimized and
+  // becomes the background. This saves bandwidth, parse time, and GPU memory.
+  if (lowPower) {
+    window.BG3D_PROBE = null;
+    return;
+  }
+
   const THREE_URL = "https://cdn.jsdelivr.net/npm/three@0.159.0/build/three.min.js";
 
   function activate() {
