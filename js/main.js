@@ -414,12 +414,47 @@ function initNavbarScrollSpy() {
 }
 
 /* ==============================================================================
-   5. ANIMATED STATS COUNTERS (Intersection Observer)
+   5. ANIMATED STATS COUNTERS (GSAP & Intersection Observer Fallback)
    ============================================================================== */
 function initAnimatedCounters() {
   const statNumbers = document.querySelectorAll(".stat-number[data-target]");
   if (statNumbers.length === 0) return;
 
+  const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const hasGsap = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
+
+  if (prefersReducedMotion) {
+    statNumbers.forEach((el) => {
+      el.textContent = el.getAttribute("data-target");
+    });
+    return;
+  }
+
+  if (hasGsap) {
+    window.gsap.registerPlugin(window.ScrollTrigger);
+    statNumbers.forEach((target) => {
+      const endValue = parseInt(target.getAttribute("data-target"), 10);
+      const counterObj = { val: 0 };
+      window.ScrollTrigger.create({
+        trigger: target,
+        start: "top 88%",
+        once: true,
+        onEnter: () => {
+          window.gsap.to(counterObj, {
+            val: endValue,
+            duration: 1.8,
+            ease: "power2.out",
+            onUpdate: () => {
+              target.textContent = Math.round(counterObj.val);
+            }
+          });
+        }
+      });
+    });
+    return;
+  }
+
+  // Native fallback
   const observer = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach((entry) => {
@@ -444,7 +479,6 @@ function initAnimatedCounters() {
     function update(currentTime) {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      // Ease out cubic
       const easeProgress = 1 - Math.pow(1 - progress, 3);
       const current = Math.floor(easeProgress * endVal);
       element.textContent = current;
@@ -461,18 +495,103 @@ function initAnimatedCounters() {
 }
 
 /* ==============================================================================
-   6. SCROLL REVEAL ENGINE (STAGGERED & ACCESSIBLE)
+   6. SCROLL REVEAL & HERO MOTION ENGINE (GSAP Staggered Timelines & Fallback)
    ============================================================================== */
 let revealObserver = null;
 
 function initScrollReveal() {
   const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const hasGsap = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
 
-  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+  if (prefersReducedMotion) {
     document.querySelectorAll(".reveal-init").forEach((el) => el.classList.add("reveal-visible"));
     return;
   }
 
+  if (hasGsap) {
+    window.gsap.registerPlugin(window.ScrollTrigger);
+
+    // Hero Staggered Master Entrance Timeline
+    const heroTl = window.gsap.timeline({ defaults: { ease: "power3.out" } });
+    
+    if (document.querySelector(".hero-status")) {
+      heroTl.from(".hero-status", { opacity: 0, y: -18, duration: 0.65, ease: "back.out(1.6)" });
+    }
+    if (document.querySelector(".hero-greeting")) {
+      heroTl.from(".hero-greeting", { opacity: 0, y: 16, duration: 0.5 }, "-=0.35");
+    }
+    if (document.querySelector(".hero-name")) {
+      heroTl.from(".hero-name", { opacity: 0, y: 24, duration: 0.75 }, "-=0.35");
+    }
+    if (document.querySelector(".hero-role-wrapper")) {
+      heroTl.from(".hero-role-wrapper", { opacity: 0, y: 16, duration: 0.55 }, "-=0.45");
+    }
+    if (document.querySelector(".hero-tagline")) {
+      heroTl.from(".hero-tagline", { opacity: 0, y: 18, duration: 0.65 }, "-=0.35");
+    }
+    if (document.querySelectorAll(".hero-stack-badge").length > 0) {
+      heroTl.from(".hero-stack-badge", { 
+        opacity: 0, 
+        scale: 0.82, 
+        stagger: 0.04, 
+        duration: 0.5, 
+        ease: "back.out(1.5)" 
+      }, "-=0.3");
+    }
+    if (document.querySelectorAll(".hero-cta-group .btn").length > 0) {
+      heroTl.from(".hero-cta-group .btn", { 
+        opacity: 0, 
+        y: 20, 
+        stagger: 0.08, 
+        duration: 0.6, 
+        ease: "back.out(1.4)" 
+      }, "-=0.25");
+    }
+    if (document.querySelector(".hero-social-strip")) {
+      heroTl.from(".hero-social-strip", { opacity: 0, y: 14, duration: 0.5 }, "-=0.35");
+    }
+    if (document.querySelector(".hero-visual")) {
+      heroTl.from(".hero-visual", { 
+        opacity: 0, 
+        scale: 0.92, 
+        duration: 0.95, 
+        ease: "power3.out" 
+      }, 0.2);
+    }
+    if (document.querySelectorAll(".floating-badge").length > 0) {
+      heroTl.from(".floating-badge", { 
+        opacity: 0, 
+        y: 24, 
+        scale: 0.85, 
+        stagger: 0.16, 
+        duration: 0.7, 
+        ease: "back.out(1.6)" 
+      }, 0.65);
+    }
+
+    // ScrollTrigger Batch for Non-Hero Reveal Elements
+    window.ScrollTrigger.batch(".section .reveal-init, .stats-strip .reveal-init", {
+      interval: 0.08,
+      batchMax: 6,
+      onEnter: (batch) => {
+        window.gsap.to(batch, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.08,
+          duration: 0.65,
+          ease: "power3.out",
+          overwrite: "auto",
+          clearProps: "transform,opacity"
+        });
+        batch.forEach((el) => el.classList.add("reveal-visible"));
+      },
+      once: true
+    });
+
+    return;
+  }
+
+  // Native IntersectionObserver Fallback
   revealObserver = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
@@ -492,6 +611,18 @@ function initScrollReveal() {
 }
 
 function observeNewScrollReveals() {
+  const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReducedMotion) {
+    document.querySelectorAll(".reveal-init").forEach((el) => el.classList.add("reveal-visible"));
+    return;
+  }
+
+  const hasGsap = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
+  if (hasGsap) {
+    window.ScrollTrigger.refresh();
+    return;
+  }
+
   if (!revealObserver) {
     document.querySelectorAll(".reveal-init").forEach((el) => el.classList.add("reveal-visible"));
     return;
@@ -586,6 +717,17 @@ function renderProjects() {
   if (standardGrid) {
     const listToRender = featuredProject ? remainingProjects : filtered;
     standardGrid.innerHTML = listToRender.map((p, idx) => createStandardProjectCardHTML(p, idx)).join("");
+    
+    // Smooth GSAP transition on filter switch
+    const hasGsap = typeof window.gsap !== "undefined";
+    const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (hasGsap && !prefersReducedMotion) {
+      window.gsap.fromTo(
+        "#projects-standard-grid .project-card",
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, stagger: 0.04, duration: 0.45, ease: "power2.out", clearProps: "transform,opacity" }
+      );
+    }
   }
 
   // Observe all newly injected cards for smooth scroll-reveal
@@ -1035,7 +1177,7 @@ function initContactForm() {
     });
   }
 
-  // Copy to clipboard handlers
+  // Copy to clipboard handlers with immediate inline feedback
   const copyButtons = document.querySelectorAll(".copy-btn");
   copyButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
@@ -1044,7 +1186,12 @@ function initContactForm() {
       const textToCopy = btn.getAttribute("data-copy");
       if (textToCopy) {
         navigator.clipboard.writeText(textToCopy).then(() => {
+          const originalHTML = btn.innerHTML;
+          btn.innerHTML = `<i class="fas fa-check" style="color: var(--accent-emerald);"></i> Copied!`;
           showToast(`Copied "${textToCopy}" to clipboard!`, "success");
+          setTimeout(() => {
+            btn.innerHTML = originalHTML;
+          }, 2200);
         });
       }
     });
@@ -1209,10 +1356,23 @@ function initAvatarTilt() {
 }
 
 /* ==============================================================================
-   14. PROJECT CARD 3D TILT (Grid Cards)
+   14. PROJECT CARD 3D TILT & SPECULAR GLARE (Grid & Glass Cards)
    ============================================================================== */
 function initCardTilt() {
   if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+  // Track dynamic glare on all glass cards
+  document.addEventListener("mousemove", (e) => {
+    const card = e.target.closest(".glass-card, .tilt-card");
+    if (card) {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty("--mouse-x", `${x}%`);
+      card.style.setProperty("--mouse-y", `${y}%`);
+    }
+  }, { passive: true });
+
   const supports3D = CSS.supports && CSS.supports("transform-style: preserve-3d");
   if (!supports3D) return;
 
@@ -1230,10 +1390,10 @@ function tiltCardHandler(card) {
     const rect = card.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width;
     const py = (e.clientY - rect.top) / rect.height;
-    const maxTilt = 7;
+    const maxTilt = 6;
     const rotateY = (px - 0.5) * 2 * maxTilt;
     const rotateX = (0.5 - py) * 2 * maxTilt;
-    card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
   }, { passive: true });
 
   card.addEventListener("mouseleave", () => {
