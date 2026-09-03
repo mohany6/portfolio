@@ -309,25 +309,25 @@ img, svg {
 
 .ambient-glow {
   position: fixed;
-  width: min(650px, 85vw);
-  height: min(650px, 85vw);
+  width: min(600px, 80vw);
+  height: min(600px, 80vw);
   border-radius: 50%;
   pointer-events: none;
   z-index: -1;
-  filter: blur(140px);
-  opacity: 0.16;
+  opacity: 0.18;
+  transform: translateZ(0);
 }
 
 .ambient-glow-1 {
-  top: -120px;
-  left: -120px;
-  background: radial-gradient(circle, var(--accent-cyan) 0%, rgba(6, 182, 212, 0) 70%);
+  top: -100px;
+  left: -100px;
+  background: radial-gradient(circle at 45% 45%, rgba(6, 182, 212, 0.42) 0%, rgba(6, 182, 212, 0.14) 38%, rgba(6, 182, 212, 0) 70%);
 }
 
 .ambient-glow-2 {
   bottom: 8%;
-  right: -120px;
-  background: radial-gradient(circle, var(--accent-indigo) 0%, rgba(99, 102, 241, 0) 70%);
+  right: -100px;
+  background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.38) 0%, rgba(99, 102, 241, 0.12) 42%, rgba(99, 102, 241, 0) 70%);
 }
 
 /* ==============================================================================
@@ -433,8 +433,9 @@ img, svg {
 /* Glassmorphism 2.0 Material Recipe (1px top highlight bevel + soft drop shadow) */
 .glass-card {
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%), var(--bg-card);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transform: translateZ(0);
   border: 1px solid var(--border-color);
   border-top: 1px solid var(--border-highlight);
   border-radius: var(--radius-lg);
@@ -513,8 +514,9 @@ img, svg {
   padding: 0.6rem clamp(0.85rem, 2.5vw, 1.5rem);
   border-radius: var(--radius-full);
   background: var(--bg-glass-nav);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transform: translateZ(0);
   border: 1px solid var(--border-color);
   border-top: 1px solid var(--border-highlight);
   box-shadow: var(--shadow-md);
@@ -1047,8 +1049,9 @@ img, svg {
   padding: 0.65rem 1.1rem;
   border-radius: var(--radius-md);
   background: var(--bg-card);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transform: translateZ(0);
   border: 1px solid var(--border-glow);
   border-top: 1px solid var(--border-highlight);
   box-shadow: var(--shadow-md), 0 0 20px rgba(0, 0, 0, 0.4);
@@ -1721,8 +1724,9 @@ img, svg {
   position: relative;
   overflow: hidden;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65), 0 0 45px rgba(6, 182, 212, 0.18);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transform: translateZ(0);
 }
 
 [data-theme="light"] .hero-project-card {

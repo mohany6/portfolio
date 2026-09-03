@@ -52,6 +52,10 @@ function initTheme() {
 function initParticleCanvas() {
   const canvas = document.getElementById("bg-canvas");
   if (!canvas) return;
+  if (window.BG3D_ACTIVE) {
+    canvas.style.display = "none";
+    return;
+  }
 
   const ctx = canvas.getContext("2d");
   let width, height;
@@ -839,7 +843,7 @@ function createFeaturedProjectHTML(project) {
               </div>
             </div>
             <div class="mockup-screen-viewport view-details-btn" data-project-id="${project.id}" title="Click to open full deep-dive modal">
-              <img id="flagship-preview-img" src="${project.image.banner}" alt="${escapeHtml(project.title)}" class="mockup-screen-img" loading="lazy" />
+              <img id="flagship-preview-img" src="${project.image.banner}" alt="${escapeHtml(project.title)}" class="mockup-screen-img" loading="lazy" decoding="async" />
               <div class="mockup-hover-overlay">
                 <i class="fas fa-expand-arrows-alt" style="font-size: 1.6rem; color: var(--accent-cyan);"></i>
                 <span>Click to Explore Full Architecture & 29 Screens</span>
@@ -883,7 +887,7 @@ function createStandardProjectCardHTML(project, idx) {
   return `
     <div class="project-card glass-card reveal-init tilt-card ${delayClass}">
       <div class="card-top-image">
-        <img src="${project.image.banner}" alt="${escapeHtml(project.title)}" loading="lazy" />
+        <img src="${project.image.banner}" alt="${escapeHtml(project.title)}" loading="lazy" decoding="async" />
       </div>
       <div class="card-content-body">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
@@ -981,7 +985,7 @@ function attachProjectModalTriggers() {
         </div>
 
         <div style="margin-bottom: 1.5rem; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-color); box-shadow: var(--shadow-md);">
-          <img src="${project.image.banner}" alt="${escapeHtml(project.title)}" style="width: 100%; height: auto;" />
+          <img src="${project.image.banner}" alt="${escapeHtml(project.title)}" style="width: 100%; height: auto;" loading="lazy" decoding="async" />
         </div>
 
         <div style="margin-bottom: 1.75rem;">
@@ -1036,7 +1040,7 @@ function attachProjectModalTriggers() {
                   (img) => `
                 <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; display: flex; flex-direction: column;">
                   <a href="${escapeHtml(img.url)}" target="_blank" rel="noopener noreferrer" title="Click to view full-resolution image" style="display: block; overflow: hidden; background: #000;">
-                    <img src="${escapeHtml(img.url)}" alt="${escapeHtml(img.caption)}" style="width: 100%; height: 135px; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy" />
+                    <img src="${escapeHtml(img.url)}" alt="${escapeHtml(img.caption)}" style="width: 100%; height: 135px; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy" decoding="async" />
                   </a>
                   <div style="padding: 0.6rem 0.75rem; flex: 1; display: flex; flex-direction: column;">
                     <span style="font-size: 0.68rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">${escapeHtml(img.category || "Feature")}</span>
@@ -1282,17 +1286,25 @@ function initCursorSpotlight() {
   let curX = -9999, curY = -9999;
 
   const loop = () => {
-    curX += (targetX - curX) * 0.12;
-    curY += (targetY - curY) * 0.12;
-    spotlight.style.transform = `translate3d(${curX}px, ${curY}px, 0) translate(-50%, -50%)`;
-    rafId = requestAnimationFrame(loop);
+    curX += (targetX - curX) * 0.14;
+    curY += (targetY - curY) * 0.14;
+    spotlight.style.transform = `translate3d(${curX.toFixed(1)}px, ${curY.toFixed(1)}px, 0) translate(-50%, -50%)`;
+    
+    // Pause RAF loop when pointer is stationary to eliminate idle GPU load
+    if (Math.abs(targetX - curX) > 0.4 || Math.abs(targetY - curY) > 0.4) {
+      rafId = requestAnimationFrame(loop);
+    } else {
+      rafId = null;
+    }
   };
 
   window.addEventListener("mousemove", (e) => {
     targetX = e.clientX;
     targetY = e.clientY;
     if (!spotlight.classList.contains("active")) spotlight.classList.add("active");
-    if (rafId === null) loop();
+    if (rafId === null) {
+      rafId = requestAnimationFrame(loop);
+    }
   }, { passive: true });
 
   window.addEventListener("mouseout", () => {
@@ -1320,12 +1332,13 @@ function initAvatarTilt() {
   let rafId = null;
   let currentRotateX = 0, currentRotateY = 0;
   let targetRotateX = 0, targetRotateY = 0;
+  let rect = null;
 
   const apply = () => {
     currentRotateX += (targetRotateX - currentRotateX) * 0.14;
     currentRotateY += (targetRotateY - currentRotateY) * 0.14;
     frame.style.transform =
-      `rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) scale(${scale})`;
+      `rotateX(${currentRotateX.toFixed(2)}deg) rotateY(${currentRotateY.toFixed(2)}deg) scale(${scale})`;
     if (Math.abs(currentRotateX - targetRotateX) < 0.05 && Math.abs(currentRotateY - targetRotateY) < 0.05) {
       rafId = null;
       return;
@@ -1333,15 +1346,19 @@ function initAvatarTilt() {
     rafId = requestAnimationFrame(apply);
   };
 
+  tiltEl.addEventListener("mouseenter", () => {
+    rect = tiltEl.getBoundingClientRect();
+  }, { passive: true });
+
   tiltEl.addEventListener("mousemove", (e) => {
-    const rect = tiltEl.getBoundingClientRect();
+    if (!rect) rect = tiltEl.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width;
     const py = (e.clientY - rect.top) / rect.height;
     targetRotateY = (px - 0.5) * 2 * max;
     targetRotateX = (0.5 - py) * 2 * max;
     if (glare) {
-      glare.style.setProperty("--glare-x", px * 100 + "%");
-      glare.style.setProperty("--glare-y", py * 100 + "%");
+      glare.style.setProperty("--glare-x", (px * 100).toFixed(1) + "%");
+      glare.style.setProperty("--glare-y", (py * 100).toFixed(1) + "%");
     }
     tiltEl.setAttribute("data-tilt-active", "true");
     if (rafId === null) apply();
@@ -1350,54 +1367,77 @@ function initAvatarTilt() {
   tiltEl.addEventListener("mouseleave", () => {
     targetRotateX = 0;
     targetRotateY = 0;
+    rect = null;
     tiltEl.removeAttribute("data-tilt-active");
     if (rafId === null) apply();
   });
 }
 
 /* ==============================================================================
-   14. PROJECT CARD 3D TILT & SPECULAR GLARE (Grid & Glass Cards)
+   14. PROJECT CARD 3D TILT & SPECULAR GLARE (Zero-Reflow RAF Architecture)
    ============================================================================== */
 function initCardTilt() {
   if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
-  // Track dynamic glare on all glass cards
-  document.addEventListener("mousemove", (e) => {
-    const card = e.target.closest(".glass-card, .tilt-card");
-    if (card) {
-      const rect = card.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      card.style.setProperty("--mouse-x", `${x}%`);
-      card.style.setProperty("--mouse-y", `${y}%`);
-    }
-  }, { passive: true });
-
-  const supports3D = CSS.supports && CSS.supports("transform-style: preserve-3d");
-  if (!supports3D) return;
-
   document.addEventListener("mouseover", (e) => {
-    const card = e.target.closest(".tilt-card");
-    if (card) tiltCardHandler(card);
-  });
+    const card = e.target.closest && e.target.closest(".glass-card, .tilt-card");
+    if (card) bindCardInteraction(card);
+  }, { passive: true });
 }
 
-function tiltCardHandler(card) {
+function bindCardInteraction(card) {
   if (card.dataset.tiltBound) return;
   card.dataset.tiltBound = "1";
 
+  let rect = null;
+  let rafId = null;
+  let mouseEvent = null;
+
+  const update = () => {
+    if (!mouseEvent || !rect) {
+      rafId = null;
+      return;
+    }
+    const px = (mouseEvent.clientX - rect.left) / rect.width;
+    const py = (mouseEvent.clientY - rect.top) / rect.height;
+
+    // Glare coordinates
+    card.style.setProperty("--mouse-x", `${(px * 100).toFixed(1)}%`);
+    card.style.setProperty("--mouse-y", `${(py * 100).toFixed(1)}%`);
+
+    // 3D perspective tilt
+    if (card.classList.contains("tilt-card")) {
+      const maxTilt = 6;
+      const rotateY = (px - 0.5) * 2 * maxTilt;
+      const rotateX = (0.5 - py) * 2 * maxTilt;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+    }
+
+    rafId = null;
+  };
+
+  card.addEventListener("mouseenter", () => {
+    rect = card.getBoundingClientRect(); // Cached once on hover enter, eliminating layout thrashing!
+  }, { passive: true });
+
   card.addEventListener("mousemove", (e) => {
-    const rect = card.getBoundingClientRect();
-    const px = (e.clientX - rect.left) / rect.width;
-    const py = (e.clientY - rect.top) / rect.height;
-    const maxTilt = 6;
-    const rotateY = (px - 0.5) * 2 * maxTilt;
-    const rotateX = (0.5 - py) * 2 * maxTilt;
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    mouseEvent = e;
+    if (!rect) rect = card.getBoundingClientRect();
+    if (rafId === null) {
+      rafId = requestAnimationFrame(update);
+    }
   }, { passive: true });
 
   card.addEventListener("mouseleave", () => {
-    card.style.transform = "";
+    if (rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+    rect = null;
+    mouseEvent = null;
+    if (card.classList.contains("tilt-card")) {
+      card.style.transform = "";
+    }
   });
 }
 

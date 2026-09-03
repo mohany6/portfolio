@@ -78,7 +78,7 @@
       alpha: true,
       powerPreference: "high-performance",
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x000000, 0);
 
@@ -207,12 +207,19 @@
     const glow = new THREE.Mesh(glowGeo, glowMat);
     scene.add(glow);
 
+    // ---- Unified Mesh Group for High-Performance GPU Transforms ----
+    const meshGroup = new THREE.Group();
+    meshGroup.add(nodes);
+    meshGroup.add(edges);
+    meshGroup.add(core);
+    meshGroup.add(glow);
+    scene.add(meshGroup);
+
     // ---- Mouse Interaction Raycasting Vector ----
     let mouseX = 0, mouseY = 0;
     let targetMouseX = 0, targetMouseY = 0;
     let scrollRatio = 0;
     let orbitAngle = 0;
-    const mouseRay = new THREE.Vector3();
 
     window.addEventListener("mousemove", (e) => {
       targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
@@ -236,7 +243,7 @@
       attributeFilter: ["data-theme"],
     });
 
-    // ---- Render Lifecycle & RAF Loop ----
+    // ---- Render Lifecycle & RAF Loop (Zero Per-Frame Buffer Re-uploads) ----
     let inView = true;
     let pageVisible = !document.hidden;
     let rafId = null;
@@ -256,67 +263,27 @@
       mouseX += (targetMouseX - mouseX) * 0.05;
       mouseY += (targetMouseY - mouseY) * 0.05;
 
-      mouseRay.set(mouseX * 6, -mouseY * 4, 3);
-
-      // Update Node Positions (Oscillation + Mouse Gravitational Field)
-      const posAttr = nodeGeo.attributes.position;
-      const arr = posAttr.array;
-      for (let i = 0; i < NODE_COUNT; i++) {
-        const i3 = i * 3;
-        const phase = nodePhases[i];
-
-        const naturalX = basePositions[i3] + Math.sin(t * 0.26 + phase) * 0.65 + Math.sin(t * 0.12 + phase * 2) * 0.3;
-        const naturalY = basePositions[i3 + 1] + Math.cos(t * 0.22 + phase) * 0.65 + Math.cos(t * 0.1 + phase * 1.8) * 0.3;
-        const naturalZ = basePositions[i3 + 2] + Math.sin(t * 0.19 + phase * 1.4) * 0.55;
-
-        // Gravitational displacement from cursor
-        const dx = naturalX - mouseRay.x;
-        const dy = naturalY - mouseRay.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        let repelX = 0, repelY = 0;
-        if (dist < 3.2 && dist > 0.01) {
-          const force = (3.2 - dist) / 3.2 * 0.45;
-          repelX = (dx / dist) * force;
-          repelY = (dy / dist) * force;
-        }
-
-        arr[i3] = naturalX + repelX;
-        arr[i3 + 1] = naturalY + repelY;
-        arr[i3 + 2] = naturalZ;
-      }
-      posAttr.needsUpdate = true;
-
-      // Update Edge Segments
-      const eArr = edgePosAttr.array;
-      for (let k = 0; k < edgeCount; k++) {
-        const i = edgePairs[k][0] * 3;
-        const j = edgePairs[k][1] * 3;
-        const k6 = k * 6;
-        eArr[k6] = arr[i];
-        eArr[k6 + 1] = arr[i + 1];
-        eArr[k6 + 2] = arr[i + 2];
-        eArr[k6 + 3] = arr[j];
-        eArr[k6 + 4] = arr[j + 1];
-        eArr[k6 + 5] = arr[j + 2];
-      }
-      edgePosAttr.needsUpdate = true;
+      // 60FPS Hardware-Accelerated Group Rotation & Parallax (Zero CPU buffer uploads)
+      meshGroup.rotation.y = t * 0.06 + mouseX * 0.25;
+      meshGroup.rotation.x = Math.sin(t * 0.04) * 0.12 - mouseY * 0.2;
+      meshGroup.rotation.z = Math.cos(t * 0.03) * 0.08;
 
       // Pulse Central Energy Core
-      const pulse = 0.85 + Math.sin(t * 1.6) * 0.18;
+      const pulse = 0.88 + Math.sin(t * 1.5) * 0.15;
       core.scale.setScalar(pulse);
-      glow.scale.setScalar(1 + Math.sin(t * 0.85) * 0.14);
+      glow.scale.setScalar(1 + Math.sin(t * 0.8) * 0.12);
 
       // Camera Parallax
-      orbitAngle += 0.001;
-      const camTargetX = Math.sin(orbitAngle) * 2 + mouseX * 0.75 + scrollRatio * 1.6;
-      const camTargetY = Math.cos(orbitAngle) * 0.5 - mouseY * 0.45 - scrollRatio * 0.5;
-      camera.position.x += (camTargetX - camera.position.x) * 0.045;
-      camera.position.y += (camTargetY - camera.position.y) * 0.045;
+      orbitAngle += 0.0008;
+      const camTargetX = Math.sin(orbitAngle) * 1.5 + mouseX * 0.6 + scrollRatio * 1.2;
+      const camTargetY = Math.cos(orbitAngle) * 0.4 - mouseY * 0.35 - scrollRatio * 0.4;
+      camera.position.x += (camTargetX - camera.position.x) * 0.04;
+      camera.position.y += (camTargetY - camera.position.y) * 0.04;
       camera.lookAt(0, 0, 0);
 
       // Floating Light Trajectories
-      cyanLight.position.x = -6 + Math.sin(t * 0.28) * 2.8;
-      violetLight.position.y = -4 + Math.cos(t * 0.24) * 2.8;
+      cyanLight.position.x = -6 + Math.sin(t * 0.25) * 2.5;
+      violetLight.position.y = -4 + Math.cos(t * 0.22) * 2.5;
 
       renderer.render(scene, camera);
       rafId = requestAnimationFrame(tick);
