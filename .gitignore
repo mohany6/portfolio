@@ -51,3 +51,6 @@ RECRUITER_EXPECTATIONS.md
 __pycache__/
 jobs/__pycache__/
 jobs/results_*.json
+
+# LinkedIn auth cookies (secrets - never commit)
+jobs/linkedin_cookies.json
