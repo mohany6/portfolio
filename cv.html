@@ -389,7 +389,7 @@
     /* Education & Certifications Layout */
     .edu-cert-container {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1fr;
       gap: 1.5rem;
       page-break-inside: avoid;
       break-inside: avoid;
@@ -691,6 +691,12 @@
       <button class="role-tab" onclick="setRole('ai')" id="tab-ai">
         <i class="fas fa-brain"></i> AI Agents & Integration
       </button>
+      <button class="role-tab" onclick="setRole('laravel')" id="tab-laravel">
+        <i class="fab fa-php"></i> Laravel / PHP
+      </button>
+      <button class="role-tab" onclick="setRole('qa')" id="tab-qa">
+        <i class="fas fa-bug"></i> QA Automation
+      </button>
     </div>
   </div>
 
@@ -700,7 +706,7 @@
     <!-- HEADER -->
     <header class="resume-header">
       <h1 class="resume-name">Mohamed Hany Fathy</h1>
-      <div class="resume-role-title" id="role-title-display">Backend Developer | Node.js • TypeScript • Cloud & System Architectures</div>
+      <div class="resume-role-title" id="role-title-display">Backend Developer | Node.js • TypeScript • Python</div>
       
       <div class="resume-contact-bar">
         <span class="resume-contact-item">Cairo, Egypt</span>
@@ -721,7 +727,7 @@
     <section class="resume-section">
       <h2 class="section-header">SUMMARY</h2>
       <p class="summary-text" id="summary-display">
-        Backend Developer and AWS Certified Developer specializing in Node.js, Express, TypeScript, and Python. Demonstrated success architecting microservices and high-throughput systems, including an 85-endpoint REST/OpenAPI platform, a strict-TypeScript GraphQL API with DataLoader N+1 batching, and multi-threaded concurrency engines supporting up to 100 parallel workers. Experienced in SQL/NoSQL database optimization, Redis caching, Docker containerization, and automated CI/CD pipelines with Jest and Supertest.
+        Backend Developer specializing in Node.js, Express, TypeScript, and Python. Built service-oriented and high-throughput systems, including an 85-endpoint REST platform, a strict-TypeScript GraphQL API with DataLoader N+1 batching, and multi-threaded concurrency engines supporting up to 100 parallel workers. Hands-on with SQL/NoSQL database optimization, Redis caching, Docker containerization, and automated CI/CD pipelines with Jest and Supertest. Works in Agile teams with code-review discipline and professional English communication.
       </p>
     </section>
 
@@ -731,15 +737,15 @@
       <div class="skills-container" id="skills-display">
         <div class="skill-row">
           <span class="skill-category">Backend & APIs:</span>
-          <span class="skill-items">Node.js, Express.js, TypeScript, RESTful APIs, OpenAPI/Swagger, GraphQL (Yoga v5, SDL, Relay Keyset Pagination), FastAPI, Microservices Architecture, DataLoader, Mongoose ODM, Eloquent ORM</span>
+          <span class="skill-items">Node.js, Express.js, TypeScript, RESTful APIs, GraphQL (Yoga v5, SDL, Relay Keyset Pagination), FastAPI, Service-Oriented Architecture, DataLoader, Mongoose ODM, Eloquent ORM</span>
         </div>
         <div class="skill-row">
           <span class="skill-category">Databases & Caching:</span>
-          <span class="skill-items">MongoDB, Microsoft SQL Server, PostgreSQL, MySQL, SQLite (better-sqlite3), Redis (Cache-Aside), Query Optimization</span>
+          <span class="skill-items">MongoDB, Microsoft SQL Server, MySQL, SQLite (better-sqlite3), Redis (Cache-Aside), Query Optimization</span>
         </div>
         <div class="skill-row">
           <span class="skill-category">Testing & DevOps:</span>
-          <span class="skill-items">Jest, Supertest (22+ tests), Unit & Integration Testing, Docker, Docker Compose, GitHub Actions CI/CD, Git, GitHub, Postman, Linux/Bash</span>
+          <span class="skill-items">Jest, Supertest (50+ integration tests), Unit & Integration Testing, Docker, Docker Compose, GitHub Actions CI/CD, Git, GitHub, Postman, Linux/Bash</span>
         </div>
         <div class="skill-row">
           <span class="skill-category">Security & Auth:</span>
@@ -754,8 +760,12 @@
           <span class="skill-items">Angular (16-19, Standalone Components, Signals, RxJS, Reactive Forms), Responsive Web Design, Tailwind CSS, Bootstrap 5, CustomTkinter</span>
         </div>
         <div class="skill-row">
-          <span class="skill-category">Architecture & Tools:</span>
-          <span class="skill-items">OOP, System Design, Concurrency, Cursor, GitHub Copilot, Multi-Agent Systems, Claude Code, LLM Tool Calling</span>
+          <span class="skill-category">AI & Dev Tools:</span>
+          <span class="skill-items">AI-Assisted Development (Claude Code, Cursor, GitHub Copilot), FastAPI ML Model Integration, PyTorch, OOP, System Design, Concurrency</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-category">Ways of Working:</span>
+          <span class="skill-items">Agile/Scrum, Code Reviews, Git Flow, Technical Documentation, Cross-Team Communication (English)</span>
         </div>
       </div>
     </section>
@@ -776,11 +786,12 @@
           <li>Managed enterprise IT support ticketing workflows, diagnosing and resolving hardware, networking, and application issues under strict operational SLA targets.</li>
           <li>Maintained logistics terminal hardware, barcode diagnostic peripherals, and warehouse workstations to eliminate operational downtime.</li>
           <li>Troubleshot local network connectivity and internal web platform access across enterprise warehouse operations.</li>
+          <li>Communicated technical issues and resolutions to non-technical operations staff in English and Arabic, documenting root causes in the ticketing system.</li>
         </ul>
       </div>
     </section>
 
-    <!-- EDUCATION & CERTIFICATIONS -->
+    <!-- EDUCATION -->
     <div class="edu-cert-container">
       <!-- Education -->
       <section class="resume-section" style="margin-bottom: 0;">
@@ -788,19 +799,30 @@
         <div class="item-block">
           <div class="item-title">Bachelor of Science in Computers and AI</div>
           <div style="color: #334155; font-size: 0.86rem; font-weight: 500;">Helwan University - Software Engineering Dept.</div>
-          <div class="item-date" style="margin-top: 0.15rem;">Graduated: August 2025</div>
+          <div class="item-date" style="margin-top: 0.15rem;">Graduated: August 2025 · Grade: Very Good</div>
+          <div style="color: #334155; font-size: 0.82rem; margin-top: 0.15rem;">Graduation Project: <strong>MyHealthAI</strong> — AI-Powered Telemedicine Platform (Angular, Node.js, MongoDB, FastAPI)</div>
         </div>
       </section>
-
-      <!-- Certifications -->
-      <section class="resume-section" style="margin-bottom: 0;">
-        <h2 class="section-header">CERTIFICATIONS</h2>
-        <ul class="bullet-list">
-          <li><strong>AWS Certified Developer - Associate</strong> (AWS)</li>
-          <li><strong>Microsoft Certified: Azure Fundamentals</strong> (AZ-900)</li>
-        </ul>
-      </section>
     </div>
+
+    <!-- ADDITIONAL DETAILS (Languages / Military / Availability) -->
+    <section class="resume-section" style="margin-top: 1.15rem;">
+      <h2 class="section-header">ADDITIONAL DETAILS</h2>
+      <div class="skills-container">
+        <div class="skill-row">
+          <span class="skill-category">Languages:</span>
+          <span class="skill-items">English (Intermediate Working Proficiency — B1+), Arabic (Native)</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-category">Military Service:</span>
+          <span class="skill-items">Completed</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-category">Availability:</span>
+          <span class="skill-items">Immediate · Cairo, Egypt · Open to onsite & hybrid</span>
+        </div>
+      </div>
+    </section>
 
     <!-- PROJECTS -->
     <section class="resume-section">
@@ -903,6 +925,21 @@
           </ul>
         </article>
 
+        <!-- Project 7: Login Automation Pipeline -->
+        <article class="item-block" id="proj-login">
+          <div class="item-header">
+            <div class="item-title-wrap">
+              <span class="item-title">Headless Login Automation & MFA Pipeline</span>
+            </div>
+            <span class="item-date">Python 3 • Playwright • OAuth 2.0 • Multiprocessing</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Built a multi-worker Playwright engine automating <strong>OAuth and MFA challenge resolution</strong> across identity providers with intelligent step retries and exponential backoff.</li>
+            <li>Engineered persistent cookie/session caching to eliminate redundant logins, with isolated browser contexts per worker preventing cross-session pollution.</li>
+            <li>Delivered QA-grade failure telemetry: structured JSON event logs and timestamped screenshots captured on every execution anomaly.</li>
+          </ul>
+        </article>
+
       </div>
     </section>
 
@@ -918,55 +955,95 @@
     // Role Configuration Profiles
     const roleConfigs = {
       backend: {
-        title: "Backend Developer | Node.js • TypeScript • Cloud & System Architectures",
-        summary: "Backend Developer and AWS Certified Developer specializing in Node.js, Express, TypeScript, and Python. Demonstrated success architecting microservices and high-throughput systems, including an 85-endpoint REST/OpenAPI platform, a strict-TypeScript GraphQL API with DataLoader N+1 batching, and multi-threaded concurrency engines supporting up to 100 parallel workers. Experienced in SQL/NoSQL database optimization, Redis caching, Docker containerization, and automated CI/CD pipelines with Jest and Supertest.",
+        title: "Backend Developer | Node.js • TypeScript • Python",
+        summary: "Backend Developer specializing in Node.js, Express, TypeScript, and Python. Built service-oriented and high-throughput systems, including an 85-endpoint REST platform, a strict-TypeScript GraphQL API with DataLoader N+1 batching, and multi-threaded concurrency engines supporting up to 100 parallel workers. Hands-on with SQL/NoSQL database optimization, Redis caching, Docker containerization, and automated CI/CD pipelines with Jest and Supertest. Works in Agile teams with code-review discipline and professional English communication.",
         skills: [
-          { cat: "Backend & APIs:", items: "Node.js, Express.js, TypeScript, RESTful APIs, OpenAPI/Swagger, GraphQL (Yoga v5, SDL, Relay Keyset Pagination), FastAPI, Microservices Architecture, DataLoader, Mongoose ODM, Eloquent ORM" },
-          { cat: "Databases & Caching:", items: "MongoDB, Microsoft SQL Server, PostgreSQL, MySQL, SQLite (better-sqlite3), Redis (Cache-Aside), Query Optimization" },
-          { cat: "Testing & DevOps:", items: "Jest, Supertest (22+ tests), Unit & Integration Testing, Docker, Docker Compose, GitHub Actions CI/CD, Git, GitHub, Postman, Linux/Bash" },
+          { cat: "Backend & APIs:", items: "Node.js, Express.js, TypeScript, RESTful APIs, GraphQL (Yoga v5, SDL, Relay Keyset Pagination), FastAPI, Service-Oriented Architecture, DataLoader, Mongoose ODM, Eloquent ORM" },
+          { cat: "Databases & Caching:", items: "MongoDB, Microsoft SQL Server, MySQL, SQLite (better-sqlite3), Redis (Cache-Aside), Query Optimization" },
+          { cat: "Testing & DevOps:", items: "Jest, Supertest (50+ integration tests), Unit & Integration Testing, Docker, Docker Compose, GitHub Actions CI/CD, Git, GitHub, Postman, Linux/Bash" },
           { cat: "Security & Auth:", items: "JWT, Role-Based Access Control (RBAC), Speakeasy TOTP 2FA, SHA-256 Device Fingerprinting, Helmet, Rate Limiting, OWASP Standards" },
           { cat: "Languages:", items: "JavaScript (ES6+), TypeScript, Python 3, PHP 8.2, SQL, HTML5, CSS3" },
           { cat: "Frontend & UI:", items: "Angular (16-19, Standalone Components, Signals, RxJS, Reactive Forms), Responsive Web Design, Tailwind CSS, Bootstrap 5, CustomTkinter" },
-          { cat: "Architecture & Tools:", items: "OOP, System Design, Concurrency, Cursor, GitHub Copilot, Multi-Agent Systems, Claude Code, LLM Tool Calling" }
+          { cat: "AI & Dev Tools:", items: "AI-Assisted Development (Claude Code, Cursor, GitHub Copilot), FastAPI ML Model Integration, PyTorch, OOP, System Design, Concurrency" },
+          { cat: "Ways of Working:", items: "Agile/Scrum, Code Reviews, Git Flow, Technical Documentation, Cross-Team Communication (English)" }
         ],
-        projectOrder: ["proj-graphql", "proj-grandstay", "proj-myhealthai", "proj-fc26", "proj-cinema", "proj-laravel"]
+        projectOrder: ["proj-graphql", "proj-grandstay", "proj-myhealthai", "proj-fc26", "proj-cinema", "proj-laravel", "proj-login"]
       },
       fullstack: {
-        title: "Full-Stack Software Engineer | Angular (16-19) • Node.js • MERN / MEAN Ecosystems",
-        summary: "Full-Stack Software Engineer (MERN/MEAN) and AWS Certified Developer specializing in Angular (16-19), Node.js, TypeScript, Express, and MongoDB/SQL ecosystems. Shipped multiple end-to-end web applications featuring complex state management, role-based access control (RBAC), and conflict-checked reservation engines. Combines modern frontend development with robust backend engineering, containerized Docker environments, automated Jest/Supertest CI/CD testing suites, and bank-grade authentication architectures (TOTP 2FA, session revocation).",
+        title: "Full-Stack Software Engineer | Angular (16-19) • Node.js • MEAN Ecosystems",
+        summary: "Full-Stack Software Engineer (MEAN) specializing in Angular (16-19), Node.js, TypeScript, Express, and MongoDB/SQL ecosystems. Shipped multiple end-to-end web applications featuring complex state management, role-based access control (RBAC), and conflict-checked reservation engines. Combines modern frontend development with robust backend engineering, containerized Docker environments, automated Jest/Supertest CI/CD testing suites, and hardened authentication architectures (TOTP 2FA, session revocation). Works in Agile teams with code-review discipline and professional English communication.",
         skills: [
           { cat: "Frontend & UI:", items: "Angular (16-19, Standalone Components, Signals, RxJS, Reactive Forms), Responsive Web Design, Tailwind CSS, Bootstrap 5, CustomTkinter" },
-          { cat: "Backend & APIs:", items: "Node.js, Express.js, TypeScript, RESTful APIs, OpenAPI/Swagger, GraphQL (Yoga v5), FastAPI, Microservices Architecture, Mongoose ODM, DataLoader, Eloquent ORM" },
+          { cat: "Backend & APIs:", items: "Node.js, Express.js, TypeScript, RESTful APIs, GraphQL (Yoga v5), FastAPI, Service-Oriented Architecture, Mongoose ODM, DataLoader, Eloquent ORM" },
           { cat: "Languages:", items: "TypeScript, JavaScript (ES6+), HTML5, CSS3, Python 3, PHP 8.2, SQL" },
-          { cat: "Databases & Caching:", items: "MongoDB, SQLite (better-sqlite3), Redis (Cache-Aside), Microsoft SQL Server, MySQL, PostgreSQL" },
-          { cat: "Testing & DevOps:", items: "Jest, Supertest (22+ tests), Unit & Integration Testing, Docker, Docker Compose, GitHub Actions CI/CD, Git, GitHub, Postman" },
+          { cat: "Databases & Caching:", items: "MongoDB, SQLite (better-sqlite3), Redis (Cache-Aside), Microsoft SQL Server, MySQL" },
+          { cat: "Testing & DevOps:", items: "Jest, Supertest (50+ integration tests), Unit & Integration Testing, Docker, Docker Compose, GitHub Actions CI/CD, Git, GitHub, Postman" },
           { cat: "Security & Auth:", items: "JWT, Role-Based Access Control (RBAC), Speakeasy TOTP 2FA, SHA-256 Device Fingerprints, Helmet, OWASP Standards" },
-          { cat: "Architecture & Tools:", items: "OOP, System Design, Concurrency, Cursor, GitHub Copilot, Multi-Agent Systems, Claude Code" }
+          { cat: "AI & Dev Tools:", items: "AI-Assisted Development (Claude Code, Cursor, GitHub Copilot), OOP, System Design, Concurrency" },
+          { cat: "Ways of Working:", items: "Agile/Scrum, Code Reviews, Git Flow, Technical Documentation, Cross-Team Communication (English)" }
         ],
-        projectOrder: ["proj-grandstay", "proj-myhealthai", "proj-cinema", "proj-graphql", "proj-laravel", "proj-fc26"]
+        projectOrder: ["proj-grandstay", "proj-myhealthai", "proj-cinema", "proj-graphql", "proj-laravel", "proj-fc26", "proj-login"]
       },
       ai: {
-        title: "Software Engineer - AI Agents & Integration | FastAPI • Node.js • Autonomous Workflows",
-        summary: "Software Engineer and AWS Certified Developer specializing in AI-integrated platforms, agentic workflows, and high-concurrency backend services. Proven track record integrating remote machine learning microservices (FastAPI, PyTorch) and LLM tool-calling pipelines into Node.js architectures with persisted inference scoring, diagnostic history, and rate-limited API proxies. Proficient in full-stack JavaScript/TypeScript, Python concurrency engines (up to 100 threads), Docker containerization, and secure cloud-native deployment patterns.",
+        title: "Software Engineer – AI Integration | FastAPI • Node.js • Python",
+        summary: "Software Engineer specializing in AI-integrated platforms and high-concurrency backend services. Proven track record integrating remote machine learning microservices (FastAPI, PyTorch) into Node.js architectures with persisted inference scoring, diagnostic history, and rate-limited API proxies. Daily practitioner of AI-assisted development workflows (Claude Code, Cursor, GitHub Copilot) with test-validated output. Proficient in full-stack JavaScript/TypeScript, Python concurrency engines (up to 100 threads), Docker containerization, and secure cloud-native deployment patterns.",
         skills: [
-          { cat: "AI & Agentic Systems:", items: "Cursor, GitHub Copilot, Claude Code, Multi-Agent Orchestration, Self-Healing Test Loops, LLM Tool Calling, FastAPI Microservices, PyTorch" },
-          { cat: "Architecture & Concurrency:", items: "Microservice Proxies, Multi-Threading (ThreadPoolExecutor up to 100 threads), Producer-Consumer Queues, Connection Pooling" },
-          { cat: "Backend & APIs:", items: "Node.js, Express.js, RESTful APIs, OpenAPI/Swagger, GraphQL Yoga v5, Mongoose ODM, DataLoader, Connection Pooling" },
+          { cat: "AI & ML Integration:", items: "FastAPI Microservices, PyTorch Model Proxying, Confidence-Score Persistence, Rate-Limited API Gateways, AI-Assisted Development (Claude Code, Cursor, GitHub Copilot)" },
+          { cat: "Architecture & Concurrency:", items: "Service Proxy Patterns, Multi-Threading (ThreadPoolExecutor up to 100 threads), Producer-Consumer Queues, Connection Pooling" },
+          { cat: "Backend & APIs:", items: "Node.js, Express.js, RESTful APIs, GraphQL Yoga v5, Mongoose ODM, DataLoader" },
           { cat: "Languages:", items: "Python 3, TypeScript, JavaScript (ES6+), SQL, PHP 8.2, HTML5, CSS3" },
           { cat: "Testing & DevOps:", items: "Docker, Docker Compose, GitHub Actions CI/CD, Jest, Supertest, Git, GitHub, Linux/Bash" },
-          { cat: "Databases & Caching:", items: "MongoDB, Microsoft SQL Server, Redis (Cache-Aside), SQLite, PostgreSQL" },
-          { cat: "Security & Auth:", items: "JWT, API Key Authentication, Rate Limiting, Speakeasy TOTP 2FA, SHA-256 Device Fingerprints" }
+          { cat: "Databases & Caching:", items: "MongoDB, Microsoft SQL Server, Redis (Cache-Aside), SQLite, MySQL" },
+          { cat: "Security & Auth:", items: "JWT, API Key Authentication, Rate Limiting, Speakeasy TOTP 2FA, SHA-256 Device Fingerprints" },
+          { cat: "Ways of Working:", items: "Agile/Scrum, Code Reviews, Technical Documentation, Cross-Team Communication (English)" }
         ],
-        projectOrder: ["proj-myhealthai", "proj-fc26", "proj-grandstay", "proj-graphql", "proj-cinema", "proj-laravel"]
+        projectOrder: ["proj-myhealthai", "proj-fc26", "proj-login", "proj-grandstay", "proj-graphql", "proj-cinema", "proj-laravel"]
+      },
+      laravel: {
+        title: "PHP / Laravel Backend Developer | Laravel 11 • Eloquent • MySQL & SQLite",
+        summary: "Full-stack PHP developer with Laravel 11 (PHP 8.2) production practice — resource routing, Eloquent ORM with foreign-key cascade integrity and eager aggregates, and server-side validation — combined with a strong JavaScript/TypeScript backend foundation (Node.js, Express, MongoDB). Ships SaaS-style Blade/Tailwind interfaces verified end-to-end on live servers, with Agile code-review discipline and professional English communication.",
+        skills: [
+          { cat: "Backend & APIs:", items: "PHP 8.2, Laravel 11, Eloquent ORM, Node.js, Express.js, TypeScript, RESTful APIs, GraphQL (Yoga v5), FastAPI" },
+          { cat: "Databases & Caching:", items: "MySQL, SQLite (better-sqlite3), MongoDB, Microsoft SQL Server, Redis (Cache-Aside), Query Optimization" },
+          { cat: "Frontend & UI:", items: "Blade Templates, Tailwind CSS 3, Vite 5, Angular (16-19), Bootstrap 5, Responsive Web Design" },
+          { cat: "Testing & DevOps:", items: "Jest, Supertest (50+ integration tests), Docker, Docker Compose, GitHub Actions CI/CD, Git, GitHub, Postman" },
+          { cat: "Security & Auth:", items: "JWT, Role-Based Access Control (RBAC), OWASP Standards, Helmet, Rate Limiting, Server-Side Validation" },
+          { cat: "Languages:", items: "PHP 8.2, JavaScript (ES6+), TypeScript, Python 3, SQL, HTML5, CSS3" },
+          { cat: "Ways of Working:", items: "Agile/Scrum, Code Reviews, Git Flow, Technical Documentation, Cross-Team Communication (English)" }
+        ],
+        projectOrder: ["proj-laravel", "proj-cinema", "proj-myhealthai", "proj-graphql", "proj-grandstay", "proj-login", "proj-fc26"]
+      },
+      qa: {
+        title: "QA / Test Automation Engineer | Playwright • Python • API Testing • CI",
+        summary: "Automation engineer with hands-on Playwright and Python experience building multi-worker headless pipelines that resolve OAuth/MFA flows, persist sessions, and emit structured failure telemetry. Backed by 50+ Jest/Supertest integration tests running in GitHub Actions CI across two production-shaped platforms, API testing with Postman, and a security-audit mindset — 6 real vulnerabilities found, fixed, and locked with regression tests. Helwan CS graduate, immediate availability.",
+        skills: [
+          { cat: "Automation & Testing:", items: "Playwright, Jest, Supertest, API Testing (Postman), Integration & Regression Suites, Parallel Worker Pools, Failure Telemetry" },
+          { cat: "Scripting Languages:", items: "Python 3, JavaScript (ES6+), TypeScript, SQL, PHP 8.2" },
+          { cat: "Frameworks & Tools:", items: "Requests/BeautifulSoup, CustomTkinter, Git/GitHub, GitHub Actions CI/CD, Docker, Linux/Bash" },
+          { cat: "Web & API Fundamentals:", items: "HTTP/HTTPS, REST/GraphQL, OAuth 2.0 / MFA, JWT/RBAC, HTML5/CSS3" },
+          { cat: "Quality Practice:", items: "OWASP Standards, Root-Cause Analysis, Test Reporting, Technical Documentation" },
+          { cat: "Ways of Working:", items: "Agile/Scrum, Code Reviews, Cross-Team Communication (English)" }
+        ],
+        projectOrder: ["proj-login", "proj-fc26", "proj-graphql", "proj-grandstay", "proj-cinema", "proj-myhealthai", "proj-laravel"]
       }
     };
 
     let currentRole = 'backend';
 
+    const roleFileNames = {
+      backend: "Backend-Developer",
+      fullstack: "Full-Stack-Engineer",
+      ai: "AI-Integration-Engineer",
+      laravel: "Laravel-Developer",
+      qa: "QA-Automation-Engineer"
+    };
+
     function setRole(roleKey) {
       currentRole = roleKey;
       const config = roleConfigs[roleKey];
       if (!config) return;
+
+      document.title = `Mohamed-Hany-Fathy-${roleFileNames[roleKey] || roleKey}-Cairo`;
 
       // Update Tab Styles
       document.querySelectorAll('.role-tab').forEach(tab => tab.classList.remove('active'));
@@ -1059,20 +1136,29 @@ Stack: PHP 8.2, Laravel 11, Eloquent ORM, Tailwind CSS, SQLite, Vite
 - Developed a relational management platform featuring 14 RESTful resource routes, implicit route-model binding, and database-level foreign key cascade deletions.
 - Utilized Eloquent withCount eager aggregate loading to eliminate N+1 queries when computing customer order metrics across KPI dashboards.
 
+Headless Login Automation & MFA Pipeline
+Stack: Python 3, Playwright, OAuth 2.0, Multiprocessing
+- Built a multi-worker Playwright engine automating OAuth and MFA challenge resolution across identity providers with intelligent step retries and exponential backoff.
+- Engineered persistent cookie/session caching to eliminate redundant logins, with isolated browser contexts per worker preventing cross-session pollution.
+- Delivered QA-grade failure telemetry: structured JSON event logs and timestamped screenshots captured on every execution anomaly.
+
 EXPERIENCE
 IT Support Specialist Intern | DHL Supply Chain
 Cairo, Egypt | Nov 2025 - Dec 2025
 - Managed enterprise IT support ticketing workflows, diagnosing and resolving hardware, networking, and application issues under strict operational SLA targets.
 - Maintained logistics terminal hardware, barcode diagnostic peripherals, and warehouse workstations to eliminate operational downtime.
 - Troubleshot local network connectivity and internal web platform access across enterprise warehouse operations.
+- Communicated technical issues and resolutions to non-technical operations staff in English and Arabic, documenting root causes in the ticketing system.
 
 EDUCATION
 Bachelor of Science in Computers and Artificial Intelligence | Helwan University
-Major: Software Engineering | Graduated: August 2025
+Major: Software Engineering | Graduated: August 2025 | Grade: Very Good
+Graduation Project: MyHealthAI - AI-Powered Telemedicine Platform (Angular, Node.js, MongoDB, FastAPI)
 
-CERTIFICATIONS
-- AWS Certified Developer - Associate (Amazon Web Services)
-- Microsoft Certified: Azure Fundamentals (AZ-900)`;
+LANGUAGES & PERSONAL
+- English: Intermediate Working Proficiency (B1+) | Arabic: Native
+- Military Service: Completed
+- Location: Cairo, Egypt | Availability: Immediate | Open to onsite & hybrid`;
 
       navigator.clipboard.writeText(plainText).then(() => {
         showToast("ATS Plain Text copied to clipboard!");
