@@ -144,6 +144,64 @@ const PROJECTS_DATA = [
   },
 
   // ============================================================================
+  // 2. CustomerHub — NestJS 11 + Next.js 15 Operations Platform ⭐ NEW (Gap Closer)
+  // ============================================================================
+  {
+    id: "customerhub-nestjs-nextjs",
+    title: "CustomerHub — NestJS + Next.js Operations Platform",
+    shortTitle: "CustomerHub (Nest + Next)",
+    tagline: "Enterprise Customer & Order Platform — NestJS 11 Modular API, Next.js 15 RSC, Swagger/OpenAPI, Aggregation KPIs & 37-Test Pyramid",
+    category: "Full-Stack",
+    secondaryCategory: "Labs",
+    featured: false,
+    badge: "NestJS 11 + Next.js 15",
+    period: "2026",
+    myRole: "Solo full-stack engineer — migrated the Laravel domain to NestJS/Next.js: modular DI API, RSC frontend, aggregation KPIs, and the full test + CI + Docker toolchain.",
+    stats: [
+      { label: "Test Pyramid", value: "37 Tests" },
+      { label: "CI Pipeline", value: "6-Stage Actions" },
+      { label: "API Docs", value: "Swagger OpenAPI" },
+      { label: "DB Pipeline", value: "$lookup / $facet" }
+    ],
+    techStack: [
+      "NestJS 11",
+      "Next.js 15 (App Router)",
+      "React Server Components",
+      "Server Actions",
+      "MongoDB / Mongoose 8",
+      "JWT + RBAC Guards",
+      "class-validator DTOs",
+      "Swagger / OpenAPI",
+      "Tailwind CSS v4",
+      "Vitest + Supertest",
+      "Playwright",
+      "Docker + GitHub Actions CI"
+    ],
+    summary: "A full-stack customer & order operations platform rebuilt from the Laravel 11 domain into the enterprise Node ecosystem — same product, translated idioms, upgraded every layer. NestJS modular DI API with a global JWT→RBAC guard chain and auto-generated Swagger docs; Next.js 15 App Router frontend with React Server Components for reads and Server Actions for writes; MongoDB aggregation pipelines ($lookup/$facet) computing KPIs in one round trip; 37 tests (Vitest unit + Supertest e2e + Playwright browser golden flow) wired into a 6-stage GitHub Actions pipeline with Docker Compose.",
+    highlights: [
+      "Engineered a modular NestJS 11 API: dependency-injection modules (Auth, Customers, Orders, Dashboard, Health, Seed), APP_GUARD chain (JwtAuthGuard → RolesGuard), interceptors, global exception filter, and auto-generated Swagger/OpenAPI documentation at /docs.",
+      "Built a Next.js 15 App Router frontend with React Server Components for reads, Server Actions for writes, streaming Suspense, httpOnly JWT cookie sessions, and middleware route guarding — closing the React/Next lane demanded by 22% of postings.",
+      "Composed MongoDB aggregation pipelines ($lookup, $facet) that compute customer order counts and paginated page data in a single round trip, replacing Eloquent withCount with idiomatic NoSQL design.",
+      "Delivered a 37-test pyramid — 17 Vitest unit (guard matrix, auth, DTO contract, cascade, seed), 19 Supertest e2e against the real HTTP server with in-memory Mongo, and 1 Playwright browser golden flow (login → dashboard → customer → order → cleanup).",
+      "Hardened authentication: roles never client-assignable (registration always yields viewer; admins provisioned server-side and regression-tested), 409-conflict mapping, FK-existence verification, and a production-required JWT secret that fails boot when missing."
+    ],
+    architecturalDetails: [
+      "Documented Laravel → NestJS/Next migration table: Route::resource → versioned controllers, route-model binding → ParseObjectIdPipe, withCount → $lookup/$facet aggregation, Form Requests → class-validator DTOs, Blade+flash → RSC+Server Actions, migration-level FK cascades → service-level tested cascade.",
+      "CI/CD chain: GitHub Actions running lint → typecheck → build → unit → e2e → Playwright, with multi-stage Dockerfiles and docker-compose (api + mongo + web, healthchecks).",
+      "Zero-setup developer experience: npm run dev:api/dev:web boot with an in-memory MongoDB (auto-downloaded once) and SEED_ON_START demo data — no external database needed to evaluate the system."
+    ],
+    links: {
+      github: "https://github.com/mohany6/customerhub",
+      live: "",
+      demoVideo: ""
+    },
+    image: {
+      banner: "assets/images/projects/customerhub-api.svg",
+      caption: "CustomerHub — NestJS Modular API × Next.js 15 App Router × MongoDB Aggregation"
+    }
+  },
+
+  // ============================================================================
   // 2. FC26 Automation Suite ⚡ — High-Throughput Desktop Tool ⭐ STRONG
   // ============================================================================
   {
@@ -451,7 +509,7 @@ const PROJECTS_DATA = [
       "SQLite / MySQL",
       "Form Validation"
     ],
-    summary: "A relational Customer & Order management platform engineered on Laravel 11 and PHP 8.2. Features 14 RESTful resource routes, Eloquent one-to-many relationships with foreign-key cascade deletes, withCount eager aggregate loading, server-side validation with self-exclusion rules, and a redesigned SaaS analytics dashboard verified live with 5 screenshots.",
+    summary: "A relational Customer & Order management platform engineered on Laravel 11 and PHP 8.2. Features 14 RESTful resource routes, Eloquent one-to-many relationships with foreign-key cascade deletes, withCount eager aggregate loading, server-side validation with self-exclusion rules, and a redesigned SaaS analytics dashboard verified live with 5 screenshots. Now the 'before' half of the CustomerHub Laravel→NestJS migration story.",
     highlights: [
       "Built complete 14 RESTful resource controllers for Customers and Orders with strict server-side validation (unique phone formats with update self-exclusion, foreign-key existence).",
       "Engineered Eloquent one-to-many relationships with foreign-key cascade deletion at migration level and withCount eager aggregates to eliminate N+1 queries.",

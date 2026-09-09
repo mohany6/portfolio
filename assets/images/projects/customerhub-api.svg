@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="100%" height="100%">
+  <defs>
+    <linearGradient id="chBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0e14" />
+      <stop offset="50%" stop-color="#14101c" />
+      <stop offset="100%" stop-color="#07040b" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="580" fill="url(#chBg)" />
+
+  <rect x="25" y="20" width="950" height="540" rx="14" fill="#10101a" stroke="rgba(224,35,78,0.25)" stroke-width="1.5" />
+
+  <!-- Top Bar -->
+  <rect x="25" y="20" width="950" height="42" rx="14" fill="#1a1526" />
+  <circle cx="52" cy="41" r="5.5" fill="#ef4444" />
+  <circle cx="70" cy="41" r="5.5" fill="#f59e0b" />
+  <circle cx="88" cy="41" r="5.5" fill="#10b981" />
+  <text x="500" y="46" fill="#94a3b8" font-family="sans-serif" font-size="12" font-weight="600" text-anchor="middle">CustomerHub — NestJS 11 API × Next.js 15 App Router × MongoDB</text>
+
+  <!-- Left: NestJS API panel -->
+  <g transform="translate(45, 80)">
+    <rect x="0" y="0" width="440" height="455" rx="10" fill="#0a0e14" stroke="rgba(255,255,255,0.06)" />
+    <text x="20" y="28" fill="#e0234e" font-family="monospace" font-size="12" font-weight="700">NESTJS MODULAR API — Swagger /docs</text>
+    <line x1="0" y1="42" x2="440" y2="42" stroke="rgba(255,255,255,0.06)" />
+
+    <text x="20" y="75" fill="#e0234e" font-family="monospace" font-size="12">@Controller(<tspan fill="#38bdf8">'customers'</tspan>)</text>
+    <text x="20" y="105" fill="#94a3b8" font-family="monospace" font-size="12">@UseGuards(<tspan fill="#34d399">JwtAuthGuard</tspan>, <tspan fill="#34d399">RolesGuard</tspan>)</text>
+    <text x="20" y="135" fill="#f8fafc" font-family="monospace" font-size="12">@Post(<tspan fill="#34d399">'create'</tspan>)</text>
+    <text x="20" y="165" fill="#f8fafc" font-family="monospace" font-size="12">@Roles(<tspan fill="#fbbf24">Role.Admin</tspan>)</text>
+    <text x="40" y="195" fill="#94a3b8" font-family="monospace" font-size="12">create(</text>
+    <text x="55" y="220" fill="#38bdf8" font-family="monospace" font-size="11">@Body() dto: <tspan fill="#fbbf24">CreateCustomerDto</tspan>)</text>
+    <text x="40" y="245" fill="#94a3b8" font-family="monospace" font-size="12">{</text>
+    <text x="55" y="270" fill="#38bdf8" font-family="monospace" font-size="11">return this.svc.create(dto);  <tspan fill="#475569">// 409 on dup phone</tspan></text>
+    <text x="40" y="295" fill="#94a3b8" font-family="monospace" font-size="12">}</text>
+
+    <rect x="20" y="330" width="400" height="105" rx="8" fill="#161021" stroke="rgba(224,35,78,0.2)" />
+    <text x="35" y="355" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="700">Aggregation KPI Pipeline ($lookup + $facet)</text>
+    <text x="35" y="378" fill="#94a3b8" font-family="monospace" font-size="10">✓ ordersCount + page data — one round trip</text>
+    <text x="35" y="398" fill="#94a3b8" font-family="monospace" font-size="10">✓ class-validator DTOs + ValidationPipe (whitelist)</text>
+    <text x="35" y="418" fill="#94a3b8" font-family="monospace" font-size="10">✓ APP_GUARD chain: JwtAuthGuard → RolesGuard</text>
+  </g>
+
+  <!-- Right: Next.js web + Test/CI panel -->
+  <g transform="translate(510, 80)">
+    <rect x="0" y="0" width="445" height="215" rx="10" fill="#0a0e14" stroke="rgba(255,255,255,0.06)" />
+    <text x="20" y="28" fill="#38bdf8" font-family="monospace" font-size="12" font-weight="700">NEXT.JS 15 APP ROUTER (RSC)</text>
+    <line x1="0" y1="42" x2="445" y2="42" stroke="rgba(255,255,255,0.06)" />
+
+    <text x="20" y="72" fill="#94a3b8" font-family="monospace" font-size="11"><tspan fill="#34d399">export default async function</tspan> <tspan fill="#38bdf8">Dashboard</tspan>() {</text>
+    <text x="35" y="97" fill="#94a3b8" font-family="monospace" font-size="11"><tspan fill="#475569">// Server Component read — zero client JS</tspan></text>
+    <text x="35" y="122" fill="#38bdf8" font-family="monospace" font-size="11">const kpis = <tspan fill="#fbbf24">await</tspan> api.dashboard.metrics()</text>
+    <text x="35" y="147" fill="#94a3b8" font-family="monospace" font-size="11">&lt;<tspan fill="#e0234e">Suspense</tspan> fallback={&lt;<tspan fill="#e0234e">Skeleton</tspan>/&gt;}&gt;...&lt;/<tspan fill="#e0234e">Suspense</tspan>&gt;</text>
+    <text x="20" y="172" fill="#94a3b8" font-family="monospace" font-size="11">}</text>
+    <text x="20" y="198" fill="#475569" font-family="monospace" font-size="10">writes → Server Actions · auth → httpOnly JWT cookie</text>
+
+    <rect x="0" y="235" width="445" height="220" rx="10" fill="#0a0e14" stroke="rgba(16,185,129,0.25)" />
+    <text x="20" y="263" fill="#34d399" font-family="monospace" font-size="12" font-weight="700">CI PIPELINE — 37 tests passing</text>
+    <line x1="0" y1="277" x2="445" y2="277" stroke="rgba(255,255,255,0.06)" />
+
+    <text x="20" y="305" fill="#94a3b8" font-family="monospace" font-size="11">✓ <tspan fill="#34d399">17</tspan> Vitest unit — guards, auth, DTO, cascade</text>
+    <text x="20" y="330" fill="#94a3b8" font-family="monospace" font-size="11">✓ <tspan fill="#34d399">19</tspan> Supertest e2e — real HTTP + in-memory Mongo</text>
+    <text x="20" y="355" fill="#94a3b8" font-family="monospace" font-size="11">✓ <tspan fill="#34d399">1</tspan> Playwright golden flow — login→order→cleanup</text>
+    <text x="20" y="380" fill="#94a3b8" font-family="monospace" font-size="11">✓ GitHub Actions: lint→typecheck→build→unit→e2e</text>
+    <text x="20" y="405" fill="#94a3b8" font-family="monospace" font-size="11">✓ Docker Compose: api + mongo + web + healthchecks</text>
+
+    <rect x="20" y="418" width="180" height="24" rx="12" fill="rgba(224,35,78,0.18)" />
+    <text x="110" y="434" fill="#e0234e" font-family="sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">Laravel → NestJS migration</text>
+    <rect x="215" y="418" width="150" height="24" rx="12" fill="rgba(56,189,248,0.15)" />
+    <text x="290" y="434" fill="#38bdf8" font-family="sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">Zero-setup dev boot</text>
+  </g>
+</svg>

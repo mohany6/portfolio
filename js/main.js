@@ -274,8 +274,8 @@ function initRoleTyper() {
   if (!typerElement) return;
 
   const roles = [
-    "Full-Stack Developer (MEARN)",
-    "Backend & API Architect",
+    "Full-Stack Developer (MEARN + Next.js)",
+    "Backend & API Architect (NestJS)",
     "AI Agents & Autonomous Workflows",
     "AI-Integrated Systems (FastAPI)",
     "High-Concurrency Python Pipelines"
