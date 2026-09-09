@@ -682,6 +682,9 @@
     <!-- TARGET ROLE SWITCHER -->
     <div class="role-switcher-bar">
       <span class="role-label"><i class="fas fa-sliders-h"></i> Tailor for Role:</span>
+      <button class="role-tab" onclick="setRole('software')" id="tab-software">
+        <i class="fas fa-code"></i> Software Engineer
+      </button>
       <button class="role-tab active" onclick="setRole('backend')" id="tab-backend">
         <i class="fas fa-server"></i> Backend (Node.js/TS)
       </button>
@@ -978,6 +981,23 @@
   <script>
     // Role Configuration Profiles
     const roleConfigs = {
+      software: {
+        title: "Software Engineer | Node.js • TypeScript • Python • Full-Stack Systems",
+        summary: "Software Engineer who designs, builds, tests, and ships complete production-shaped systems end-to-end. Delivered an 85-endpoint AI-integrated telemedicine platform (~73K lines), a modular NestJS API with Swagger/OpenAPI and JWT→RBAC guard chains, a strict-TypeScript GraphQL backend with Relay pagination and DataLoader batching, and high-throughput Python concurrency engines running up to 100 parallel workers. Engineering discipline beyond code: ~109 automated tests (Jest, Vitest, Supertest, Playwright) running in GitHub Actions CI, Dockerized deployments with healthchecks, security-audit practice that found and fixed 6 real vulnerabilities with regression locks, and daily AI-assisted development workflows (Claude Code, Cursor, Copilot) with test-validated output. Works in Agile teams with code-review discipline and professional English communication.",
+        skills: [
+          { cat: "Engineering & Architecture:", items: "System Design, Service-Oriented Architecture, RESTful API Design (85+ endpoints), GraphQL (Yoga v5, Relay Cursor Pagination), NestJS 11 (Modular DI, Guards, Swagger/OpenAPI), FastAPI, Concurrency (ThreadPoolExecutor, Producer/Consumer Queues), DataLoader N+1 Batching" },
+          { cat: "Languages:", items: "TypeScript, JavaScript (ES6+), Python 3, PHP 8.2, SQL, HTML5, CSS3" },
+          { cat: "Backend & Frameworks:", items: "Node.js, Express.js, NestJS 11, FastAPI, Eloquent ORM (Laravel 11), Mongoose ODM" },
+          { cat: "Databases & Caching:", items: "MongoDB (Aggregation Pipelines: $lookup, $facet), Microsoft SQL Server, MySQL, SQLite (better-sqlite3), Redis (Cache-Aside), Query Optimization (-30% API Latency)" },
+          { cat: "Testing & Quality:", items: "Jest, Vitest, Supertest (50+ integration tests), Playwright (browser E2E golden flows), Unit & Integration Testing, Regression Testing, Security Auditing, OWASP Standards" },
+          { cat: "DevOps & Cloud:", items: "Docker, Docker Compose (healthchecks), GitHub Actions CI/CD (6-stage pipelines), Git, GitHub, Postman, Linux/Bash, Vercel Edge" },
+          { cat: "Security & Auth:", items: "JWT, Role-Based Access Control (RBAC), Speakeasy TOTP 2FA, SHA-256 Device Fingerprinting, Helmet, Rate Limiting, Parameterized SQL" },
+          { cat: "Frontend:", items: "Angular (16-19, Standalone Components, Signals), Next.js 15 (App Router, RSC, Server Actions), React, Tailwind CSS, Bootstrap 5" },
+          { cat: "AI-Native Practice:", items: "AI-Assisted Development (Claude Code, Cursor, GitHub Copilot) with test-validated output, FastAPI ML Model Integration, PyTorch Inference Proxying" },
+          { cat: "Ways of Working:", items: "Agile/Scrum, Code Reviews, Git Flow, Technical Documentation, Root-Cause Analysis, Cross-Team Communication (English)" }
+        ],
+        projectOrder: ["proj-myhealthai", "proj-customerhub", "proj-graphql", "proj-grandstay", "proj-fc26", "proj-cinema", "proj-laravel", "proj-login"]
+      },
       backend: {
         title: "Backend Developer | Node.js • NestJS • TypeScript • Python",
         summary: "Backend Developer specializing in Node.js, Express, NestJS, TypeScript, and Python. Built service-oriented and high-throughput systems, including an 85-endpoint REST platform, a modular NestJS API with Swagger/OpenAPI docs and a global JWT→RBAC guard chain, a strict-TypeScript GraphQL API with DataLoader N+1 batching, and multi-threaded concurrency engines supporting up to 100 parallel workers. Hands-on with SQL/NoSQL database optimization (aggregation pipelines, Redis caching), Docker containerization, and automated CI/CD pipelines with Jest, Vitest, and Supertest. Works in Agile teams with code-review discipline and professional English communication.",
@@ -1084,6 +1104,7 @@
     let currentRole = 'backend';
 
     const roleFileNames = {
+      software: "Software-Engineer",
       backend: "Backend-Developer",
       fullstack: "Full-Stack-Engineer",
       frontend: "Frontend-Developer",
